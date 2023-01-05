@@ -31,18 +31,12 @@ namespace EtaxInvoice
                 var result = frm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
-                    Person person = frm.CurrentPerson;
+                    Customer cus = frm.CurrentCustomer;
                     //Do something here with these values
 
                     //for example
                     //this.textBox_userid.Text = val;
-                    this.textBox_customerName.Text = person.Name;
-                    this.textBox_customerName.Text = person.Name;
-                    this.textBox_customerName.Text = person.Name;
-                    this.textBox_customerName.Text = person.Name;
-                    this.textBox_customerName.Text = person.Name;
-                    this.textBox_customerName.Text = person.Name;
-                    this.textBox_customerName.Text = person.Name;
+                    this.textBox_customerName.Text = cus.FTCstName;
                 }
             }
             catch (Exception ex)

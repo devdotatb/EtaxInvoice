@@ -468,9 +468,9 @@
             this.label4.Location = new System.Drawing.Point(26, 120);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(111, 13);
+            this.label4.Size = new System.Drawing.Size(36, 13);
             this.label4.TabIndex = 97;
-            this.label4.Text = "เลขประจำตัวผู้เสียภาษี";
+            this.label4.Text = "สาขาที่";
             // 
             // textBox1
             // 

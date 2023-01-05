@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Invoice.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="HelperClasses\MessageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

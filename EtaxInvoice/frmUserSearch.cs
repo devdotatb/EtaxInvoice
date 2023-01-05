@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,45 +15,61 @@ namespace EtaxInvoice
     public partial class frmUserSearch : Form
     {
         public List<Person> People { get; set; }
+        public List<Customer> Customers { get; set; }
         public frmUserSearch()
         {
-            People = GetPeople();
+            //People = GetPeople();
+            Customers = GetCustomers();
             InitializeComponent();
         }
 
-        private List<Person> GetPeople()
+        private List<Customer> GetCustomers()
         {
-            var list = new List<Person>();
-            list.Add(new Person()
+            string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOS;Integrated Security=True;";
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"Select a.FTCtyCode, a.FTCstName, a.FTCstTaxNo, a.FTCstWeb , a.FTCstAddrInv, a.FTCstStreetInv, a.FTCsttrictInv, a.FTDstCodeInv, a.FTPvnCodeInv , a.FTCstPostCodeInv, a.FTCstSize , a.FTCstTelInv, a.FTCstFaxInv, a.FTCstEmail, e.FTCYDescTh, d.FTPvnName, c.FTDstName 
+from TCNMCst a 
+left outer join TCNMCstType b on a. FTCtyCode = b. FTCtyCode 
+left outer join TCNMDistrict c on a. FTDstCodeInv = c. FTDstCode
+left outer join TCNMProvince d on a. FTPvnCodeInv = d. FTPvnCode
+left outer join TCNMCountry e on a. FTCstSize = e. FTCYCode");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            var result = new List<Customer>();
+            while (reader.Read())
             {
-                PersonId = 1,
-                Name = "Person 1",
-                Surname = "Surname 1",
-                Profession = "P 1"
-            });
-            list.Add(new Person()
-            {
-                PersonId = 1,
-                Name = "Person 2",
-                Surname = "Surname 2",
-                Profession = "P 2"
-            });
-            list.Add(new Person()
-            {
-                PersonId = 1,
-                Name = "Person 3",
-                Surname = "Surname 3",
-                Profession = "P 3"
-            });
-            return list;
+                var cus = new Customer
+                {
+                    FTCtyCode = reader.GetString(0),
+                    FTCstName = reader.GetString(1),
+                    FTCstTaxNo = reader.GetString(2),
+                    FTCstWeb = reader.GetString(3),
+                    FTCstAddrInv = reader.GetString(4),
+                    FTCstStreetInv = reader.GetString(5),
+                    FTCsttrictInv = reader.GetString(6),
+                    FTDstCodeInv = reader.GetString(7),
+                    FTPvnCodeInv = reader.GetString(8),
+                    FTCstPostCodeInv = reader.GetString(9),
+                    FTCstSize = reader.GetString(10),
+                    FTCstTelInv = reader.GetString(11),
+                    FTCstFaxInv = reader.GetString(12),
+                    FTCstEmail = reader.GetString(13),
+                    //FTCYDescTh = reader.GetString(14),
+                    //FTPvnName = reader.GetString(15),
+                    //FTDstName = reader.GetString(16),
+                };
+                result.Add(cus);
+            }
+            return result;
         }
 
         private void frmUserSearch_Load(object sender, EventArgs e)
         {
-            var people = this.People;
-            dataGridView1.DataSource = people;
-            dataGridView1.Columns["PersonId"].Visible = false;
-            dataGridView1.Columns["Name"].HeaderText = "ชื่อลูกค้า";
+            var customers = this.Customers;
+            dataGridView1.DataSource = customers;
+            //dataGridView1.Columns["PersonId"].Visible = false;
+            //dataGridView1.Columns["Name"].HeaderText = "ชื่อลูกค้า";
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -61,7 +78,7 @@ namespace EtaxInvoice
             {
                 var senderGrid = (DataGridView)sender;
 
-                var selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].DataBoundItem as Person;
+                var selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].DataBoundItem as Customer;
 
                 label2.Text = senderGrid.Columns[e.ColumnIndex].HeaderText;
 
@@ -69,7 +86,7 @@ namespace EtaxInvoice
 
                 this.CurrentSelectedColumn = senderGrid.Columns[e.ColumnIndex].Name;
 
-                this.CurrentPerson = selectedRow;
+                this.CurrentCustomer = selectedRow;
 
             }
             catch (Exception ex)
@@ -99,15 +116,15 @@ namespace EtaxInvoice
 
         private void button_filter_Click(object sender, EventArgs e)
         {
-            var people = this.People;
+            var cus = this.Customers;
             switch (CurrentSelectedColumn)
             {
-                case "Name":
-                    people = people.Where(t => t.Name == textBox_search.Text).ToList();
+                case "FTCstName":
+                    cus = cus.Where(t => t.FTCstName == textBox_search.Text).ToList();
                     break;
                 default:break;
             }
-            dataGridView1.DataSource = people;
+            dataGridView1.DataSource = cus;
         }
     }
 }
