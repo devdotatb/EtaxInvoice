@@ -42,9 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HelperClasses\SQLHelper.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="Province.cs" />
     <Compile Include="HelperClasses\MessageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,9 +8,6 @@ namespace EtaxInvoice
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        public string CurrentSelectedColumn { get; set; }
-        public Person CurrentPerson { get; set; }
-        public Customer CurrentCustomer { get; set; }
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
