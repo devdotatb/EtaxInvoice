@@ -36,7 +36,6 @@ namespace EtaxInvoice
             this.panel2 = new System.Windows.Forms.Panel();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_OK = new System.Windows.Forms.Button();
-            this.button_filter = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -66,6 +65,7 @@ namespace EtaxInvoice
             this.textBox_search.Name = "textBox_search";
             this.textBox_search.Size = new System.Drawing.Size(372, 20);
             this.textBox_search.TabIndex = 4;
+            this.textBox_search.TextChanged += new System.EventHandler(this.textBox_search_TextChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -87,7 +87,6 @@ namespace EtaxInvoice
             // 
             this.panel2.Controls.Add(this.button_Cancel);
             this.panel2.Controls.Add(this.button_OK);
-            this.panel2.Controls.Add(this.button_filter);
             this.panel2.Controls.Add(this.textBox_search);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
@@ -117,16 +116,6 @@ namespace EtaxInvoice
             this.button_OK.Text = "ตกลง";
             this.button_OK.UseVisualStyleBackColor = true;
             this.button_OK.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button_filter
-            // 
-            this.button_filter.Location = new System.Drawing.Point(409, 33);
-            this.button_filter.Name = "button_filter";
-            this.button_filter.Size = new System.Drawing.Size(75, 23);
-            this.button_filter.TabIndex = 5;
-            this.button_filter.Text = "กรองข้อมูล";
-            this.button_filter.UseVisualStyleBackColor = true;
-            this.button_filter.Click += new System.EventHandler(this.button_filter_Click);
             // 
             // dataGridView1
             // 
@@ -166,7 +155,6 @@ namespace EtaxInvoice
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button_filter;
         private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.Button button_OK;
     }

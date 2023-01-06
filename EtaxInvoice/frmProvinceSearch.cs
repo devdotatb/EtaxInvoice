@@ -27,6 +27,12 @@ namespace EtaxInvoice
         {
             var provs = this.Provinces;
             UpdateDataGridView(provs);
+            SetDefaultData();
+        }
+        private void SetDefaultData()
+        {
+            CurrentSelectedColumn = "FTPvnName";
+            label2.Text = "ชื่อ";
         }
         private void UpdateDataGridView(List<Province> data)
         {
@@ -61,8 +67,8 @@ namespace EtaxInvoice
             {
                 var prov = new Province
                 {
-                    FTPvnCode = SQLHelper.SafeGetString(reader,0),
-                    FTPvnName = SQLHelper.SafeGetString(reader,1),
+                    FTPvnCode = SQLHelper.SafeGetString(reader, 0),
+                    FTPvnName = SQLHelper.SafeGetString(reader, 1),
                     /*FDDateUpd = SQLHelper.SafeGetString(reader,2),
                     FTTimeUpd = SQLHelper.SafeGetString(reader,3),
                     FTWhoUpd = SQLHelper.SafeGetString(reader,4),
@@ -74,34 +80,66 @@ namespace EtaxInvoice
             }
             return result;
         }
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private bool dataGrid_clicked_operation(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
+                if (e.ColumnIndex == -1)
+                {
+                    return false;
+                }
                 var senderGrid = (DataGridView)sender;
+                label2.Text = senderGrid.Columns[e.ColumnIndex].HeaderText;
+                this.CurrentSelectedColumn = senderGrid.Columns[e.ColumnIndex].Name;
+
+                if (dataGridView1.SelectedCells[0].RowIndex == 0)
+                {
+                    return false;
+                }
+
 
                 var selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].DataBoundItem as Province;
 
-                label2.Text = senderGrid.Columns[e.ColumnIndex].HeaderText;
-
-                textBox_search.Text = dataGridView1.SelectedCells[0].Value.ToString();
-
-                this.CurrentSelectedColumn = senderGrid.Columns[e.ColumnIndex].Name;
-
                 this.CurrentProvince = selectedRow;
+
+                return true;
 
             }
             catch (Exception ex)
             {
                 MessageHelper.ShowError(ex.Message);
+                return false;
             }
+        }
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGrid_clicked_operation(sender,e);
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView1_CellClick(sender, e);
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            var result = dataGrid_clicked_operation(sender, e);
+            if (result)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+        }
+
+        private void textBox_search_TextChanged(object sender, EventArgs e)
+        {
+            var prov = this.Provinces;
+            switch (CurrentSelectedColumn)
+            {
+                case "FTPvnCode":
+                    prov = prov.Where(t => t.FTPvnCode.Contains(textBox_search.Text)).ToList();
+                    break;
+                case "FTPvnName":
+                    prov = prov.Where(t => t.FTPvnName.Contains(textBox_search.Text)).ToList();
+                    break;
+                default: break;
+            }
+            UpdateDataGridView(prov);
         }
     }
 }

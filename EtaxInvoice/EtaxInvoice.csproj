@@ -106,6 +106,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmDistrictSearch.resx">
+      <DependentUpon>frmDistrictSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmInvoiceMain.resx">
       <DependentUpon>frmInvoiceMain.cs</DependentUpon>
     </EmbeddedResource>

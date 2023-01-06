@@ -45,6 +45,7 @@
     <Compile Include="HelperClasses\SQLHelper.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="District.cs" />
     <Compile Include="Province.cs" />
     <Compile Include="HelperClasses\MessageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
