@@ -39,6 +39,7 @@ namespace EtaxInvoice
         }
         private void UpdateDataGridView(List<Invoice> data)
         {
+            this.CurrentInvoice = data.FirstOrDefault();
             dataGridView1.DataSource = data;
             dataGridView1.Columns["FTBchCode"].Visible = false;
             dataGridView1.Columns["FDDateIns"].HeaderText = "วันที่เอกสาร";

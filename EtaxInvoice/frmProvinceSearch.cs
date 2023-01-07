@@ -36,6 +36,7 @@ namespace EtaxInvoice
         }
         private void UpdateDataGridView(List<Province> data)
         {
+            this.CurrentProvince = data.FirstOrDefault();
             dataGridView1.DataSource = data;
             dataGridView1.Columns["FTPvnCode"].HeaderText = "รหัส";
             dataGridView1.Columns["FTPvnName"].HeaderText = "ชื่อ";

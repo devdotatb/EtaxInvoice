@@ -2672,6 +2672,16 @@
             this.numericUpDown_sumNet.DecimalPlaces = 2;
             this.numericUpDown_sumNet.Enabled = false;
             this.numericUpDown_sumNet.Location = new System.Drawing.Point(238, 3);
+            this.numericUpDown_sumNet.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_sumNet.Minimum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown_sumNet.Name = "numericUpDown_sumNet";
             this.numericUpDown_sumNet.ReadOnly = true;
             this.numericUpDown_sumNet.Size = new System.Drawing.Size(229, 20);
@@ -2684,6 +2694,16 @@
             this.numericUpDown_sumDiscount.DecimalPlaces = 2;
             this.numericUpDown_sumDiscount.Enabled = false;
             this.numericUpDown_sumDiscount.Location = new System.Drawing.Point(238, 29);
+            this.numericUpDown_sumDiscount.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_sumDiscount.Minimum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown_sumDiscount.Name = "numericUpDown_sumDiscount";
             this.numericUpDown_sumDiscount.ReadOnly = true;
             this.numericUpDown_sumDiscount.Size = new System.Drawing.Size(229, 20);
@@ -2696,6 +2716,16 @@
             this.numericUpDown_NetAfter.DecimalPlaces = 2;
             this.numericUpDown_NetAfter.Enabled = false;
             this.numericUpDown_NetAfter.Location = new System.Drawing.Point(238, 55);
+            this.numericUpDown_NetAfter.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_NetAfter.Minimum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown_NetAfter.Name = "numericUpDown_NetAfter";
             this.numericUpDown_NetAfter.ReadOnly = true;
             this.numericUpDown_NetAfter.Size = new System.Drawing.Size(229, 20);
@@ -2708,6 +2738,16 @@
             this.numericUpDown_sumVat.DecimalPlaces = 2;
             this.numericUpDown_sumVat.Enabled = false;
             this.numericUpDown_sumVat.Location = new System.Drawing.Point(238, 81);
+            this.numericUpDown_sumVat.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_sumVat.Minimum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown_sumVat.Name = "numericUpDown_sumVat";
             this.numericUpDown_sumVat.ReadOnly = true;
             this.numericUpDown_sumVat.Size = new System.Drawing.Size(229, 20);
@@ -2720,6 +2760,16 @@
             this.numericUpDown_Total.DecimalPlaces = 2;
             this.numericUpDown_Total.Enabled = false;
             this.numericUpDown_Total.Location = new System.Drawing.Point(238, 108);
+            this.numericUpDown_Total.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_Total.Minimum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown_Total.Name = "numericUpDown_Total";
             this.numericUpDown_Total.ReadOnly = true;
             this.numericUpDown_Total.Size = new System.Drawing.Size(229, 20);

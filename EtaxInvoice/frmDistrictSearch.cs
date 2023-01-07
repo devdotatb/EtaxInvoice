@@ -36,6 +36,7 @@ namespace EtaxInvoice
         }
         private void UpdateDataGridView(List<District> data)
         {
+            this.CurrentDistrict = data.FirstOrDefault();
             dataGridView1.DataSource = data;
             dataGridView1.Columns["FTDstCode"].HeaderText = "รหัส";
             dataGridView1.Columns["FTDstName"].HeaderText = "ชื่อ";
