@@ -50,7 +50,7 @@ namespace EtaxInvoice
         }
         private List<District> GetDistricts()
         {
-            string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOSS;Integrated Security=True;";
+            string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOS;Integrated Security=True;";
             SqlConnection connection = new SqlConnection(connstr);
             string sql = string.Format(@"SELECT  [FTDstCode]
       ,[FTDstName]
@@ -62,7 +62,7 @@ namespace EtaxInvoice
       ,[FDDateIns]
       ,[FTTimeIns]
       ,[FTWhoIns]
-  FROM [SFMPOSS].[dbo].[TCNMDistrict]");
+  FROM [SFMPOS].[dbo].[TCNMDistrict]");
             connection.Open();
             SqlCommand cmd = new SqlCommand(sql, connection);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -86,14 +86,13 @@ namespace EtaxInvoice
                 {
                     return false;
                 }
-                var senderGrid = (DataGridView)sender;
-                label2.Text = senderGrid.Columns[e.ColumnIndex].HeaderText;
-                this.CurrentSelectedColumn = senderGrid.Columns[e.ColumnIndex].Name;
-
-                if (dataGridView1.SelectedCells[0].RowIndex == 0)
+                if (e.RowIndex == -1)
                 {
                     return false;
                 }
+                var senderGrid = (DataGridView)sender;
+                label2.Text = senderGrid.Columns[e.ColumnIndex].HeaderText;
+                this.CurrentSelectedColumn = senderGrid.Columns[e.ColumnIndex].Name;
 
 
                 var selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].DataBoundItem as District;

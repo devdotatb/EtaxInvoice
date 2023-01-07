@@ -58,7 +58,7 @@ namespace EtaxInvoice
 
         private List<Customer> GetCustomers()
         {
-            string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOSS;Integrated Security=True;";
+            string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOS;Integrated Security=True;";
             SqlConnection connection = new SqlConnection(connstr);
             string sql = string.Format(@"Select a.FTCstCode, a.FTCstName, a.FTCstTaxNo, a.FTCstWeb , a.FTCstAddrInv, a.FTCstStreetInv, a.FTCsttrictInv, a.FTDstCodeInv, a.FTPvnCodeInv , a.FTCstPostCodeInv, a.FTCstSize , a.FTCstTelInv, a.FTCstFaxInv, a.FTCstEmail, e.FTCYDescTh, d.FTPvnName, c.FTDstName 
 from TCNMCst a 
@@ -105,14 +105,14 @@ left outer join TCNMCountry e on a. FTCstSize = e. FTCYCode");
                 {
                     return false;
                 }
-                var senderGrid = (DataGridView)sender;
-                label2.Text = senderGrid.Columns[e.ColumnIndex].HeaderText;
-                this.CurrentSelectedColumn = senderGrid.Columns[e.ColumnIndex].Name;
-
-                if (dataGridView1.SelectedCells[0].RowIndex == 0)
+                if (e.RowIndex == -1)
                 {
                     return false;
                 }
+
+                var senderGrid = (DataGridView)sender;
+                label2.Text = senderGrid.Columns[e.ColumnIndex].HeaderText;
+                this.CurrentSelectedColumn = senderGrid.Columns[e.ColumnIndex].Name;
 
 
                 var selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].DataBoundItem as Customer;

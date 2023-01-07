@@ -4,8 +4,6 @@ namespace EtaxInvoice
 {
     partial class frmInvoiceSearch
     {
-        public string CurrentSelectedColumn { get; set; }
-        public Invoice CurrentInvoice { get; set; }
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -37,7 +35,6 @@ namespace EtaxInvoice
             this.panel1 = new System.Windows.Forms.Panel();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_OK = new System.Windows.Forms.Button();
-            this.button_filter = new System.Windows.Forms.Button();
             this.textBox_search = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -84,7 +81,6 @@ namespace EtaxInvoice
             // 
             this.panel1.Controls.Add(this.button_Cancel);
             this.panel1.Controls.Add(this.button_OK);
-            this.panel1.Controls.Add(this.button_filter);
             this.panel1.Controls.Add(this.textBox_search);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
@@ -114,21 +110,13 @@ namespace EtaxInvoice
             this.button_OK.UseVisualStyleBackColor = true;
             this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
             // 
-            // button_filter
-            // 
-            this.button_filter.Location = new System.Drawing.Point(408, 35);
-            this.button_filter.Name = "button_filter";
-            this.button_filter.Size = new System.Drawing.Size(75, 23);
-            this.button_filter.TabIndex = 11;
-            this.button_filter.Text = "กรองข้อมูล";
-            this.button_filter.UseVisualStyleBackColor = true;
-            // 
             // textBox_search
             // 
             this.textBox_search.Location = new System.Drawing.Point(30, 38);
             this.textBox_search.Name = "textBox_search";
             this.textBox_search.Size = new System.Drawing.Size(372, 20);
             this.textBox_search.TabIndex = 10;
+            this.textBox_search.TextChanged += new System.EventHandler(this.textBox_search_TextChanged);
             // 
             // label2
             // 
@@ -171,7 +159,6 @@ namespace EtaxInvoice
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.Button button_OK;
-        private System.Windows.Forms.Button button_filter;
         private System.Windows.Forms.TextBox textBox_search;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

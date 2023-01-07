@@ -16,7 +16,7 @@ namespace EtaxInvoice
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmInvoiceMain());
+            Application.Run(new frmMain());
         }
     }
 }
