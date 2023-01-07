@@ -186,7 +186,7 @@ namespace EtaxInvoice
                 var result = frm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
-                    OpenfrmInvoice(true,frm.POSnumber);
+                    OpenfrmInvoice(true, frm.POSnumber);
                 }
             }
             catch (Exception ex)
@@ -194,7 +194,7 @@ namespace EtaxInvoice
                 MessageHelper.ShowError(ex.Message);
             }
         }
-        private void OpenfrmInvoice(bool isToday,string POSno)
+        private void OpenfrmInvoice(bool isToday, string POSno)
         {
             try
             {
@@ -205,14 +205,22 @@ namespace EtaxInvoice
                 if (result == DialogResult.OK)
                 {
                     Invoice inv = frm.CurrentInvoice;
+                    this.CurrentInvoice = frm.CurrentInvoice;
                     this.CurrentInvoiceDetailList = frm.CurrentInvoiceDetailList;
                     this.CurrentInvoicePayment = frm.CurrentInvoicePayment;
-                    UpdateDataGridView();
+
 
                     textBox_invoiceDocNo.Text = inv.FTShdDocNo;
                     textBox_invoiceBranchCode.Text = inv.FTBchCode;
                     textBox_invoiceDate.Text = inv.FDDateIns;
-                    this.CurrentInvoice = frm.CurrentInvoice;
+
+                    numericUpDown_sumNet.Value = (decimal)this.CurrentInvoiceDetailList.Sum(t => t.FCSdtB4DisChg);
+                    numericUpDown_sumDiscount.Value = (decimal)this.CurrentInvoiceDetailList.Sum(t => t.FCSdtDis);
+                    numericUpDown_NetAfter.Value = (decimal)this.CurrentInvoiceDetailList.Sum(t => t.FCSdtNet);
+                    numericUpDown_sumVat.Value = (decimal)this.CurrentInvoiceDetailList.Sum(t => t.FCSdtVat);
+                    numericUpDown_Total.Value = (decimal)this.CurrentInvoicePayment.FCSrcNet;//(decimal)this.CurrentInvoiceDetailList.Sum(t => t.FCSdtDis);
+
+                    UpdateDataGridView();
                 }
             }
             catch (Exception ex)
@@ -259,6 +267,19 @@ namespace EtaxInvoice
         private void UpdateDataGridView()
         {
             dataGridView1.DataSource = CurrentInvoiceDetailList;
+
+            dataGridView1.Columns["FTSdtSeqNo"].HeaderText = "ลำดับ";
+            dataGridView1.Columns["FTSdtBarCode"].HeaderText = "รหัสสินค้า";
+            dataGridView1.Columns["FTPdtName"].HeaderText = "ชื่อสินค้า";
+            dataGridView1.Columns["FTPdtCode"].HeaderText = "หน่วย";
+            dataGridView1.Columns["FCSdtQty"].HeaderText = "จำนวน";
+            dataGridView1.Columns["FCSdtDis"].HeaderText = "ส่วนลด";
+            dataGridView1.Columns["FCSdtFootAvg"].Visible = false;
+            dataGridView1.Columns["FCSdtNet"].HeaderText = "จำนวนเงิน";
+            dataGridView1.Columns["FCSdtB4DisChg"].Visible = false;
+            dataGridView1.Columns["FCSdtSetPrice"].HeaderText = "ราคาต่อหน่วย";
+            dataGridView1.Columns["FCSdtVat"].Visible = false;
+            dataGridView1.Columns["FTSdtVatType"].Visible = false;
             /*dataGridView1.Columns["FTCstCode"].HeaderText = "รหัสลูกค้า";
             dataGridView1.Columns["FTCstName"].HeaderText = "ชื่อลูกค้า";
             dataGridView1.Columns["FTCstTaxNo"].HeaderText = "หมายเลขประจำตัวผู้เสียภาษี";
