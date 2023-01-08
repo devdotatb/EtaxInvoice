@@ -9,6 +9,7 @@ namespace EtaxInvoice.Common
     public class Customer
     {
         public string FTCstCode { get; set; }
+        public string FTCtyCode { get; set; }
         public string FTCstName { get; set; }
         public string FTCstTaxNo { get; set; }
         public string FTCstWeb { get; set; }

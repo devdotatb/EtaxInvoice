@@ -26,7 +26,7 @@ namespace EtaxInvoice
         }
         public void LoadPOSComboBox()
         {
-            string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOS;Integrated Security=True;";
+            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
             SqlConnection connection = new SqlConnection(connstr);
             string sql = string.Format(@"select FTPosCode from TPSMPos where FTPosRorW=1");
             connection.Open();

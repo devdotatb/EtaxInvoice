@@ -52,81 +52,61 @@ namespace EtaxInvoice
             dataGridView1.Columns["FCShdDis"].Visible = false;
             dataGridView1.Columns["FCShdB4DisChg"].Visible = false;
             dataGridView1.Columns["FCShdGndAE"].Visible = false;
+            dataGridView1.Columns["FCShdAftDisChg"].Visible = false;
+            dataGridView1.Columns["FCShdVatRate"].Visible = false;
             //dataGridView1.Columns["PersonId"].Visible = false;
             //dataGridView1.Columns["Name"].HeaderText = "ชื่อลูกค้า";
         }
         private List<Invoice> GetInvoices()
         {
+            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = "";
             if (isToday)
             {
                 // 001 002 003
-                string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOS;Integrated Security=True;";
-                SqlConnection connection = new SqlConnection(connstr);
-                string sql = string.Format(@"
+                sql = string.Format(@"
 select FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo
 , FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat
-, FCShdDis, FCShdB4DisChg, FCShdGndAE 
+, FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate
 from TSHD{0} HD with(nolock)
 where isnull(FTShdDocVatFull,'') = '' and FTShdStaDoc = '1'", this.POSnumber);
-                connection.Open();
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                SqlDataReader reader = cmd.ExecuteReader();
-                var result = new List<Invoice>();
-                while (reader.Read())
-                {
-                    var each_data = new Invoice
-                    {
-                        FTBchCode = SQLHelper.SafeGetString(reader, 0),
-                        FDDateIns = SQLHelper.SafeGetDateToString(reader, 1),
-                        FTTimeIns = SQLHelper.SafeGetString(reader, 2),
-                        FTShdDocNo = SQLHelper.SafeGetString(reader, 3),
-                        FCShdTotal = SQLHelper.SafeGetDouble(reader, 4),
-                        FCShdVat = SQLHelper.SafeGetDouble(reader, 5),
-                        FCShdVatable = SQLHelper.SafeGetDouble(reader, 6),
-                        FCShdNonVat = SQLHelper.SafeGetDouble(reader, 7),
-                        FCShdDis = SQLHelper.SafeGetDouble(reader, 8),
-                        FCShdB4DisChg = SQLHelper.SafeGetDouble(reader, 9),
-                        FCShdGndAE = SQLHelper.SafeGetDouble(reader, 10),
-                    };
-                    result.Add(each_data);
-                }
-                return result;
             }
             else
             {
                 // TPSTSalHD
-                string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOS;Integrated Security=True;";
-                SqlConnection connection = new SqlConnection(connstr);
-                string sql = string.Format(@"select 
+                sql = string.Format(@"select 
 FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo, 
 FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat, 
-FCShdDis, FCShdB4DisChg, FCShdGndAE 
+FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate
 from TPSTSalHD HD with(nolock)
 where isnull(FTShdDocVatFull,'') = '' ");
-                connection.Open();
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                SqlDataReader reader = cmd.ExecuteReader();
-                var result = new List<Invoice>();
-                while (reader.Read())
-                {
-                    var each_data = new Invoice
-                    {
-                        FTBchCode = SQLHelper.SafeGetString(reader, 0),
-                        FDDateIns = SQLHelper.SafeGetDateToString(reader, 1),
-                        FTTimeIns = SQLHelper.SafeGetString(reader, 2),
-                        FTShdDocNo = SQLHelper.SafeGetString(reader, 3),
-                        FCShdTotal = SQLHelper.SafeGetDouble(reader, 4),
-                        FCShdVat = SQLHelper.SafeGetDouble(reader, 5),
-                        FCShdVatable = SQLHelper.SafeGetDouble(reader, 6),
-                        FCShdNonVat = SQLHelper.SafeGetDouble(reader, 7),
-                        FCShdDis = SQLHelper.SafeGetDouble(reader, 8),
-                        FCShdB4DisChg = SQLHelper.SafeGetDouble(reader, 9),
-                        FCShdGndAE = SQLHelper.SafeGetDouble(reader, 10),
-                    };
-                    result.Add(each_data);
-                }
-                return result;
             }
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            var result = new List<Invoice>();
+            while (reader.Read())
+            {
+                var each_data = new Invoice
+                {
+                    FTBchCode = SQLHelper.SafeGetString(reader, 0),
+                    FDDateIns = SQLHelper.SafeGetDateToString(reader, 1),
+                    FTTimeIns = SQLHelper.SafeGetString(reader, 2),
+                    FTShdDocNo = SQLHelper.SafeGetString(reader, 3),
+                    FCShdTotal = SQLHelper.SafeGetDouble(reader, 4),
+                    FCShdVat = SQLHelper.SafeGetDouble(reader, 5),
+                    FCShdVatable = SQLHelper.SafeGetDouble(reader, 6),
+                    FCShdNonVat = SQLHelper.SafeGetDouble(reader, 7),
+                    FCShdDis = SQLHelper.SafeGetDouble(reader, 8),
+                    FCShdB4DisChg = SQLHelper.SafeGetDouble(reader, 9),
+                    FCShdGndAE = SQLHelper.SafeGetDouble(reader, 10),
+                    FCShdAftDisChg = SQLHelper.SafeGetDouble(reader, 11),
+                    FCShdVatRate = SQLHelper.SafeGetDouble(reader, 12),
+                };
+                result.Add(each_data);
+            }
+            return result;
         }
         private bool dataGrid_clicked_operation(object sender, DataGridViewCellEventArgs e)
         {
@@ -182,13 +162,13 @@ where isnull(FTShdDocVatFull,'') = '' ");
         }
         private void saveDetail()
         {
-            string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOS;Integrated Security=True;";
+            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
             SqlConnection connection = new SqlConnection(connstr);
             string sql = "";
             if (isToday)
             {
                 // 001 002 003
-                sql = string.Format(@"select 0 as FTSdtSeqNo, DT.FTSdtBarCode, DT.FTPdtName, DT.FTPdtCode, DT.FCSdtQty, DT.FCSdtDis, DT.FCSdtFootAvg, DT.FCSdtNet, DT.FCSdtB4DisChg, DT.FCSdtSetPrice, DT.FCSdtVat, DT.FTSdtVatType 
+                sql = string.Format(@"select DT.FNSdtSeqNo, DT.FTSdtBarCode, DT.FTPdtName, DT.FTPdtCode, DT.FCSdtQty, DT.FCSdtDis, DT.FCSdtFootAvg, DT.FCSdtNet, DT.FCSdtB4DisChg, DT.FCSdtSetPrice, DT.FCSdtVat, DT.FTSdtVatType 
 from TSHD{0} HD with(nolock)
 left join TSDT{0} DT with(nolock) on HD.FTShdDocNo = DT.FTShdDocNo
 where isnull(HD.FTShdDocVatFull,'') = '' and HD.FTShdStaDoc = '1' and DT.FTShdDocNo = '{1}'", this.POSnumber, this.CurrentInvoice.FTShdDocNo);
@@ -196,7 +176,7 @@ where isnull(HD.FTShdDocVatFull,'') = '' and HD.FTShdStaDoc = '1' and DT.FTShdDo
             else
             {
                 // TPSTSalHD
-                sql = string.Format(@"select 0 as FTSdtSeqNo, DT.FTSdtBarCode, DT.FTPdtName, DT.FTPdtCode, DT.FCSdtQty, DT.FCSdtDis, DT.FCSdtFootAvg, DT.FCSdtNet, DT.FCSdtB4DisChg, DT.FCSdtSetPrice, DT.FCSdtVat, DT.FTSdtVatType 
+                sql = string.Format(@"select DT.FNSdtSeqNo, DT.FTSdtBarCode, DT.FTPdtName, DT.FTPdtCode, DT.FCSdtQty, DT.FCSdtDis, DT.FCSdtFootAvg, DT.FCSdtNet, DT.FCSdtB4DisChg, DT.FCSdtSetPrice, DT.FCSdtVat, DT.FTSdtVatType 
 from TPSTSalHD HD with(nolock)
 left join TPSTSalDT DT with(nolock) on HD.FTShdDocNo = DT.FTShdDocNo
 where isnull(HD.FTShdDocVatFull,'') = '' and DT.FTShdDocNo = '{0}'", this.CurrentInvoice.FTShdDocNo);
@@ -209,7 +189,7 @@ where isnull(HD.FTShdDocVatFull,'') = '' and DT.FTShdDocNo = '{0}'", this.Curren
             {
                 var each_data = new InvoiceDetail
                 {
-                    FTSdtSeqNo = SQLHelper.SafeGetInt(reader, 0),
+                    FNSdtSeqNo = SQLHelper.SafeGetDouble(reader, 0),
                     FTSdtBarCode = SQLHelper.SafeGetString(reader, 1),
                     FTPdtName = SQLHelper.SafeGetString(reader, 2),
                     FTPdtCode = SQLHelper.SafeGetString(reader, 3),
@@ -228,7 +208,7 @@ where isnull(HD.FTShdDocVatFull,'') = '' and DT.FTShdDocNo = '{0}'", this.Curren
         }
         private void savePayment()
         {
-            string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOS;Integrated Security=True;";
+            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
             SqlConnection connection = new SqlConnection(connstr);
             string sql = "";
             if (isToday)

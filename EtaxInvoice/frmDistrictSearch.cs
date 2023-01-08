@@ -51,7 +51,7 @@ namespace EtaxInvoice
         }
         private List<District> GetDistricts()
         {
-            string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOS;Integrated Security=True;";
+            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
             SqlConnection connection = new SqlConnection(connstr);
             string sql = string.Format(@"SELECT  [FTDstCode]
       ,[FTDstName]
@@ -138,6 +138,12 @@ namespace EtaxInvoice
                 default: break;
             }
             UpdateDataGridView(prov);
+        }
+
+        private void button_Cancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

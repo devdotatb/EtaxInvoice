@@ -19,5 +19,7 @@ namespace EtaxInvoice.Common
         public double FCShdDis { get; set; }
         public double FCShdB4DisChg { get; set; }
         public double FCShdGndAE { get; set; }
+        public double FCShdAftDisChg { get; set; }
+        public double FCShdVatRate { get; set; }
     }
 }

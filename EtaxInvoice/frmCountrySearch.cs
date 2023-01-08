@@ -12,64 +12,52 @@ using System.Windows.Forms;
 
 namespace EtaxInvoice
 {
-    public partial class frmProvinceSearch : Form
+    public partial class frmCountrySearch : Form
     {
-        public List<Province> Provinces { get; set; }
+        public List<Country> Countries { get; set; }
         public string CurrentSelectedColumn { get; set; }
-        public Province CurrentProvince { get; set; }
-        public frmProvinceSearch()
+        public Country CurrentCountry { get; set; }
+        public frmCountrySearch()
         {
-            Provinces = GetProvinces();
+            Countries = GetCountries();
             InitializeComponent();
         }
 
-        private void frmProvinceSearch_Load(object sender, EventArgs e)
+        private void frmCountrySearch_Load(object sender, EventArgs e)
         {
-            var provs = this.Provinces;
+            var provs = this.Countries;
             UpdateDataGridView(provs);
             SetDefaultData();
         }
         private void SetDefaultData()
         {
-            CurrentSelectedColumn = "FTPvnName";
-            label2.Text = "ชื่อ";
+            CurrentSelectedColumn = "FTCYDescTh";
+            label2.Text = "ชื่อไทย";
         }
-        private void UpdateDataGridView(List<Province> data)
+        private void UpdateDataGridView(List<Country> data)
         {
-            this.CurrentProvince = data.FirstOrDefault();
+            this.CurrentCountry = data.FirstOrDefault();
             dataGridView1.DataSource = data;
-            dataGridView1.Columns["FTPvnCode"].HeaderText = "รหัส";
-            dataGridView1.Columns["FTPvnName"].HeaderText = "ชื่อ";
-            dataGridView1.Columns["FDDateUpd"].Visible = false;
-            dataGridView1.Columns["FTTimeUpd"].Visible = false;
-            dataGridView1.Columns["FTWhoUpd"].Visible = false;
-            dataGridView1.Columns["FDDateIns"].Visible = false;
-            dataGridView1.Columns["FTTimeIns"].Visible = false;
-            dataGridView1.Columns["FTWhoIns"].Visible = false;
+            dataGridView1.Columns["FTCYCode"].HeaderText = "รหัส";
+            dataGridView1.Columns["FTCYDescTh"].HeaderText = "ชื่อไทย";
+            dataGridView1.Columns["FTCYDescEn"].HeaderText = "ชื่ออังกฤษ";
         }
-        private List<Province> GetProvinces()
+        private List<Country> GetCountries()
         {
             string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
             SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"SELECT [FTPvnCode]
-                  ,[FTPvnName]
-                  ,[FDDateUpd]
-                  ,[FTTimeUpd]
-                  ,[FTWhoUpd]
-                  ,[FDDateIns]
-                  ,[FTTimeIns]
-                  ,[FTWhoIns]
-              FROM [SFMPOS].[dbo].[TCNMProvince]");
+            string sql = string.Format(@"select FTCYCode,FTCYDescTh,FTCYDescEn from TCNMCountry");
             connection.Open();
             SqlCommand cmd = new SqlCommand(sql, connection);
             SqlDataReader reader = cmd.ExecuteReader();
-            var result = new List<Province>();
+            var result = new List<Country>();
             while (reader.Read())
             {
-                var prov = new Province
+                var prov = new Country
                 {
-                    FTPvnCode = SQLHelper.SafeGetString(reader, 0),
-                    FTPvnName = SQLHelper.SafeGetString(reader, 1),
+                    FTCYCode = SQLHelper.SafeGetString(reader, 0),
+                    FTCYDescTh = SQLHelper.SafeGetString(reader, 1),
+                    FTCYDescEn = SQLHelper.SafeGetString(reader, 1),
                     /*FDDateUpd = SQLHelper.SafeGetString(reader,2),
                     FTTimeUpd = SQLHelper.SafeGetString(reader,3),
                     FTWhoUpd = SQLHelper.SafeGetString(reader,4),
@@ -99,9 +87,9 @@ namespace EtaxInvoice
                 this.CurrentSelectedColumn = senderGrid.Columns[e.ColumnIndex].Name;
 
 
-                var selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].DataBoundItem as Province;
+                var selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].DataBoundItem as Country;
 
-                this.CurrentProvince = selectedRow;
+                this.CurrentCountry = selectedRow;
 
                 return true;
 
@@ -128,14 +116,17 @@ namespace EtaxInvoice
 
         private void textBox_search_TextChanged(object sender, EventArgs e)
         {
-            var prov = this.Provinces;
+            var prov = this.Countries;
             switch (CurrentSelectedColumn)
             {
-                case "FTPvnCode":
-                    prov = prov.Where(t => t.FTPvnCode.Contains(textBox_search.Text)).ToList();
+                case "FTCYCode":
+                    prov = prov.Where(t => t.FTCYCode.Contains(textBox_search.Text)).ToList();
                     break;
-                case "FTPvnName":
-                    prov = prov.Where(t => t.FTPvnName.Contains(textBox_search.Text)).ToList();
+                case "FTCYDescTh":
+                    prov = prov.Where(t => t.FTCYDescTh.Contains(textBox_search.Text)).ToList();
+                    break;
+                case "FTCYDescEn":
+                    prov = prov.Where(t => t.FTCYDescEn.Contains(textBox_search.Text)).ToList();
                     break;
                 default: break;
             }

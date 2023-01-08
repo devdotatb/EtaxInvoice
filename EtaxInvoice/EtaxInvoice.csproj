@@ -23,7 +23,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -104,6 +105,12 @@
     <Compile Include="frmInvoiceSearch.Designer.cs">
       <DependentUpon>frmInvoiceSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCountrySearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCountrySearch.Designer.cs">
+      <DependentUpon>frmCountrySearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmProvinceSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +140,9 @@
     <EmbeddedResource Include="frmInvoiceSearch.resx">
       <DependentUpon>frmInvoiceSearch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCountrySearch.resx">
+      <DependentUpon>frmCountrySearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmProvinceSearch.resx">
       <DependentUpon>frmProvinceSearch.cs</DependentUpon>
     </EmbeddedResource>
@@ -160,7 +170,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EtaxInvoice.Common\EtaxInvoice.Common.csproj">

@@ -14,17 +14,19 @@ namespace EtaxInvoice
 {
     public partial class frmUserSearch : Form
     {
+        private CustomerTypeDefault customerTypeDefault { get; set; } = new CustomerTypeDefault();
         public List<Customer> Customers { get; set; }
         public string CurrentSelectedColumn { get; set; }
         public Customer CurrentCustomer { get; set; }
+        public string CustomerTypeCode { get; set; }
         public frmUserSearch()
         {
-            Customers = GetCustomers();
             InitializeComponent();
         }
 
         private void frmUserSearch_Load(object sender, EventArgs e)
         {
+            Customers = GetCustomers();
             var customers = this.Customers;
             UpdateDataGridView(customers);
             SetDefaultData();
@@ -38,7 +40,7 @@ namespace EtaxInvoice
         {
             this.CurrentCustomer = data.FirstOrDefault();
             dataGridView1.DataSource = data;
-            dataGridView1.Columns["FTCstCode"].HeaderText = "รหัสลูกค้า";
+            dataGridView1.Columns["FTCtyCode"].Visible = false;
             dataGridView1.Columns["FTCstName"].HeaderText = "ชื่อลูกค้า";
             dataGridView1.Columns["FTCstTaxNo"].HeaderText = "หมายเลขประจำตัวผู้เสียภาษี";
             dataGridView1.Columns["FTCstWeb"].Visible = false;
@@ -55,18 +57,23 @@ namespace EtaxInvoice
             dataGridView1.Columns["FTCYDescTh"].Visible = false;
             dataGridView1.Columns["FTPvnName"].HeaderText = "จังหวัด";
             dataGridView1.Columns["FTDstName"].HeaderText = "อำเภอ";
+            dataGridView1.Columns["FTCstCode"].HeaderText = "รหัสลูกค้า";
         }
 
         private List<Customer> GetCustomers()
         {
-            string connstr = @"Data Source=.\sqlexpress;Initial Catalog=SFMPOS;Integrated Security=True;";
+            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
             SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"Select a.FTCstCode, a.FTCstName, a.FTCstTaxNo, a.FTCstWeb , a.FTCstAddrInv, a.FTCstStreetInv, a.FTCsttrictInv, a.FTDstCodeInv, a.FTPvnCodeInv , a.FTCstPostCodeInv, a.FTCstSize , a.FTCstTelInv, a.FTCstFaxInv, a.FTCstEmail, e.FTCYDescTh, d.FTPvnName, c.FTDstName 
+            string sql = string.Format(@"Select a.FTCtyCode, a.FTCstName, a.FTCstTaxNo, a.FTCstWeb , a.FTCstAddrInv
+, a.FTCstStreetInv, a.FTCsttrictInv, a.FTDstCodeInv, a.FTPvnCodeInv , a.FTCstPostCodeInv
+, a.FTCstSize , a.FTCstTelInv, a.FTCstFaxInv, a.FTCstEmail, e.FTCYDescTh
+, d.FTPvnName, c.FTDstName , a.FTCstCode
 from TCNMCst a 
 left outer join TCNMCstType b on a. FTCtyCode = b. FTCtyCode 
 left outer join TCNMDistrict c on a. FTDstCodeInv = c. FTDstCode
 left outer join TCNMProvince d on a. FTPvnCodeInv = d. FTPvnCode
-left outer join TCNMCountry e on a. FTCstSize = e. FTCYCode");
+left outer join TCNMCountry e on a. FTCstSize = e. FTCYCode
+where a.FTCtyCode = '{0}'",this.CustomerTypeCode);
             connection.Open();
             SqlCommand cmd = new SqlCommand(sql, connection);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -75,7 +82,7 @@ left outer join TCNMCountry e on a. FTCstSize = e. FTCYCode");
             {
                 var cus = new Customer
                 {
-                    FTCstCode = SQLHelper.SafeGetString(reader,0),
+                    FTCtyCode = SQLHelper.SafeGetString(reader,0),
                     FTCstName = SQLHelper.SafeGetString(reader,1),
                     FTCstTaxNo = SQLHelper.SafeGetString(reader,2),
                     FTCstWeb = SQLHelper.SafeGetString(reader,3),
@@ -92,7 +99,17 @@ left outer join TCNMCountry e on a. FTCstSize = e. FTCYCode");
                     FTCYDescTh = SQLHelper.SafeGetString(reader, 14),
                     FTPvnName = SQLHelper.SafeGetString(reader, 15),
                     FTDstName = SQLHelper.SafeGetString(reader, 16),
+                    FTCstCode = SQLHelper.SafeGetString(reader, 17),
                 };
+                if (this.CustomerTypeCode == customerTypeDefault.CCPT)
+                {
+                    string[] splitted = cus.FTCstAddrInv.Split('|');
+                    if (splitted.Count() == 2)
+                    {
+                        cus.FTCstAddrInv = splitted[0];
+                        cus.FTPvnName = splitted[1];
+                    }
+                }
                 result.Add(cus);
             }
             return result;

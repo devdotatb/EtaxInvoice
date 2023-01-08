@@ -1,6 +1,6 @@
 ﻿namespace EtaxInvoice
 {
-    partial class frmDistrictSearch
+    partial class frmCountrySearch
     {
         /// <summary>
         /// Required designer variable.
@@ -63,8 +63,8 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(694, 516);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(568, 465);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // dataGridView1
             // 
@@ -76,7 +76,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(688, 406);
+            this.dataGridView1.Size = new System.Drawing.Size(562, 366);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
@@ -85,9 +85,9 @@
             // 
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 415);
+            this.panel1.Location = new System.Drawing.Point(3, 375);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(688, 98);
+            this.panel1.Size = new System.Drawing.Size(562, 87);
             this.panel1.TabIndex = 1;
             // 
             // tableLayoutPanel2
@@ -102,16 +102,16 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(688, 98);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(562, 87);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.tableLayoutPanel3);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 52);
+            this.panel3.Location = new System.Drawing.Point(3, 46);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(682, 43);
+            this.panel3.Size = new System.Drawing.Size(556, 38);
             this.panel3.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -126,12 +126,12 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(682, 43);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(556, 38);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // button_Cancel
             // 
-            this.button_Cancel.Location = new System.Drawing.Point(548, 3);
+            this.button_Cancel.Location = new System.Drawing.Point(447, 3);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(75, 23);
             this.button_Cancel.TabIndex = 25;
@@ -145,7 +145,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_search.Location = new System.Drawing.Point(3, 3);
             this.textBox_search.Name = "textBox_search";
-            this.textBox_search.Size = new System.Drawing.Size(539, 20);
+            this.textBox_search.Size = new System.Drawing.Size(438, 20);
             this.textBox_search.TabIndex = 22;
             this.textBox_search.TextChanged += new System.EventHandler(this.textBox_search_TextChanged);
             // 
@@ -162,13 +162,13 @@
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(682, 43);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(556, 37);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // button_OK
             // 
             this.button_OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_OK.Location = new System.Drawing.Point(548, 17);
+            this.button_OK.Location = new System.Drawing.Point(447, 11);
             this.button_OK.Name = "button_OK";
             this.button_OK.Size = new System.Drawing.Size(75, 23);
             this.button_OK.TabIndex = 24;
@@ -202,15 +202,15 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "กรองข้อมูลตาม";
             // 
-            // frmDistrictSearch
+            // frmCountrySearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 516);
+            this.ClientSize = new System.Drawing.Size(568, 465);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "frmDistrictSearch";
-            this.Text = "frmDistrictSearch";
-            this.Load += new System.EventHandler(this.frmDistrictSearch_Load);
+            this.Name = "frmCountrySearch";
+            this.Text = "frmCountrySearch";
+            this.Load += new System.EventHandler(this.frmCountrySearch_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -237,8 +237,8 @@
         private System.Windows.Forms.TextBox textBox_search;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Button button_OK;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
     }
 }
