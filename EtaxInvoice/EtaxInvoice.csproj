@@ -24,7 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -62,6 +62,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -75,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIData\resultAPIData.cs" />
     <Compile Include="APIData\CNAPIData.cs" />
     <Compile Include="APIData\CustomerAPIData.cs" />
     <Compile Include="APIData\DiscountInfoAPIData.cs" />
@@ -89,6 +93,12 @@
     </Compile>
     <Compile Include="frmDistrictSearch.Designer.cs">
       <DependentUpon>frmDistrictSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmailConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmailConfirm.Designer.cs">
+      <DependentUpon>frmEmailConfirm.cs</DependentUpon>
     </Compile>
     <Compile Include="frmInvoiceCheckDate.cs">
       <SubType>Form</SubType>
@@ -133,6 +143,7 @@
       <DependentUpon>frmUserSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="HelperClasses\ConfigHelper.cs" />
+    <Compile Include="HelperClasses\LogInserter.cs" />
     <Compile Include="HelperClasses\MessageHelper.cs" />
     <Compile Include="HelperClasses\SQLHelper.cs" />
     <Compile Include="Program.cs" />
@@ -144,10 +155,14 @@
     <Compile Include="ProgramData\Invoice.cs" />
     <Compile Include="ProgramData\InvoiceDetail.cs" />
     <Compile Include="ProgramData\InvoicePayment.cs" />
+    <Compile Include="ProgramData\LogETAX.cs" />
     <Compile Include="ProgramData\Province.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmDistrictSearch.resx">
       <DependentUpon>frmDistrictSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmailConfirm.resx">
+      <DependentUpon>frmEmailConfirm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInvoiceCheckDate.resx">
       <DependentUpon>frmInvoiceCheckDate.cs</DependentUpon>
@@ -180,6 +195,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="EtaxInvoice_TemporaryKey.pfx" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -194,12 +210,6 @@
     <None Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EtaxInvoice.Common\EtaxInvoice.Common.csproj">
-      <Project>{3AA9C2AF-40CF-4C4A-959C-81D91FAC7038}</Project>
-      <Name>EtaxInvoice.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

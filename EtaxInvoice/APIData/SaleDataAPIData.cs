@@ -9,7 +9,7 @@ namespace EtaxInvoice.APIData
     public class SaleDataAPIData
     {
         public string bu { get; set; }
-        public int total { get; set; }
+        public decimal total { get; set; }
         public SalesTicketAPIData salesTicket { get; set; } = new SalesTicketAPIData();
     }
 }

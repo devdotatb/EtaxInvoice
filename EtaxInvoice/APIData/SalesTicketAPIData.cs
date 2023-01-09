@@ -24,7 +24,7 @@ namespace EtaxInvoice.APIData
         public string transType { get; set; }
         public string template_type { get; set; }
         public decimal taxValue { get; set; }
-        public int totalQty { get; set; }
+        public decimal totalQty { get; set; }
         public decimal totalDiscount { get; set; }
         public decimal totalAmtExdiscount { get; set; }
         public string receiptNumber { get; set; }

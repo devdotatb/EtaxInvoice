@@ -15,7 +15,7 @@ namespace EtaxInvoice.APIData
         public string userLoc { get; set; }
         public string userRole { get; set; }
         public CustomerAPIData customer { get; set; } = new CustomerAPIData();
-        public CustomerAPIData shipTo { get; set; }
+        public Dictionary<string, object> shipTo { get; set; } = new Dictionary<string, object>();
         public SaleDataAPIData saleData { get; set; } = new SaleDataAPIData();
     }
 }

@@ -13,11 +13,18 @@ namespace EtaxInvoice
             return System.Configuration.ConfigurationSettings.AppSettings[key];
         }
 
+        public static string DatabaseName 
+        {
+            get
+            {
+                return "Initial Catalog=" + Program.globalDBName + ";";
+            }
+        }
         public static string ConnectionString
         {
             get
             {
-                return GetAppSetting("ConnectionString");
+                return GetAppSetting("ConnectionString") + DatabaseName;
             }
         }
     }

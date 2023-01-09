@@ -54,8 +54,7 @@ namespace EtaxInvoice
             dataGridView1.Columns["FCShdGndAE"].Visible = false;
             dataGridView1.Columns["FCShdAftDisChg"].Visible = false;
             dataGridView1.Columns["FCShdVatRate"].Visible = false;
-            //dataGridView1.Columns["PersonId"].Visible = false;
-            //dataGridView1.Columns["Name"].HeaderText = "ชื่อลูกค้า";
+            dataGridView1.Columns["FDShdDocDate"].Visible = false;
         }
         private List<Invoice> GetInvoices()
         {
@@ -68,7 +67,7 @@ namespace EtaxInvoice
                 sql = string.Format(@"
 select FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo
 , FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat
-, FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate
+, FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate
 from TSHD{0} HD with(nolock)
 where isnull(FTShdDocVatFull,'') = '' and FTShdStaDoc = '1'", this.POSnumber);
             }
@@ -78,7 +77,7 @@ where isnull(FTShdDocVatFull,'') = '' and FTShdStaDoc = '1'", this.POSnumber);
                 sql = string.Format(@"select 
 FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo, 
 FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat, 
-FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate
+FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate
 from TPSTSalHD HD with(nolock)
 where isnull(FTShdDocVatFull,'') = '' ");
             }
@@ -94,15 +93,16 @@ where isnull(FTShdDocVatFull,'') = '' ");
                     FDDateIns = SQLHelper.SafeGetDateToString(reader, 1),
                     FTTimeIns = SQLHelper.SafeGetString(reader, 2),
                     FTShdDocNo = SQLHelper.SafeGetString(reader, 3),
-                    FCShdTotal = SQLHelper.SafeGetDouble(reader, 4),
-                    FCShdVat = SQLHelper.SafeGetDouble(reader, 5),
-                    FCShdVatable = SQLHelper.SafeGetDouble(reader, 6),
-                    FCShdNonVat = SQLHelper.SafeGetDouble(reader, 7),
-                    FCShdDis = SQLHelper.SafeGetDouble(reader, 8),
-                    FCShdB4DisChg = SQLHelper.SafeGetDouble(reader, 9),
-                    FCShdGndAE = SQLHelper.SafeGetDouble(reader, 10),
-                    FCShdAftDisChg = SQLHelper.SafeGetDouble(reader, 11),
-                    FCShdVatRate = SQLHelper.SafeGetDouble(reader, 12),
+                    FCShdTotal = SQLHelper.SafeGetDecimal(reader, 4),
+                    FCShdVat = SQLHelper.SafeGetDecimal(reader, 5),
+                    FCShdVatable = SQLHelper.SafeGetDecimal(reader, 6),
+                    FCShdNonVat = SQLHelper.SafeGetDecimal(reader, 7),
+                    FCShdDis = SQLHelper.SafeGetDecimal(reader, 8),
+                    FCShdB4DisChg = SQLHelper.SafeGetDecimal(reader, 9),
+                    FCShdGndAE = SQLHelper.SafeGetDecimal(reader, 10),
+                    FCShdAftDisChg = SQLHelper.SafeGetDecimal(reader, 11),
+                    FCShdVatRate = SQLHelper.SafeGetDecimal(reader, 12),
+                    FDShdDocDate = SQLHelper.SafeGetDate(reader, 13),
                 };
                 result.Add(each_data);
             }
@@ -189,17 +189,17 @@ where isnull(HD.FTShdDocVatFull,'') = '' and DT.FTShdDocNo = '{0}'", this.Curren
             {
                 var each_data = new InvoiceDetail
                 {
-                    FNSdtSeqNo = SQLHelper.SafeGetDouble(reader, 0),
+                    FNSdtSeqNo = SQLHelper.SafeGetDecimal(reader, 0),
                     FTSdtBarCode = SQLHelper.SafeGetString(reader, 1),
                     FTPdtName = SQLHelper.SafeGetString(reader, 2),
                     FTPdtCode = SQLHelper.SafeGetString(reader, 3),
-                    FCSdtQty = SQLHelper.SafeGetDouble(reader, 4),
-                    FCSdtDis = SQLHelper.SafeGetDouble(reader, 5),
-                    FCSdtFootAvg = SQLHelper.SafeGetDouble(reader, 6),
-                    FCSdtNet = SQLHelper.SafeGetDouble(reader, 7),
-                    FCSdtB4DisChg = SQLHelper.SafeGetDouble(reader, 8),
-                    FCSdtSetPrice = SQLHelper.SafeGetDouble(reader, 9),
-                    FCSdtVat = SQLHelper.SafeGetDouble(reader, 10),
+                    FCSdtQty = SQLHelper.SafeGetDecimal(reader, 4),
+                    FCSdtDis = SQLHelper.SafeGetDecimal(reader, 5),
+                    FCSdtFootAvg = SQLHelper.SafeGetDecimal(reader, 6),
+                    FCSdtNet = SQLHelper.SafeGetDecimal(reader, 7),
+                    FCSdtB4DisChg = SQLHelper.SafeGetDecimal(reader, 8),
+                    FCSdtSetPrice = SQLHelper.SafeGetDecimal(reader, 9),
+                    FCSdtVat = SQLHelper.SafeGetDecimal(reader, 10),
                     FTSdtVatType = SQLHelper.SafeGetString(reader, 11),
                 };
                 result.Add(each_data);
@@ -235,7 +235,7 @@ where isnull(FTShdDocVatFull,'') = '' and RC.FTShdDocNo = '{0}'", this.CurrentIn
             {
                 var each_data = new InvoicePayment
                 {
-                    FCSrcNet = SQLHelper.SafeGetDouble(reader, 0),
+                    FCSrcNet = SQLHelper.SafeGetDecimal(reader, 0),
                     FTRcvName = SQLHelper.SafeGetString(reader, 1),
                     FTSrcRef = SQLHelper.SafeGetString(reader, 2),
                     FTShdPosCN = SQLHelper.SafeGetString(reader, 3),

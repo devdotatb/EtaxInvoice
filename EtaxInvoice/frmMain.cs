@@ -1,4 +1,5 @@
 ﻿
+using EtaxInvoice.APIData;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace EtaxInvoice
 {
@@ -21,6 +25,7 @@ namespace EtaxInvoice
         public List<InvoiceDetail> CurrentInvoiceDetailList { get; set; }
         public List<Country> CountryList { get; set; }
         private InvoicePayment CurrentInvoicePayment { get; set; }
+        public string APIEmail { get; set; }
         public frmMain()
         {
             InitializeComponent();
@@ -59,18 +64,18 @@ namespace EtaxInvoice
 
                 case 0:
                     {
-                        
+
                         break;
                     }
                 case 1:
                     {
-                         
+
                         break;
                     }
 
                 case 2:
                     {
-                         
+
                         break;
                     }
             }
@@ -114,6 +119,7 @@ namespace EtaxInvoice
                     {
                         cnty = findingcnty.FirstOrDefault();
                     }
+                    this.CurrentCountry = cnty;
 
                     switch (tabCustomerDetail.SelectedIndex)
                     {
@@ -195,7 +201,7 @@ namespace EtaxInvoice
             {
                 string text = "ออกใบกำกับภาษีเต็มรูป\nจากใบกับกับภาษีอย่างย่อวันนี้หรือไม่";
                 string textheader = "";
-                var result = MessageHelper.ShowConfirmWithCancel(text,textheader);
+                var result = MessageHelper.ShowConfirmWithCancel(text, textheader);
                 switch (result)
                 {
                     case DialogResult.Yes:
@@ -352,20 +358,20 @@ namespace EtaxInvoice
                             {
                                 this.textBox_customerProvinceCode.Text = cus.FTPvnCode;
                                 this.textBox_customerProvinceName.Text = cus.FTPvnName;
-                                
+
                                 break;
                             }
                         case 1:
                             {
                                 this.textBox_customerProvinceCode_1.Text = cus.FTPvnCode;
                                 this.textBox_customerProvinceName_1.Text = cus.FTPvnName;
-                                 
+
                                 break;
                             }
 
                         case 2:
                             {
-                                 
+
                                 break;
                             }
                     }
@@ -404,7 +410,7 @@ namespace EtaxInvoice
 
                         case 2:
                             {
-                                 
+
                                 break;
                             }
                     }
@@ -453,7 +459,9 @@ namespace EtaxInvoice
         private void toolStripButton_Add_Click(object sender, EventArgs e)
         {
             string branch = "00000";
-            string generatedcstcode = "CST" + branch + "-" + DateTime.Now.ToString("yyyyMMddHHmmss");
+            string yyyyMMddHHmmss = DateTime.Now.ToString("yyyyMMddHHmmss");
+            string yyMMddHHmmss = yyyyMMddHHmmss.Remove(0, 2);
+            string generatedcstcode = "CT" + branch + "-" + yyMMddHHmmss;
             switch (tabCustomerDetail.SelectedIndex)
             {
 
@@ -481,6 +489,7 @@ namespace EtaxInvoice
                     }
                 case 1:
                     {
+                        comboBox_cWeb_1.SelectedIndex = 0;
                         this.textBox_customerCode_1.Text = generatedcstcode;
                         this.textBox_customerName_1.Text = "";
                         this.textBox_customerTaxId_1.Text = "";
@@ -744,6 +753,344 @@ namespace EtaxInvoice
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void button_print_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string text = "กรุณายืนยันการออก E-TAX Invoice";
+                string textheader = "";
+                var result = MessageHelper.ShowConfirm(text, textheader);
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        frmEmailConfirm frm = new frmEmailConfirm();
+                        switch (tabCustomerDetail.SelectedIndex)
+                        {
+                            case 0: // บุคคลธรรมดา
+                                {
+                                    frm.Email = textBox_customerEmail.Text;
+
+                                    break;
+                                }
+                            case 1:// นิติบุคคล
+                                {
+                                    frm.Email = textBox_customerEmail_1.Text;
+
+                                    break;
+                                }
+
+                            case 2:// ชาวต่างชาติ
+                                {
+                                    frm.Email = textBox_customerEmail_2.Text;
+                                    break;
+                                }
+                        }
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        var email_result = frm.ShowDialog(this);
+                        if (email_result == DialogResult.OK)
+                        {
+                            APIEmail = frm.Email;
+                            InvoiceAPIData built = buildAPIdata();
+                            callapi_Invoice(built);
+                        }
+                        break;
+                    case DialogResult.No:
+                        break;
+                    case DialogResult.Cancel:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ShowError(ex.Message);
+            }
+        }
+
+        public InvoiceAPIData buildAPIdata()
+        {
+            var sendingdata = new InvoiceAPIData();
+
+            sendingdata.remark = "";
+            sendingdata.isShowBranchNo = true;
+            sendingdata.userid = "x10-tester";
+            sendingdata.userBu = "CFR";
+            sendingdata.userLoc = "6001";
+            sendingdata.userRole = "SUPERADMIN";
+
+            CustomerAPIData building_customer = new CustomerAPIData();
+            building_customer.consentInfo = true;
+
+            switch (tabCustomerDetail.SelectedIndex)
+            {
+                case 0: // บุคคลธรรมดา
+                    {
+
+                        building_customer.customerType = customerTypeDefault.NIDN;
+
+                        building_customer.customerName = textBox_customerName.Text;
+                        building_customer.customerTaxId = textBox_customerTaxId.Text;
+                        building_customer.customerBranch = textBox_customerWeb.Text;
+                        building_customer.templateLang = "TH";
+                        building_customer.addressType = "LOCAL";
+                        building_customer.buildingNo = textBox_customerAddress.Text;
+                        building_customer.buildingName = "";
+                        building_customer.roomNo = "";
+                        building_customer.moo = "";
+                        building_customer.floor = "";
+                        building_customer.soi = "";
+                        building_customer.road = textBox_customerRoad.Text;
+                        building_customer.subDistrict = textBox_customerSubDistrict.Text;
+                        building_customer.district = textBox_customerDistrictCode.Text;
+                        building_customer.province = textBox_customerProvinceCode.Text;
+                        building_customer.postcode = textBox_customerPostCode.Text;
+                        building_customer.country = CurrentCountry.FTCYDescTh;
+                        building_customer.countryCode = CurrentCountry.FTCYCode;
+                        building_customer.tel = textBox_customerTel.Text;
+                        building_customer.fax = textBox_customerFax.Text;
+                        building_customer.email = APIEmail;
+                        building_customer.addressLine = "";
+
+                        break;
+                    }
+                case 1:// นิติบุคคล
+                    {
+
+                        building_customer.customerType = customerTypeDefault.TXID;
+
+                        building_customer.customerName = textBox_customerName_1.Text;
+                        building_customer.customerTaxId = textBox_customerTaxId_1.Text;
+                        building_customer.customerBranch = textBox_customerWeb_1.Text;
+                        building_customer.templateLang = "TH";
+                        building_customer.addressType = "LOCAL";
+                        building_customer.buildingNo = textBox_customerAddress.Text;
+                        building_customer.buildingName = "";
+                        building_customer.roomNo = "";
+                        building_customer.moo = "";
+                        building_customer.floor = "";
+                        building_customer.soi = "";
+                        building_customer.road = textBox_customerRoad_1.Text;
+                        building_customer.subDistrict = textBox_customerSubDistrict_1.Text;
+                        building_customer.district = textBox_customerDistrictCode_1.Text;
+                        building_customer.province = textBox_customerProvinceCode_1.Text;
+                        building_customer.postcode = textBox_customerPostCode_1.Text;
+                        building_customer.country = CurrentCountry.FTCYDescTh;
+                        building_customer.countryCode = CurrentCountry.FTCYCode;
+                        building_customer.tel = textBox_customerTel_1.Text;
+                        building_customer.fax = textBox_customerFax_1.Text;
+                        building_customer.email = APIEmail;
+                        building_customer.addressLine = "";
+
+                        break;
+                    }
+
+                case 2:// ชาวต่างชาติ
+                    {
+
+                        building_customer.customerType = customerTypeDefault.CCPT;
+
+                        building_customer.customerName = textBox_customerName_2.Text;
+                        building_customer.customerTaxId = textBox_customerTaxId_2.Text;
+                        building_customer.templateLang = "EN";
+                        building_customer.addressType = "INTER";
+                        building_customer.buildingNo = textBox_customerAddress.Text;
+                        building_customer.buildingName = "";
+                        building_customer.roomNo = "";
+                        building_customer.moo = "";
+                        building_customer.floor = "";
+                        building_customer.soi = "";
+                        building_customer.postcode = textBox_customerPostCode_2.Text;
+                        building_customer.country = CurrentCountry.FTCYDescTh;
+                        building_customer.countryCode = CurrentCountry.FTCYCode;
+                        building_customer.tel = textBox_customerTel_2.Text;
+                        building_customer.email = APIEmail;
+                        building_customer.addressLine = "";
+
+                        break;
+                    }
+            }
+            sendingdata.customer = building_customer;
+
+            SaleDataAPIData building_saledata = new SaleDataAPIData();
+            building_saledata.bu = "CFR";
+            building_saledata.total = CurrentInvoiceDetailList.Sum(t => t.FCSdtQty);
+
+            SalesTicketAPIData building_salesTicket = new SalesTicketAPIData();
+
+            List<ProductAPIData> building_products = new List<ProductAPIData>();
+            foreach (var invdt in CurrentInvoiceDetailList)
+            {
+                var each_product = new ProductAPIData();
+                each_product.seq = invdt.FNSdtSeqNo;
+                each_product.barcode = invdt.FTSdtBarCode;
+                each_product.serialNo = "";
+                each_product.productNameTH = invdt.FTPdtName;
+                each_product.productNameEN = invdt.FTPdtName;
+                each_product.sku = Convert.ToInt32(invdt.FTPdtCode);
+                each_product.cat1 = "";
+                each_product.cat2 = "";
+                each_product.cat3 = "";
+                each_product.cat4 = "";
+                each_product.cat5 = "";
+                each_product.qty = invdt.FCSdtQty;
+                each_product.discountAmt = invdt.FCSdtDis + invdt.FCSdtFootAvg;
+                each_product.amt = invdt.FCSdtDis - invdt.FCSdtFootAvg;
+                each_product.amtExdiscount = invdt.FCSdtB4DisChg;
+                each_product.amtPerQty = invdt.FCSdtSetPrice;
+                each_product.vatAmt = invdt.FCSdtVat;
+                each_product.isVat = invdt.FTSdtVatType == "1" ? "V" : "N";
+                each_product.discountInfo = new List<DiscountInfoAPIData>();
+                building_products.Add(each_product);
+            }
+            building_salesTicket.products = building_products;
+
+            List<PaymentAPIData> building_payments = new List<PaymentAPIData>();
+
+            var each_payment = new PaymentAPIData();
+            each_payment.paymentType = "";
+            each_payment.tenderCode = "";
+            each_payment.saleAmt = CurrentInvoicePayment.FCSrcNet;
+            each_payment.paymentDescription = CurrentInvoicePayment.FTRcvName;
+            each_payment.paymentMediaNumber = CurrentInvoicePayment.FTSrcRef;
+            building_payments.Add(each_payment);
+            building_salesTicket.payments = building_payments;
+
+            building_salesTicket.loc = "6001";//CurrentInvoice.FTBchCode;
+            building_salesTicket.receiptDate = CurrentInvoice.FDDateIns;
+            building_salesTicket.ticketNo = CurrentInvoice.FTShdDocNo;
+            building_salesTicket.tpNo = CurrentInvoice.FTShdDocNo;
+            building_salesTicket.receiptNo = CurrentInvoice.FTShdDocNo;
+            building_salesTicket.totalSaleAmt = CurrentInvoice.FCShdTotal;
+            building_salesTicket.totalVatSaleAmt = CurrentInvoice.FCShdVat + CurrentInvoice.FCShdVatable;
+            building_salesTicket.totalNetSaleAmt = CurrentInvoice.FCShdNonVat + CurrentInvoice.FCShdVatable;
+            building_salesTicket.totalVatItemAmt = CurrentInvoice.FCShdVatable;
+            building_salesTicket.totalNonVatItemAmt = CurrentInvoice.FCShdNonVat;
+            building_salesTicket.transType = "NM";
+            building_salesTicket.template_type = "Sales";
+            building_salesTicket.taxValue = CurrentInvoice.FCShdVat;
+            building_salesTicket.totalQty = CurrentInvoiceDetailList.Sum(t => t.FCSdtQty);
+            building_salesTicket.totalDiscount = CurrentInvoice.FCShdDis;
+            building_salesTicket.totalAmtExdiscount = CurrentInvoice.FCShdB4DisChg;
+            building_salesTicket.receiptNumber = CurrentInvoice.FTShdDocNo;
+            building_salesTicket.barcodeComplete = CurrentInvoice.FTShdDocNo;
+            building_salesTicket.remainderAmt = 0;
+            building_salesTicket.depositAmt = CurrentInvoice.FCShdGndAE;
+            building_salesTicket.orderNo = "";
+
+            building_saledata.salesTicket = building_salesTicket;
+            sendingdata.saleData = building_saledata;
+
+            return sendingdata;
+        }
+
+        public async void callapi_Invoice(InvoiceAPIData data)
+        {
+            string apiUrl = "https://uat-etax-apims.central.co.th/nonprd-etax001/std-genft-document";
+            string serviceName = "std-genft-document";
+
+            string jsonString = JsonConvert.SerializeObject(data);
+
+            string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(jsonString));
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //client.DefaultRequestHeaders.Add("Authorization", "Bearer your-api-key");
+                client.DefaultRequestHeaders.Add("b2cauthorize", "test");
+                client.DefaultRequestHeaders.Add("api-key", "01fc39fbb6fa408db327523ad59b9309");
+
+                var payload = new StringContent(base64String);
+
+                HttpResponseMessage response = await client.PostAsync(apiUrl, payload);
+
+                string responseContent = await response.Content.ReadAsStringAsync();
+                var obj_result = JsonConvert.DeserializeObject<resultAPIData>(responseContent);
+                //log response ?
+                LogETAX logdata = new LogETAX();
+                logdata.FDDateIns = DateTime.Now;
+                logdata.FTTimeIns = DateTime.Now.ToString("HHmmss");
+                logdata.FTWhoIns = Program.globalStartUserName;
+                logdata.FTRemark = "";
+                logdata.FTBchCode = Program.globalBranchNumber;
+                logdata.FTDeviceID = "Storeback";
+                logdata.FTShdDocNo = CurrentInvoice.FTShdDocNo;
+                logdata.FDShdDocDate = CurrentInvoice.FDShdDocDate;
+                logdata.FTShdDocType = "1";
+                logdata.FTReqType = "สร้างใบกำกับภาษี";
+                logdata.FNStep = 0;
+                logdata.FTServiceName = serviceName;
+                logdata.FTReqPara = base64String;
+                logdata.FTResPara = responseContent;
+                logdata.FTResCode = response.StatusCode.ToString();
+                logdata.FTResMsg = obj_result.statusMessage;
+                logdata.FTResShwMsg = obj_result.statusMessage;
+                SaveLog(logdata);
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string pdflink = "";
+                    if (obj_result.statusCode == "SUC023")
+                    {
+                        //duplicate
+                        var obj_result_full = JsonConvert.DeserializeObject<resultSuccessDuplicateAPIData>(responseContent);
+                        pdflink = obj_result_full.data.pdfURL.FirstOrDefault();
+
+                        string text = obj_result.statusMessage;
+                        string textheader = "";
+                        var result = MessageHelper.ShowInfo(text, textheader);
+                        if (result == DialogResult.OK)
+                        {
+                            string text_p = "คลิก OK เพื่อแสดงเอกสาร";
+                            string textheader_p = "";
+                            var result_p = MessageHelper.ShowInfo(text_p, textheader_p);
+                            if (result_p == DialogResult.OK)
+                            {
+                                System.Diagnostics.Process.Start(pdflink);
+                            }
+                        }
+                    }
+                    else if (obj_result.statusCode == "SUC004")
+                    {
+                        //new
+                        var obj_result_full = JsonConvert.DeserializeObject<resultSuccessNewAPIData>(responseContent);
+                        pdflink = obj_result_full.data.pdfURL;
+
+                        string text = "ระบบได้ดำเนินการส่งรายละเอียด\nเพื่อสร้างเอกสารอิเล็กทรอนิกส์เรียบร้อยแล้ว\nโดยนำส่งตาม E-mail ที่มีการระบุไว้";
+                        string textheader = "";
+                        var result = MessageHelper.ShowInfo(text, textheader);
+                        if (result == DialogResult.OK)
+                        {
+                            string text_p = "คลิก OK เพื่อแสดงเอกสาร";
+                            string textheader_p = "";
+                            var result_p = MessageHelper.ShowInfo(text_p, textheader_p);
+                            if (result_p == DialogResult.OK)
+                            {
+                                System.Diagnostics.Process.Start(pdflink);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        string text = obj_result.statusMessage;
+                        var result = MessageHelper.ShowError(text);
+                    }
+                }
+                else
+                {
+                    string text = responseContent + "\n" + base64String;
+                    var result = MessageHelper.ShowError(text);
+                }
+            }
+        }
+
+        public void SaveLog(LogETAX logdata)
+        {
+            LogInserter.InsertLog(logdata);
         }
     }
 }

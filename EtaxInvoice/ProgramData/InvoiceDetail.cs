@@ -8,17 +8,17 @@ namespace EtaxInvoice
 {
     public class InvoiceDetail
     {
-        public double FNSdtSeqNo { get; set; }
+        public decimal FNSdtSeqNo { get; set; }
         public string FTSdtBarCode { get; set; }
         public string FTPdtName { get; set; }
         public string FTPdtCode { get; set; }
-        public double FCSdtQty { get; set; }
-        public double FCSdtSetPrice { get; set; }
-        public double FCSdtDis { get; set; }
-        public double FCSdtFootAvg { get; set; }
-        public double FCSdtNet { get; set; }
-        public double FCSdtB4DisChg { get; set; }
-        public double FCSdtVat { get; set; }
+        public decimal FCSdtQty { get; set; }
+        public decimal FCSdtSetPrice { get; set; }
+        public decimal FCSdtDis { get; set; }
+        public decimal FCSdtFootAvg { get; set; }
+        public decimal FCSdtNet { get; set; }
+        public decimal FCSdtB4DisChg { get; set; }
+        public decimal FCSdtVat { get; set; }
         public string FTSdtVatType { get; set; }
     }
 }

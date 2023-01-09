@@ -174,6 +174,7 @@
             this.button_OK.TabIndex = 24;
             this.button_OK.Text = "ตกลง";
             this.button_OK.UseVisualStyleBackColor = true;
+            this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
             // 
             // panel4
             // 

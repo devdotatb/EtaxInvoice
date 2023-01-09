@@ -13,11 +13,11 @@ namespace EtaxInvoice
         {
         }
 
-        public static DialogResult ShowInfo(string text)
+        public static DialogResult ShowInfo(string text, string textheader = "Info")
         {
-            return MessageBox.Show(text, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return MessageBox.Show(text, textheader, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        public static DialogResult ShowError(string text)
+        public static DialogResult ShowError(string text, string textheader = "Error")
         {
             return MessageBox.Show(text, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -25,9 +25,9 @@ namespace EtaxInvoice
         {
             return MessageBox.Show(text, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-        public static DialogResult ShowConfirm(string text)
+        public static DialogResult ShowConfirm(string text, string textheader)
         {
-            return MessageBox.Show(text, "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return MessageBox.Show(text, textheader, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
         public static DialogResult ShowConfirmWithCancel(string text,string textheader)
         {

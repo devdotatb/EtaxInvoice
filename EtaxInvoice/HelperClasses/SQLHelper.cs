@@ -15,10 +15,16 @@ namespace EtaxInvoice
                 return reader.GetString(colIndex);
             return string.Empty;
         }
+        public static DateTime SafeGetDate(this SqlDataReader reader, int colIndex)
+        {
+            if (!reader.IsDBNull(colIndex))
+                return Convert.ToDateTime(reader[colIndex]);
+            return DateTime.Today;
+        }
         public static string SafeGetDateToString(this SqlDataReader reader, int colIndex)
         {
             if (!reader.IsDBNull(colIndex))
-                return Convert.ToDateTime(reader[colIndex]).ToString("dd/MM/yyyy");
+                return Convert.ToDateTime(reader[colIndex]).ToString("yyyy-MM-dd HH:mm:ss");
             return string.Empty;
         }
         public static int SafeGetInt(this SqlDataReader reader, int colIndex)
@@ -31,6 +37,12 @@ namespace EtaxInvoice
         {
             if (!reader.IsDBNull(colIndex))
                 return reader.GetDouble(colIndex);
+            return 0;
+        }
+        public static decimal SafeGetDecimal(this SqlDataReader reader, int colIndex)
+        {
+            if (!reader.IsDBNull(colIndex))
+                return (decimal)reader.GetDouble(colIndex);
             return 0;
         }
     }

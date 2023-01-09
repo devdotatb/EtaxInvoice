@@ -235,11 +235,11 @@
             this.textBox_customerCountry_2 = new System.Windows.Forms.TextBox();
             this.textBox27 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel47 = new System.Windows.Forms.TableLayoutPanel();
-            this.เพิ่ม = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button_add = new System.Windows.Forms.Button();
+            this.button_save = new System.Windows.Forms.Button();
+            this.button_customersearch = new System.Windows.Forms.Button();
             this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_print = new System.Windows.Forms.Button();
             this.button_close = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -794,7 +794,7 @@
             this.textBox_invoiceBranchCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_invoiceBranchCode.Location = new System.Drawing.Point(127, 4);
             this.textBox_invoiceBranchCode.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_invoiceBranchCode.MaxLength = 13;
+            this.textBox_invoiceBranchCode.MaxLength = 50;
             this.textBox_invoiceBranchCode.Name = "textBox_invoiceBranchCode";
             this.textBox_invoiceBranchCode.ReadOnly = true;
             this.textBox_invoiceBranchCode.Size = new System.Drawing.Size(281, 20);
@@ -844,7 +844,7 @@
             this.textBox_invoiceDocNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_invoiceDocNo.Location = new System.Drawing.Point(127, 4);
             this.textBox_invoiceDocNo.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_invoiceDocNo.MaxLength = 13;
+            this.textBox_invoiceDocNo.MaxLength = 50;
             this.textBox_invoiceDocNo.Name = "textBox_invoiceDocNo";
             this.textBox_invoiceDocNo.ReadOnly = true;
             this.textBox_invoiceDocNo.Size = new System.Drawing.Size(239, 20);
@@ -869,7 +869,7 @@
             // 
             this.textBox_invoiceDate.Location = new System.Drawing.Point(127, 4);
             this.textBox_invoiceDate.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_invoiceDate.MaxLength = 13;
+            this.textBox_invoiceDate.MaxLength = 50;
             this.textBox_invoiceDate.Name = "textBox_invoiceDate";
             this.textBox_invoiceDate.ReadOnly = true;
             this.textBox_invoiceDate.Size = new System.Drawing.Size(281, 20);
@@ -972,7 +972,7 @@
             this.textBox_customerCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerCode.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerCode.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerCode.MaxLength = 13;
+            this.textBox_customerCode.MaxLength = 50;
             this.textBox_customerCode.Name = "textBox_customerCode";
             this.textBox_customerCode.ReadOnly = true;
             this.textBox_customerCode.Size = new System.Drawing.Size(283, 20);
@@ -1018,7 +1018,7 @@
             this.textBox_customerAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerAddress.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerAddress.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerAddress.MaxLength = 13;
+            this.textBox_customerAddress.MaxLength = 50;
             this.textBox_customerAddress.Name = "textBox_customerAddress";
             this.textBox_customerAddress.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerAddress.TabIndex = 120;
@@ -1063,7 +1063,7 @@
             this.textBox_customerName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerName.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerName.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerName.MaxLength = 13;
+            this.textBox_customerName.MaxLength = 50;
             this.textBox_customerName.Name = "textBox_customerName";
             this.textBox_customerName.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerName.TabIndex = 132;
@@ -1108,7 +1108,7 @@
             this.textBox_customerRoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerRoad.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerRoad.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerRoad.MaxLength = 13;
+            this.textBox_customerRoad.MaxLength = 50;
             this.textBox_customerRoad.Name = "textBox_customerRoad";
             this.textBox_customerRoad.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerRoad.TabIndex = 123;
@@ -1153,7 +1153,7 @@
             this.textBox_customerTaxId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerTaxId.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerTaxId.MaxLength = 13;
+            this.textBox_customerTaxId.MaxLength = 50;
             this.textBox_customerTaxId.Name = "textBox_customerTaxId";
             this.textBox_customerTaxId.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerTaxId.TabIndex = 134;
@@ -1198,7 +1198,7 @@
             this.textBox_customerSubDistrict.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerSubDistrict.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerSubDistrict.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerSubDistrict.MaxLength = 13;
+            this.textBox_customerSubDistrict.MaxLength = 50;
             this.textBox_customerSubDistrict.Name = "textBox_customerSubDistrict";
             this.textBox_customerSubDistrict.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerSubDistrict.TabIndex = 125;
@@ -1243,7 +1243,7 @@
             this.textBox_customerWeb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerWeb.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerWeb.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerWeb.MaxLength = 13;
+            this.textBox_customerWeb.MaxLength = 50;
             this.textBox_customerWeb.Name = "textBox_customerWeb";
             this.textBox_customerWeb.ReadOnly = true;
             this.textBox_customerWeb.Size = new System.Drawing.Size(283, 20);
@@ -1304,7 +1304,7 @@
             this.textBox_customerDistrictName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerDistrictName.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerDistrictName.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerDistrictName.MaxLength = 13;
+            this.textBox_customerDistrictName.MaxLength = 50;
             this.textBox_customerDistrictName.Name = "textBox_customerDistrictName";
             this.textBox_customerDistrictName.ReadOnly = true;
             this.textBox_customerDistrictName.Size = new System.Drawing.Size(132, 20);
@@ -1326,7 +1326,7 @@
             this.textBox_customerDistrictCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerDistrictCode.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerDistrictCode.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerDistrictCode.MaxLength = 13;
+            this.textBox_customerDistrictCode.MaxLength = 50;
             this.textBox_customerDistrictCode.Name = "textBox_customerDistrictCode";
             this.textBox_customerDistrictCode.ReadOnly = true;
             this.textBox_customerDistrictCode.Size = new System.Drawing.Size(88, 20);
@@ -1361,7 +1361,7 @@
             this.textBox_customerEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerEmail.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerEmail.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerEmail.MaxLength = 13;
+            this.textBox_customerEmail.MaxLength = 50;
             this.textBox_customerEmail.Name = "textBox_customerEmail";
             this.textBox_customerEmail.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerEmail.TabIndex = 136;
@@ -1432,7 +1432,7 @@
             this.textBox_customerProvinceCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerProvinceCode.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerProvinceCode.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerProvinceCode.MaxLength = 13;
+            this.textBox_customerProvinceCode.MaxLength = 50;
             this.textBox_customerProvinceCode.Name = "textBox_customerProvinceCode";
             this.textBox_customerProvinceCode.ReadOnly = true;
             this.textBox_customerProvinceCode.Size = new System.Drawing.Size(88, 20);
@@ -1443,7 +1443,7 @@
             this.textBox_customerProvinceName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerProvinceName.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerProvinceName.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerProvinceName.MaxLength = 13;
+            this.textBox_customerProvinceName.MaxLength = 50;
             this.textBox_customerProvinceName.Name = "textBox_customerProvinceName";
             this.textBox_customerProvinceName.ReadOnly = true;
             this.textBox_customerProvinceName.Size = new System.Drawing.Size(132, 20);
@@ -1482,7 +1482,7 @@
             this.textBox_customerTel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerTel.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerTel.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerTel.MaxLength = 13;
+            this.textBox_customerTel.MaxLength = 50;
             this.textBox_customerTel.Name = "textBox_customerTel";
             this.textBox_customerTel.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerTel.TabIndex = 138;
@@ -1492,7 +1492,7 @@
             this.textBox_customerFax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerFax.Location = new System.Drawing.Point(320, 6);
             this.textBox_customerFax.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerFax.MaxLength = 13;
+            this.textBox_customerFax.MaxLength = 50;
             this.textBox_customerFax.Name = "textBox_customerFax";
             this.textBox_customerFax.Size = new System.Drawing.Size(91, 20);
             this.textBox_customerFax.TabIndex = 140;
@@ -1565,7 +1565,7 @@
             this.textBox_customerPostCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerPostCode.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerPostCode.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerPostCode.MaxLength = 13;
+            this.textBox_customerPostCode.MaxLength = 50;
             this.textBox_customerPostCode.Name = "textBox_customerPostCode";
             this.textBox_customerPostCode.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerPostCode.TabIndex = 143;
@@ -1676,7 +1676,7 @@
             this.textBox_customerCode_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerCode_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerCode_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerCode_1.MaxLength = 13;
+            this.textBox_customerCode_1.MaxLength = 50;
             this.textBox_customerCode_1.Name = "textBox_customerCode_1";
             this.textBox_customerCode_1.ReadOnly = true;
             this.textBox_customerCode_1.Size = new System.Drawing.Size(283, 20);
@@ -1722,7 +1722,7 @@
             this.textBox_customerAddress_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerAddress_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerAddress_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerAddress_1.MaxLength = 13;
+            this.textBox_customerAddress_1.MaxLength = 50;
             this.textBox_customerAddress_1.Name = "textBox_customerAddress_1";
             this.textBox_customerAddress_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerAddress_1.TabIndex = 120;
@@ -1767,7 +1767,7 @@
             this.textBox_customerName_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerName_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerName_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerName_1.MaxLength = 13;
+            this.textBox_customerName_1.MaxLength = 50;
             this.textBox_customerName_1.Name = "textBox_customerName_1";
             this.textBox_customerName_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerName_1.TabIndex = 132;
@@ -1812,7 +1812,7 @@
             this.textBox_customerRoad_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerRoad_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerRoad_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerRoad_1.MaxLength = 13;
+            this.textBox_customerRoad_1.MaxLength = 50;
             this.textBox_customerRoad_1.Name = "textBox_customerRoad_1";
             this.textBox_customerRoad_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerRoad_1.TabIndex = 123;
@@ -1857,7 +1857,7 @@
             this.textBox_customerTaxId_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerTaxId_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerTaxId_1.MaxLength = 13;
+            this.textBox_customerTaxId_1.MaxLength = 50;
             this.textBox_customerTaxId_1.Name = "textBox_customerTaxId_1";
             this.textBox_customerTaxId_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerTaxId_1.TabIndex = 134;
@@ -1902,7 +1902,7 @@
             this.textBox_customerSubDistrict_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerSubDistrict_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerSubDistrict_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerSubDistrict_1.MaxLength = 13;
+            this.textBox_customerSubDistrict_1.MaxLength = 50;
             this.textBox_customerSubDistrict_1.Name = "textBox_customerSubDistrict_1";
             this.textBox_customerSubDistrict_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerSubDistrict_1.TabIndex = 125;
@@ -1947,7 +1947,7 @@
             this.textBox_customerWeb_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerWeb_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerWeb_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerWeb_1.MaxLength = 13;
+            this.textBox_customerWeb_1.MaxLength = 50;
             this.textBox_customerWeb_1.Name = "textBox_customerWeb_1";
             this.textBox_customerWeb_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerWeb_1.TabIndex = 142;
@@ -2009,7 +2009,7 @@
             this.textBox_customerDistrictName_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerDistrictName_1.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerDistrictName_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerDistrictName_1.MaxLength = 13;
+            this.textBox_customerDistrictName_1.MaxLength = 50;
             this.textBox_customerDistrictName_1.Name = "textBox_customerDistrictName_1";
             this.textBox_customerDistrictName_1.ReadOnly = true;
             this.textBox_customerDistrictName_1.Size = new System.Drawing.Size(132, 20);
@@ -2031,7 +2031,7 @@
             this.textBox_customerDistrictCode_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerDistrictCode_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerDistrictCode_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerDistrictCode_1.MaxLength = 13;
+            this.textBox_customerDistrictCode_1.MaxLength = 50;
             this.textBox_customerDistrictCode_1.Name = "textBox_customerDistrictCode_1";
             this.textBox_customerDistrictCode_1.ReadOnly = true;
             this.textBox_customerDistrictCode_1.Size = new System.Drawing.Size(88, 20);
@@ -2066,7 +2066,7 @@
             this.textBox_customerEmail_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerEmail_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerEmail_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerEmail_1.MaxLength = 13;
+            this.textBox_customerEmail_1.MaxLength = 50;
             this.textBox_customerEmail_1.Name = "textBox_customerEmail_1";
             this.textBox_customerEmail_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerEmail_1.TabIndex = 136;
@@ -2137,7 +2137,7 @@
             this.textBox_customerProvinceCode_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerProvinceCode_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerProvinceCode_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerProvinceCode_1.MaxLength = 13;
+            this.textBox_customerProvinceCode_1.MaxLength = 50;
             this.textBox_customerProvinceCode_1.Name = "textBox_customerProvinceCode_1";
             this.textBox_customerProvinceCode_1.ReadOnly = true;
             this.textBox_customerProvinceCode_1.Size = new System.Drawing.Size(88, 20);
@@ -2148,7 +2148,7 @@
             this.textBox_customerProvinceName_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerProvinceName_1.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerProvinceName_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerProvinceName_1.MaxLength = 13;
+            this.textBox_customerProvinceName_1.MaxLength = 50;
             this.textBox_customerProvinceName_1.Name = "textBox_customerProvinceName_1";
             this.textBox_customerProvinceName_1.ReadOnly = true;
             this.textBox_customerProvinceName_1.Size = new System.Drawing.Size(132, 20);
@@ -2187,7 +2187,7 @@
             this.textBox_customerTel_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerTel_1.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerTel_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerTel_1.MaxLength = 13;
+            this.textBox_customerTel_1.MaxLength = 50;
             this.textBox_customerTel_1.Name = "textBox_customerTel_1";
             this.textBox_customerTel_1.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerTel_1.TabIndex = 138;
@@ -2197,7 +2197,7 @@
             this.textBox_customerFax_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerFax_1.Location = new System.Drawing.Point(320, 6);
             this.textBox_customerFax_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerFax_1.MaxLength = 13;
+            this.textBox_customerFax_1.MaxLength = 50;
             this.textBox_customerFax_1.Name = "textBox_customerFax_1";
             this.textBox_customerFax_1.Size = new System.Drawing.Size(91, 20);
             this.textBox_customerFax_1.TabIndex = 140;
@@ -2270,7 +2270,7 @@
             this.textBox_customerPostCode_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerPostCode_1.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerPostCode_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerPostCode_1.MaxLength = 13;
+            this.textBox_customerPostCode_1.MaxLength = 50;
             this.textBox_customerPostCode_1.Name = "textBox_customerPostCode_1";
             this.textBox_customerPostCode_1.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerPostCode_1.TabIndex = 143;
@@ -2320,7 +2320,7 @@
             // 
             this.textBox21.Location = new System.Drawing.Point(190, 249);
             this.textBox21.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox21.MaxLength = 13;
+            this.textBox21.MaxLength = 50;
             this.textBox21.Name = "textBox21";
             this.textBox21.Size = new System.Drawing.Size(232, 20);
             this.textBox21.TabIndex = 65;
@@ -2399,7 +2399,7 @@
             this.textBox_customerCode_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerCode_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerCode_2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerCode_2.MaxLength = 13;
+            this.textBox_customerCode_2.MaxLength = 50;
             this.textBox_customerCode_2.Name = "textBox_customerCode_2";
             this.textBox_customerCode_2.ReadOnly = true;
             this.textBox_customerCode_2.Size = new System.Drawing.Size(283, 20);
@@ -2445,7 +2445,7 @@
             this.textBox_customerAddress_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerAddress_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerAddress_2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerAddress_2.MaxLength = 13;
+            this.textBox_customerAddress_2.MaxLength = 50;
             this.textBox_customerAddress_2.Name = "textBox_customerAddress_2";
             this.textBox_customerAddress_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerAddress_2.TabIndex = 120;
@@ -2490,7 +2490,7 @@
             this.textBox_customerName_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerName_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerName_2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerName_2.MaxLength = 13;
+            this.textBox_customerName_2.MaxLength = 50;
             this.textBox_customerName_2.Name = "textBox_customerName_2";
             this.textBox_customerName_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerName_2.TabIndex = 132;
@@ -2557,7 +2557,7 @@
             this.textBox_customerTaxId_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerTaxId_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId_2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerTaxId_2.MaxLength = 13;
+            this.textBox_customerTaxId_2.MaxLength = 50;
             this.textBox_customerTaxId_2.Name = "textBox_customerTaxId_2";
             this.textBox_customerTaxId_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerTaxId_2.TabIndex = 134;
@@ -2670,7 +2670,7 @@
             this.textBox_customerEmail_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerEmail_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerEmail_2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerEmail_2.MaxLength = 13;
+            this.textBox_customerEmail_2.MaxLength = 50;
             this.textBox_customerEmail_2.Name = "textBox_customerEmail_2";
             this.textBox_customerEmail_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerEmail_2.TabIndex = 136;
@@ -2728,7 +2728,7 @@
             this.textBox_customerProvinceName_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerProvinceName_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerProvinceName_2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerProvinceName_2.MaxLength = 13;
+            this.textBox_customerProvinceName_2.MaxLength = 50;
             this.textBox_customerProvinceName_2.Name = "textBox_customerProvinceName_2";
             this.textBox_customerProvinceName_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerProvinceName_2.TabIndex = 150;
@@ -2764,7 +2764,7 @@
             this.textBox_customerTel_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerTel_2.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerTel_2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerTel_2.MaxLength = 13;
+            this.textBox_customerTel_2.MaxLength = 50;
             this.textBox_customerTel_2.Name = "textBox_customerTel_2";
             this.textBox_customerTel_2.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerTel_2.TabIndex = 138;
@@ -2826,7 +2826,7 @@
             this.textBox_customerPostCode_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerPostCode_2.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerPostCode_2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerPostCode_2.MaxLength = 13;
+            this.textBox_customerPostCode_2.MaxLength = 50;
             this.textBox_customerPostCode_2.Name = "textBox_customerPostCode_2";
             this.textBox_customerPostCode_2.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerPostCode_2.TabIndex = 143;
@@ -2866,7 +2866,7 @@
             // 
             this.textBox27.Location = new System.Drawing.Point(228, 253);
             this.textBox27.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox27.MaxLength = 13;
+            this.textBox27.MaxLength = 50;
             this.textBox27.Name = "textBox27";
             this.textBox27.Size = new System.Drawing.Size(232, 20);
             this.textBox27.TabIndex = 93;
@@ -2878,9 +2878,9 @@
             this.tableLayoutPanel47.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66333F));
             this.tableLayoutPanel47.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66333F));
             this.tableLayoutPanel47.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66333F));
-            this.tableLayoutPanel47.Controls.Add(this.เพิ่ม, 1, 0);
-            this.tableLayoutPanel47.Controls.Add(this.button2, 2, 0);
-            this.tableLayoutPanel47.Controls.Add(this.button3, 3, 0);
+            this.tableLayoutPanel47.Controls.Add(this.button_add, 1, 0);
+            this.tableLayoutPanel47.Controls.Add(this.button_save, 2, 0);
+            this.tableLayoutPanel47.Controls.Add(this.button_customersearch, 3, 0);
             this.tableLayoutPanel47.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel47.Location = new System.Drawing.Point(3, 252);
             this.tableLayoutPanel47.Name = "tableLayoutPanel47";
@@ -2889,44 +2889,44 @@
             this.tableLayoutPanel47.Size = new System.Drawing.Size(953, 29);
             this.tableLayoutPanel47.TabIndex = 3;
             // 
-            // เพิ่ม
+            // button_add
             // 
-            this.เพิ่ม.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.button_add.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.เพิ่ม.Location = new System.Drawing.Point(479, 3);
-            this.เพิ่ม.Name = "เพิ่ม";
-            this.เพิ่ม.Size = new System.Drawing.Size(152, 23);
-            this.เพิ่ม.TabIndex = 0;
-            this.เพิ่ม.Text = "เพิ่ม";
-            this.เพิ่ม.UseVisualStyleBackColor = true;
-            this.เพิ่ม.Click += new System.EventHandler(this.toolStripButton_Add_Click);
+            this.button_add.Location = new System.Drawing.Point(479, 3);
+            this.button_add.Name = "button_add";
+            this.button_add.Size = new System.Drawing.Size(152, 23);
+            this.button_add.TabIndex = 0;
+            this.button_add.Text = "เพิ่ม";
+            this.button_add.UseVisualStyleBackColor = true;
+            this.button_add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
             // 
-            // button2
+            // button_save
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.button_save.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(637, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(152, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "บันทึก";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.toolStripButton_Save_Click);
+            this.button_save.Location = new System.Drawing.Point(637, 3);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(152, 23);
+            this.button_save.TabIndex = 1;
+            this.button_save.Text = "บันทึก";
+            this.button_save.UseVisualStyleBackColor = true;
+            this.button_save.Click += new System.EventHandler(this.toolStripButton_Save_Click);
             // 
-            // button3
+            // button_customersearch
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.button_customersearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(795, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(155, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "ค้นหา";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button_SearchCustomer_Click);
+            this.button_customersearch.Location = new System.Drawing.Point(795, 3);
+            this.button_customersearch.Name = "button_customersearch";
+            this.button_customersearch.Size = new System.Drawing.Size(155, 23);
+            this.button_customersearch.TabIndex = 2;
+            this.button_customersearch.Text = "ค้นหา";
+            this.button_customersearch.UseVisualStyleBackColor = true;
+            this.button_customersearch.Click += new System.EventHandler(this.button_SearchCustomer_Click);
             // 
             // tableLayoutPanel49
             // 
@@ -2934,7 +2934,7 @@
             this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.67333F));
             this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66333F));
             this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66333F));
-            this.tableLayoutPanel49.Controls.Add(this.button1, 1, 0);
+            this.tableLayoutPanel49.Controls.Add(this.button_print, 1, 0);
             this.tableLayoutPanel49.Controls.Add(this.button_close, 2, 0);
             this.tableLayoutPanel49.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel49.Location = new System.Drawing.Point(3, 678);
@@ -2944,17 +2944,18 @@
             this.tableLayoutPanel49.Size = new System.Drawing.Size(953, 31);
             this.tableLayoutPanel49.TabIndex = 4;
             // 
-            // button1
+            // button_print
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.button_print.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(638, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(152, 25);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "พิมพ์";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_print.Location = new System.Drawing.Point(638, 3);
+            this.button_print.Name = "button_print";
+            this.button_print.Size = new System.Drawing.Size(152, 25);
+            this.button_print.TabIndex = 0;
+            this.button_print.Text = "พิมพ์";
+            this.button_print.UseVisualStyleBackColor = true;
+            this.button_print.Click += new System.EventHandler(this.button_print_Click);
             // 
             // button_close
             // 
@@ -3326,11 +3327,11 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel45;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel46;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel47;
-        private System.Windows.Forms.Button เพิ่ม;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_add;
+        private System.Windows.Forms.Button button_save;
+        private System.Windows.Forms.Button button_customersearch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel49;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_print;
         private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.TextBox textBox_customerCountry;
         private System.Windows.Forms.Button button_countrySearch;

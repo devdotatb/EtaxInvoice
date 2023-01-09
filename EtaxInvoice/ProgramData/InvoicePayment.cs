@@ -8,7 +8,7 @@ namespace EtaxInvoice
 {
     public class InvoicePayment
     {
-        public double FCSrcNet { get; set; }
+        public decimal FCSrcNet { get; set; }
         public string FTRcvName { get; set; }
         public string FTSrcRef { get; set; }
         public string FTShdPosCN { get; set; }
