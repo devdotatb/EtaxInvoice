@@ -1,4 +1,4 @@
-﻿using EtaxInvoice.Common;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,7 +51,7 @@ namespace EtaxInvoice
         }
         private List<District> GetDistricts()
         {
-            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
+            string connstr = ConfigHelper.ConnectionString;
             SqlConnection connection = new SqlConnection(connstr);
             string sql = string.Format(@"SELECT  [FTDstCode]
       ,[FTDstName]

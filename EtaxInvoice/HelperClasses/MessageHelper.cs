@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EtaxInvoice.Common
+namespace EtaxInvoice
 {
     public class MessageHelper
     {
@@ -28,6 +28,10 @@ namespace EtaxInvoice.Common
         public static DialogResult ShowConfirm(string text)
         {
             return MessageBox.Show(text, "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        }
+        public static DialogResult ShowConfirmWithCancel(string text,string textheader)
+        {
+            return MessageBox.Show(text, textheader, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
         }
     }
 }

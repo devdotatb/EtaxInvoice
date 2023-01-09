@@ -24,7 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -75,6 +75,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIData\CNAPIData.cs" />
+    <Compile Include="APIData\CustomerAPIData.cs" />
+    <Compile Include="APIData\DiscountInfoAPIData.cs" />
+    <Compile Include="APIData\InvoiceAPIData.cs" />
+    <Compile Include="APIData\PaymentAPIData.cs" />
+    <Compile Include="APIData\ProductAPIData.cs" />
+    <Compile Include="APIData\RefTicketAPIData.cs" />
+    <Compile Include="APIData\SaleDataAPIData.cs" />
+    <Compile Include="APIData\SalesTicketAPIData.cs" />
     <Compile Include="frmDistrictSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,7 +132,19 @@
     <Compile Include="frmUserSearch.Designer.cs">
       <DependentUpon>frmUserSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\ConfigHelper.cs" />
+    <Compile Include="HelperClasses\MessageHelper.cs" />
+    <Compile Include="HelperClasses\SQLHelper.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramData\Country.cs" />
+    <Compile Include="ProgramData\Customer.cs" />
+    <Compile Include="ProgramData\CustomerType.cs" />
+    <Compile Include="ProgramData\CustomerTypeDefault.cs" />
+    <Compile Include="ProgramData\District.cs" />
+    <Compile Include="ProgramData\Invoice.cs" />
+    <Compile Include="ProgramData\InvoiceDetail.cs" />
+    <Compile Include="ProgramData\InvoicePayment.cs" />
+    <Compile Include="ProgramData\Province.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmDistrictSearch.resx">
       <DependentUpon>frmDistrictSearch.cs</DependentUpon>

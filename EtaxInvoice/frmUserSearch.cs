@@ -1,4 +1,4 @@
-﻿using EtaxInvoice.Common;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,7 +62,7 @@ namespace EtaxInvoice
 
         private List<Customer> GetCustomers()
         {
-            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
+            string connstr = ConfigHelper.ConnectionString;
             SqlConnection connection = new SqlConnection(connstr);
             string sql = string.Format(@"Select a.FTCtyCode, a.FTCstName, a.FTCstTaxNo, a.FTCstWeb , a.FTCstAddrInv
 , a.FTCstStreetInv, a.FTCsttrictInv, a.FTDstCodeInv, a.FTPvnCodeInv , a.FTCstPostCodeInv
@@ -101,6 +101,7 @@ where a.FTCtyCode = '{0}'",this.CustomerTypeCode);
                     FTDstName = SQLHelper.SafeGetString(reader, 16),
                     FTCstCode = SQLHelper.SafeGetString(reader, 17),
                 };
+                // pipe for foreign Customer' s  address
                 if (this.CustomerTypeCode == customerTypeDefault.CCPT)
                 {
                     string[] splitted = cus.FTCstAddrInv.Split('|');

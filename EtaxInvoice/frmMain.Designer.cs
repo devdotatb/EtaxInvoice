@@ -122,9 +122,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel_c_1_12 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.button_countrySearch = new System.Windows.Forms.Button();
             this.textBox_customerPostCode = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBox_customerCountry = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -179,9 +181,11 @@
             this.label32 = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
+            this.button_countrySearch_1 = new System.Windows.Forms.Button();
             this.textBox_customerPostCode_1 = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
+            this.textBox_customerCountry_1 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.textBox21 = new System.Windows.Forms.TextBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
@@ -224,9 +228,11 @@
             this.label48 = new System.Windows.Forms.Label();
             this.panel26 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel40 = new System.Windows.Forms.TableLayoutPanel();
+            this.button_countrySearch_2 = new System.Windows.Forms.Button();
             this.textBox_customerPostCode_2 = new System.Windows.Forms.TextBox();
             this.label50 = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
+            this.textBox_customerCountry_2 = new System.Windows.Forms.TextBox();
             this.textBox27 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel47 = new System.Windows.Forms.TableLayoutPanel();
             this.เพิ่ม = new System.Windows.Forms.Button();
@@ -235,12 +241,6 @@
             this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.button_close = new System.Windows.Forms.Button();
-            this.textBox_customerCountry = new System.Windows.Forms.TextBox();
-            this.button_countrySearch = new System.Windows.Forms.Button();
-            this.textBox_customerCountry_1 = new System.Windows.Forms.TextBox();
-            this.button_countrySearch_1 = new System.Windows.Forms.Button();
-            this.button_countrySearch_2 = new System.Windows.Forms.Button();
-            this.textBox_customerCountry_2 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabInvoice.SuspendLayout();
@@ -733,7 +733,7 @@
             this.tableLayoutPanel43.Name = "tableLayoutPanel43";
             this.tableLayoutPanel43.RowCount = 1;
             this.tableLayoutPanel43.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel43.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 114F));
+            this.tableLayoutPanel43.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 118F));
             this.tableLayoutPanel43.Size = new System.Drawing.Size(462, 118);
             this.tableLayoutPanel43.TabIndex = 1;
             // 
@@ -1549,6 +1549,17 @@
             this.tableLayoutPanel12.Size = new System.Drawing.Size(415, 33);
             this.tableLayoutPanel12.TabIndex = 1;
             // 
+            // button_countrySearch
+            // 
+            this.button_countrySearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button_countrySearch.Location = new System.Drawing.Point(374, 6);
+            this.button_countrySearch.Name = "button_countrySearch";
+            this.button_countrySearch.Size = new System.Drawing.Size(26, 21);
+            this.button_countrySearch.TabIndex = 151;
+            this.button_countrySearch.Text = "...";
+            this.button_countrySearch.UseVisualStyleBackColor = true;
+            this.button_countrySearch.Click += new System.EventHandler(this.button_countrySearch_Click);
+            // 
             // textBox_customerPostCode
             // 
             this.textBox_customerPostCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -1580,6 +1591,15 @@
             this.label5.Size = new System.Drawing.Size(45, 13);
             this.label5.TabIndex = 144;
             this.label5.Text = "ประเทศ";
+            // 
+            // textBox_customerCountry
+            // 
+            this.textBox_customerCountry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_customerCountry.Location = new System.Drawing.Point(278, 6);
+            this.textBox_customerCountry.Name = "textBox_customerCountry";
+            this.textBox_customerCountry.ReadOnly = true;
+            this.textBox_customerCountry.Size = new System.Drawing.Size(90, 20);
+            this.textBox_customerCountry.TabIndex = 145;
             // 
             // tabPage6
             // 
@@ -2234,6 +2254,17 @@
             this.tableLayoutPanel27.Size = new System.Drawing.Size(415, 33);
             this.tableLayoutPanel27.TabIndex = 1;
             // 
+            // button_countrySearch_1
+            // 
+            this.button_countrySearch_1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button_countrySearch_1.Location = new System.Drawing.Point(374, 6);
+            this.button_countrySearch_1.Name = "button_countrySearch_1";
+            this.button_countrySearch_1.Size = new System.Drawing.Size(26, 21);
+            this.button_countrySearch_1.TabIndex = 152;
+            this.button_countrySearch_1.Text = "...";
+            this.button_countrySearch_1.UseVisualStyleBackColor = true;
+            this.button_countrySearch_1.Click += new System.EventHandler(this.button_countrySearch_1_Click);
+            // 
             // textBox_customerPostCode_1
             // 
             this.textBox_customerPostCode_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -2265,6 +2296,15 @@
             this.label34.Size = new System.Drawing.Size(45, 13);
             this.label34.TabIndex = 144;
             this.label34.Text = "ประเทศ";
+            // 
+            // textBox_customerCountry_1
+            // 
+            this.textBox_customerCountry_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_customerCountry_1.Location = new System.Drawing.Point(278, 6);
+            this.textBox_customerCountry_1.Name = "textBox_customerCountry_1";
+            this.textBox_customerCountry_1.ReadOnly = true;
+            this.textBox_customerCountry_1.Size = new System.Drawing.Size(90, 20);
+            this.textBox_customerCountry_1.TabIndex = 145;
             // 
             // label21
             // 
@@ -2770,6 +2810,17 @@
             this.tableLayoutPanel40.Size = new System.Drawing.Size(415, 33);
             this.tableLayoutPanel40.TabIndex = 1;
             // 
+            // button_countrySearch_2
+            // 
+            this.button_countrySearch_2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button_countrySearch_2.Location = new System.Drawing.Point(374, 6);
+            this.button_countrySearch_2.Name = "button_countrySearch_2";
+            this.button_countrySearch_2.Size = new System.Drawing.Size(26, 21);
+            this.button_countrySearch_2.TabIndex = 151;
+            this.button_countrySearch_2.Text = "...";
+            this.button_countrySearch_2.UseVisualStyleBackColor = true;
+            this.button_countrySearch_2.Click += new System.EventHandler(this.button_countrySearch_2_Click);
+            // 
             // textBox_customerPostCode_2
             // 
             this.textBox_customerPostCode_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -2801,6 +2852,15 @@
             this.label51.Size = new System.Drawing.Size(45, 13);
             this.label51.TabIndex = 144;
             this.label51.Text = "ประเทศ";
+            // 
+            // textBox_customerCountry_2
+            // 
+            this.textBox_customerCountry_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_customerCountry_2.Location = new System.Drawing.Point(278, 6);
+            this.textBox_customerCountry_2.Name = "textBox_customerCountry_2";
+            this.textBox_customerCountry_2.ReadOnly = true;
+            this.textBox_customerCountry_2.Size = new System.Drawing.Size(90, 20);
+            this.textBox_customerCountry_2.TabIndex = 145;
             // 
             // textBox27
             // 
@@ -2908,66 +2968,6 @@
             this.button_close.Text = "ปิด";
             this.button_close.UseVisualStyleBackColor = true;
             this.button_close.Click += new System.EventHandler(this.button_close_Click);
-            // 
-            // textBox_customerCountry
-            // 
-            this.textBox_customerCountry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerCountry.Location = new System.Drawing.Point(278, 6);
-            this.textBox_customerCountry.Name = "textBox_customerCountry";
-            this.textBox_customerCountry.ReadOnly = true;
-            this.textBox_customerCountry.Size = new System.Drawing.Size(90, 20);
-            this.textBox_customerCountry.TabIndex = 145;
-            // 
-            // button_countrySearch
-            // 
-            this.button_countrySearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_countrySearch.Location = new System.Drawing.Point(374, 6);
-            this.button_countrySearch.Name = "button_countrySearch";
-            this.button_countrySearch.Size = new System.Drawing.Size(26, 21);
-            this.button_countrySearch.TabIndex = 151;
-            this.button_countrySearch.Text = "...";
-            this.button_countrySearch.UseVisualStyleBackColor = true;
-            this.button_countrySearch.Click += new System.EventHandler(this.button_countrySearch_Click);
-            // 
-            // textBox_customerCountry_1
-            // 
-            this.textBox_customerCountry_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerCountry_1.Location = new System.Drawing.Point(278, 6);
-            this.textBox_customerCountry_1.Name = "textBox_customerCountry_1";
-            this.textBox_customerCountry_1.ReadOnly = true;
-            this.textBox_customerCountry_1.Size = new System.Drawing.Size(90, 20);
-            this.textBox_customerCountry_1.TabIndex = 145;
-            // 
-            // button_countrySearch_1
-            // 
-            this.button_countrySearch_1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_countrySearch_1.Location = new System.Drawing.Point(374, 6);
-            this.button_countrySearch_1.Name = "button_countrySearch_1";
-            this.button_countrySearch_1.Size = new System.Drawing.Size(26, 21);
-            this.button_countrySearch_1.TabIndex = 152;
-            this.button_countrySearch_1.Text = "...";
-            this.button_countrySearch_1.UseVisualStyleBackColor = true;
-            this.button_countrySearch_1.Click += new System.EventHandler(this.button_countrySearch_1_Click);
-            // 
-            // button_countrySearch_2
-            // 
-            this.button_countrySearch_2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_countrySearch_2.Location = new System.Drawing.Point(374, 6);
-            this.button_countrySearch_2.Name = "button_countrySearch_2";
-            this.button_countrySearch_2.Size = new System.Drawing.Size(26, 21);
-            this.button_countrySearch_2.TabIndex = 151;
-            this.button_countrySearch_2.Text = "...";
-            this.button_countrySearch_2.UseVisualStyleBackColor = true;
-            this.button_countrySearch_2.Click += new System.EventHandler(this.button_countrySearch_2_Click);
-            // 
-            // textBox_customerCountry_2
-            // 
-            this.textBox_customerCountry_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerCountry_2.Location = new System.Drawing.Point(278, 6);
-            this.textBox_customerCountry_2.Name = "textBox_customerCountry_2";
-            this.textBox_customerCountry_2.ReadOnly = true;
-            this.textBox_customerCountry_2.Size = new System.Drawing.Size(90, 20);
-            this.textBox_customerCountry_2.TabIndex = 145;
             // 
             // frmMain
             // 

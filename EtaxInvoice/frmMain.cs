@@ -1,4 +1,4 @@
-﻿using EtaxInvoice.Common;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +17,7 @@ namespace EtaxInvoice
         private CustomerTypeDefault customerTypeDefault { get; set; } = new CustomerTypeDefault();
         private Customer CurrentCustomer { get; set; }
         private Invoice CurrentInvoice { get; set; }
-        private Country CurrentCountry { get; set; }
+        private Country CurrentCountry { get; set; } = new Country();
         public List<InvoiceDetail> CurrentInvoiceDetailList { get; set; }
         public List<Country> CountryList { get; set; }
         private InvoicePayment CurrentInvoicePayment { get; set; }
@@ -29,7 +29,7 @@ namespace EtaxInvoice
 
         private void LoadCountry()
         {
-            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
+            string connstr = ConfigHelper.ConnectionString;
             SqlConnection connection = new SqlConnection(connstr);
             string sql = string.Format(@"select FTCYCode,FTCYDescTh,FTCYDescEn from TCNMCountry");
             connection.Open();
@@ -80,6 +80,7 @@ namespace EtaxInvoice
             try
             {
                 frmUserSearch frm = new frmUserSearch();
+                frm.StartPosition = FormStartPosition.CenterParent;
 
                 switch (tabCustomerDetail.SelectedIndex)
                 {
@@ -188,11 +189,38 @@ namespace EtaxInvoice
                 MessageHelper.ShowError(ex.Message);
             }
         }
+        private void ShowConfirmCheckDate()
+        {
+            try
+            {
+                string text = "ออกใบกำกับภาษีเต็มรูป\nจากใบกับกับภาษีอย่างย่อวันนี้หรือไม่";
+                string textheader = "";
+                var result = MessageHelper.ShowConfirmWithCancel(text,textheader);
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        OpenfrmInvoiceTodayABB();
+                        break;
+                    case DialogResult.No:
+                        OpenfrmInvoice(false, null);
+                        break;
+                    case DialogResult.Cancel:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ShowError(ex.Message);
+            }
+        }
         private void OpenfrmInvoiceCheckDate()
         {
             try
             {
                 frmInvoiceCheckDate frm = new frmInvoiceCheckDate();
+                frm.StartPosition = FormStartPosition.CenterParent;
                 var result = frm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
@@ -216,6 +244,7 @@ namespace EtaxInvoice
             try
             {
                 frmInvoiceTodayABB frm = new frmInvoiceTodayABB();
+                frm.StartPosition = FormStartPosition.CenterParent;
                 var result = frm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
@@ -232,6 +261,7 @@ namespace EtaxInvoice
             try
             {
                 frmInvoiceSearch frm = new frmInvoiceSearch();
+                frm.StartPosition = FormStartPosition.CenterParent;
                 frm.isToday = isToday;
                 frm.POSnumber = POSno;
                 var result = frm.ShowDialog(this);
@@ -268,6 +298,7 @@ namespace EtaxInvoice
             try
             {
                 frmCountrySearch frm = new frmCountrySearch();
+                frm.StartPosition = FormStartPosition.CenterParent;
                 var result = frm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
@@ -309,6 +340,7 @@ namespace EtaxInvoice
             try
             {
                 frmProvinceSearch frm = new frmProvinceSearch();
+                frm.StartPosition = FormStartPosition.CenterParent;
                 var result = frm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
@@ -349,6 +381,7 @@ namespace EtaxInvoice
             try
             {
                 frmDistrictSearch frm = new frmDistrictSearch();
+                frm.StartPosition = FormStartPosition.CenterParent;
                 var result = frm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
@@ -575,9 +608,18 @@ namespace EtaxInvoice
                         break;
                     }
             }
+            if (string.IsNullOrEmpty(customerCode))
+            {
+                MessageHelper.ShowError("กรุณากด \"เพิ่ม\"");
+                return;
+            }
             if (string.IsNullOrEmpty(customerName))
             {
                 errorstring += "ชื่อ,";
+            }
+            if (string.IsNullOrEmpty(countrycode))
+            {
+                errorstring += "ประเทศ,";
             }
 
             if (errorstring != tmperror)
@@ -586,7 +628,7 @@ namespace EtaxInvoice
                 return;
             }
 
-            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
+            string connstr = ConfigHelper.ConnectionString;
             string insertformat = @"
                             IF NOT EXISTS (SELECT * FROM TCNMCst WHERE FTCstCode = @customerCode)
                             BEGIN
@@ -646,7 +688,8 @@ namespace EtaxInvoice
 
         private void button_InvoiceSearch_Click(object sender, EventArgs e)
         {
-            OpenfrmInvoiceCheckDate();
+            //OpenfrmInvoiceCheckDate();
+            ShowConfirmCheckDate();
         }
 
         private void button_countrySearch_Click(object sender, EventArgs e)

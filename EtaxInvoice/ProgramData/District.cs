@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtaxInvoice.Common
+namespace EtaxInvoice
 {
     public class District
     {

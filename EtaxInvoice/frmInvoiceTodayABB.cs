@@ -1,4 +1,4 @@
-﻿using EtaxInvoice.Common;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +26,7 @@ namespace EtaxInvoice
         }
         public void LoadPOSComboBox()
         {
-            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
+            string connstr = ConfigHelper.ConnectionString;
             SqlConnection connection = new SqlConnection(connstr);
             string sql = string.Format(@"select FTPosCode from TPSMPos where FTPosRorW=1");
             connection.Open();
@@ -49,6 +49,19 @@ namespace EtaxInvoice
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.POSnumber = comboBox1.SelectedItem.ToString();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

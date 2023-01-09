@@ -42,17 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerTypeDefault.cs" />
-    <Compile Include="CustomerType.cs" />
-    <Compile Include="HelperClasses\SQLHelper.cs" />
-    <Compile Include="InvoicePayment.cs" />
-    <Compile Include="InvoiceDetail.cs" />
-    <Compile Include="Invoice.cs" />
-    <Compile Include="Customer.cs" />
-    <Compile Include="District.cs" />
-    <Compile Include="Country.cs" />
-    <Compile Include="Province.cs" />
-    <Compile Include="HelperClasses\MessageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

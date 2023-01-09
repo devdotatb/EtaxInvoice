@@ -1,4 +1,4 @@
-﻿using EtaxInvoice.Common;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,7 +59,7 @@ namespace EtaxInvoice
         }
         private List<Invoice> GetInvoices()
         {
-            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
+            string connstr = ConfigHelper.ConnectionString;
             SqlConnection connection = new SqlConnection(connstr);
             string sql = "";
             if (isToday)
@@ -162,7 +162,7 @@ where isnull(FTShdDocVatFull,'') = '' ");
         }
         private void saveDetail()
         {
-            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
+            string connstr = ConfigHelper.ConnectionString;
             SqlConnection connection = new SqlConnection(connstr);
             string sql = "";
             if (isToday)
@@ -208,7 +208,7 @@ where isnull(HD.FTShdDocVatFull,'') = '' and DT.FTShdDocNo = '{0}'", this.Curren
         }
         private void savePayment()
         {
-            string connstr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
+            string connstr = ConfigHelper.ConnectionString;
             SqlConnection connection = new SqlConnection(connstr);
             string sql = "";
             if (isToday)
