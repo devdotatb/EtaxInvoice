@@ -18,6 +18,15 @@ namespace EtaxInvoice
 {
     public partial class frmMain : Form
     {
+        public static string userLoc;
+        public static string ETAX_Invoice_EndPoint;
+        public static string ETAX_CN_EndPoint;
+        public static string API_Key;
+        public static string Client_ID;
+        public static string Client_Secret;
+        public static string userBu;
+        public static string OAuth_URL;
+        public static string Web_Service_Timeout;
         private CustomerTypeDefault customerTypeDefault { get; set; } = new CustomerTypeDefault();
         private Customer CurrentCustomer { get; set; }
         private Invoice CurrentInvoice { get; set; }
@@ -30,6 +39,145 @@ namespace EtaxInvoice
         {
             InitializeComponent();
             LoadCountry();
+            LoadConfig();
+        }
+        private void LoadConfig()
+        {
+            LoaduserLoc();
+            LoadETAX_Invoice_EndPoint();
+            LoadETAX_CN_EndPoint();
+            LoadAPI_Key();
+            LoadClient_ID();
+            LoadClient_Secret();
+            LoaduserBu();
+            LoadOAuth_URL();
+            LoadWeb_Service_Timeout();
+        }
+        private void LoaduserLoc()
+        {
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"select top 1 FTBchCode from TCNMComp");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                userLoc = SQLHelper.SafeGetString(reader, 0);
+            }
+        }
+        private void LoadETAX_Invoice_EndPoint()
+        {
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '001'");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                ETAX_Invoice_EndPoint = SQLHelper.SafeGetString(reader, 0);
+            }
+        }
+        private void LoadETAX_CN_EndPoint()
+        {
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '002'");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                ETAX_CN_EndPoint = SQLHelper.SafeGetString(reader, 0);
+            }
+        }
+        private void LoadAPI_Key()
+        {
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '003'");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                API_Key = SQLHelper.SafeGetString(reader, 0);
+            }
+        }
+        private void LoadClient_ID()
+        {
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '004'");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Client_ID = SQLHelper.SafeGetString(reader, 0);
+            }
+        }
+        private void LoadClient_Secret()
+        {
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '005'");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Client_Secret = SQLHelper.SafeGetString(reader, 0);
+            }
+        }
+        private void LoaduserBu()
+        {
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"select FTSysUsrValue from TSysConfig where FTSysCode = 'ETAX' and FTSysSeq = '006'");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                userBu = SQLHelper.SafeGetString(reader, 0);
+            }
+        }
+        private void LoadOAuth_URL()
+        {
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '007'");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                OAuth_URL = SQLHelper.SafeGetString(reader, 0);
+            }
+        }
+        private void LoadWeb_Service_Timeout()
+        {
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '008'");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Web_Service_Timeout = SQLHelper.SafeGetString(reader, 0);
+            }
         }
 
         private void LoadCountry()
@@ -503,7 +651,6 @@ namespace EtaxInvoice
             }
             EnableText();
         }
-
         private void toolStripButton_Save_Click(object sender, EventArgs e)
         {
             string branch = "00000";
@@ -753,12 +900,10 @@ namespace EtaxInvoice
         {
             OpenfrmUser();
         }
-
         private void button_InvoiceSearch_Click(object sender, EventArgs e)
         {
             ShowConfirmCheckDate();
         }
-
         private void button_countrySearch_Click(object sender, EventArgs e)
         {
             OpenfrmCountry();
@@ -767,7 +912,6 @@ namespace EtaxInvoice
         {
             OpenfrmCountry();
         }
-
         private void button_countrySearch_2_Click(object sender, EventArgs e)
         {
             OpenfrmCountry();
@@ -776,43 +920,18 @@ namespace EtaxInvoice
         {
             OpenfrmProvince();
         }
-        private void button_DistrictSearch_Click(object sender, EventArgs e)
-        {
-            OpenfrmDistrict();
-        }
-
-        private void button_DistrictSearch_1_Click(object sender, EventArgs e)
-        {
-            OpenfrmDistrict();
-        }
-
         private void button_provinceSearch_1_Click(object sender, EventArgs e)
         {
             OpenfrmProvince();
         }
-
-        private void comboBox_cWeb_1_SelectedIndexChanged(object sender, EventArgs e)
+        private void button_DistrictSearch_Click(object sender, EventArgs e)
         {
-            if (comboBox_cWeb_1.SelectedIndex == 0)
-            {
-                // สาขาที่
-                textBox_customerWeb_1.Text = "";
-                textBox_customerWeb_1.ReadOnly = false;
-            }
-            else
-            {
-                // สำนักงานใหญ่
-                textBox_customerWeb_1.Text = "00000";
-                textBox_customerWeb_1.ReadOnly = true;
-            }
+            OpenfrmDistrict();
         }
-
-        private void button_close_Click(object sender, EventArgs e)
+        private void button_DistrictSearch_1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            OpenfrmDistrict();
         }
-
         private void button_print_Click(object sender, EventArgs e)
         {
             try
@@ -850,8 +969,8 @@ namespace EtaxInvoice
                         if (email_result == DialogResult.OK)
                         {
                             APIEmail = frm.Email;
-                            InvoiceAPIData built = buildAPIdata();
-                            callapi_Invoice(built);
+                            InvoiceAPIData built = BuildAPIdata();
+                            Callapi_Invoice(built);
                         }
                         break;
                     case DialogResult.No:
@@ -867,17 +986,121 @@ namespace EtaxInvoice
                 MessageHelper.ShowError(ex.Message);
             }
         }
+        private void button_close_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
 
-        public InvoiceAPIData buildAPIdata()
+        public void ValidateBeforeAPI()
+        {
+            string customerCode = "";
+            string customerName = "";
+            string customerTaxId = "";
+            string customerAddress = "";
+            string customerRoad = "";
+            string customerSubDistrict = "";
+            string customerDistrictCode = "";
+            string customerProvinceCode = "";
+            string customerPostCode = "";
+            string customerTel = "";
+            string customerFax = "";
+            string customerEmail = "";
+            string customerWeb = "";
+            string countrycode = "";
+            string customerType = "";
+
+            string errorstring = "กรุณากรอก : ";
+            string tmperror = errorstring;
+            switch (tabCustomerDetail.SelectedIndex)
+            {
+                case 0: // บุคคลธรรมดา
+                    {
+                        customerCode = textBox_customerCode.Text;
+                        customerName = textBox_customerName.Text;
+                        customerTaxId = textBox_customerTaxId.Text;
+                        customerAddress = textBox_customerAddress.Text;
+                        customerRoad = textBox_customerRoad.Text;
+                        customerSubDistrict = textBox_customerSubDistrict.Text;
+                        customerDistrictCode = textBox_customerDistrictCode.Text;
+                        customerProvinceCode = textBox_customerProvinceCode.Text;
+                        customerPostCode = textBox_customerPostCode.Text;
+                        customerTel = textBox_customerTel.Text;
+                        customerFax = textBox_customerFax.Text;
+                        customerEmail = textBox_customerEmail.Text;
+                        customerWeb = "";
+                        countrycode = CurrentCountry.FTCYCode;
+                        customerType = customerTypeDefault.NIDN;
+
+                        break;
+                    }
+                case 1:// นิติบุคคล
+                    {
+                        customerCode = textBox_customerCode_1.Text;
+                        customerName = textBox_customerName_1.Text;
+                        customerTaxId = textBox_customerTaxId_1.Text;
+                        customerAddress = textBox_customerAddress_1.Text;
+                        customerRoad = textBox_customerRoad_1.Text;
+                        customerSubDistrict = textBox_customerSubDistrict_1.Text;
+                        customerDistrictCode = textBox_customerDistrictCode_1.Text;
+                        customerProvinceCode = textBox_customerProvinceCode_1.Text;
+                        customerPostCode = textBox_customerPostCode_1.Text;
+                        customerTel = textBox_customerTel_1.Text;
+                        customerFax = textBox_customerFax_1.Text;
+                        customerEmail = textBox_customerEmail_1.Text;
+                        customerWeb = textBox_customerWeb_1.Text;
+                        countrycode = CurrentCountry.FTCYCode;
+                        customerType = customerTypeDefault.TXID;
+
+                        break;
+                    }
+
+                case 2:// ชาวต่างชาติ
+                    {
+                        customerCode = textBox_customerCode_2.Text;
+                        customerName = textBox_customerName_2.Text;
+                        customerTaxId = textBox_customerTaxId_2.Text;
+                        customerAddress = textBox_customerAddress_2.Text + "|" + textBox_customerProvinceName_2.Text;
+                        customerPostCode = textBox_customerPostCode_2.Text;
+                        customerTel = textBox_customerTel_2.Text;
+                        customerEmail = textBox_customerEmail_2.Text;
+                        countrycode = CurrentCountry.FTCYCode;
+                        customerType = customerTypeDefault.CCPT;
+
+                        break;
+                    }
+            }
+
+            if (string.IsNullOrEmpty(customerCode))
+            {
+                MessageHelper.ShowError("กรุณากด \"เพิ่ม\"");
+                return;
+            }
+            if (string.IsNullOrEmpty(customerName))
+            {
+                errorstring += "ชื่อ,";
+            }
+            if (string.IsNullOrEmpty(countrycode))
+            {
+                errorstring += "ประเทศ,";
+            }
+
+            if (errorstring != tmperror)
+            {
+                MessageHelper.ShowError(errorstring.Remove(errorstring.Length - 1));
+                return;
+            }
+        }
+        public InvoiceAPIData BuildAPIdata()
         {
             var sendingdata = new InvoiceAPIData();
 
             sendingdata.remark = "";
             sendingdata.isShowBranchNo = true;
-            sendingdata.userid = "x10-tester";
-            sendingdata.userBu = "CFR";
-            sendingdata.userLoc = "6001";
-            sendingdata.userRole = "SUPERADMIN";
+            sendingdata.userid = Program.globalStartUserName;
+            sendingdata.userBu = "CFR";//userBu;//
+            sendingdata.userLoc = "6001";//userLoc;//
+            sendingdata.userRole = "Test by ADMIN";
 
             CustomerAPIData building_customer = new CustomerAPIData();
             building_customer.consentInfo = true;
@@ -973,7 +1196,7 @@ namespace EtaxInvoice
             sendingdata.customer = building_customer;
 
             SaleDataAPIData building_saledata = new SaleDataAPIData();
-            building_saledata.bu = "CFR";
+            building_saledata.bu = "CFR";//userBu;//
             building_saledata.total = CurrentInvoiceDetailList.Sum(t => t.FCSdtQty);
 
             SalesTicketAPIData building_salesTicket = new SalesTicketAPIData();
@@ -1016,7 +1239,7 @@ namespace EtaxInvoice
             building_payments.Add(each_payment);
             building_salesTicket.payments = building_payments;
 
-            building_salesTicket.loc = "6001";//CurrentInvoice.FTBchCode;
+            building_salesTicket.loc = "6001";//userLoc;//
             building_salesTicket.receiptDate = CurrentInvoice.FDDateIns;
             building_salesTicket.ticketNo = CurrentInvoice.FTShdDocNo;
             building_salesTicket.tpNo = CurrentInvoice.FTShdDocNo;
@@ -1026,7 +1249,7 @@ namespace EtaxInvoice
             building_salesTicket.totalNetSaleAmt = CurrentInvoice.FCShdNonVat + CurrentInvoice.FCShdVatable;
             building_salesTicket.totalVatItemAmt = CurrentInvoice.FCShdVatable;
             building_salesTicket.totalNonVatItemAmt = CurrentInvoice.FCShdNonVat;
-            building_salesTicket.transType = "NM";
+            building_salesTicket.transType = "";
             building_salesTicket.template_type = "Sales";
             building_salesTicket.taxValue = CurrentInvoice.FCShdVat;
             building_salesTicket.totalQty = CurrentInvoiceDetailList.Sum(t => t.FCSdtQty);
@@ -1043,10 +1266,9 @@ namespace EtaxInvoice
 
             return sendingdata;
         }
-
-        public async void callapi_Invoice(InvoiceAPIData data)
+        public async void Callapi_Invoice(InvoiceAPIData data)
         {
-            string apiUrl = "https://uat-etax-apims.central.co.th/nonprd-etax001/std-genft-document";
+            string apiUrl = ETAX_Invoice_EndPoint;
             string serviceName = "std-genft-document";
 
             string jsonString = JsonConvert.SerializeObject(data);
@@ -1059,7 +1281,7 @@ namespace EtaxInvoice
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 //client.DefaultRequestHeaders.Add("Authorization", "Bearer your-api-key");
                 client.DefaultRequestHeaders.Add("b2cauthorize", "test");
-                client.DefaultRequestHeaders.Add("api-key", "01fc39fbb6fa408db327523ad59b9309");
+                client.DefaultRequestHeaders.Add("api-key", API_Key);
 
                 var payload = new StringContent(base64String);
 
@@ -1145,7 +1367,6 @@ namespace EtaxInvoice
                 }
             }
         }
-
         public void SaveLog(LogETAX logdata)
         {
             LogInserter.InsertLog(logdata);
@@ -1153,8 +1374,8 @@ namespace EtaxInvoice
 
         private void only_number_TextChanged(object sender, EventArgs e, TextBox textBox)
         {
-            int number;
-            if (!int.TryParse(textBox.Text, out number))
+            long number;
+            if (!Int64.TryParse(textBox.Text, out number))
             {
                 if (textBox.Text.Length > 0)
                 {
@@ -1231,6 +1452,21 @@ namespace EtaxInvoice
 
 
         // 1
+        private void comboBox_cWeb_1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox_cWeb_1.SelectedIndex == 0)
+            {
+                // สาขาที่
+                textBox_customerWeb_1.Text = "";
+                textBox_customerWeb_1.ReadOnly = false;
+            }
+            else
+            {
+                // สำนักงานใหญ่
+                textBox_customerWeb_1.Text = "00000";
+                textBox_customerWeb_1.ReadOnly = true;
+            }
+        }
         private void textBox_customerTaxId_1_TextChanged(object sender, EventArgs e)
         {
             only_number_TextChanged(sender, e, textBox_customerTaxId_1);

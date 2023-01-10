@@ -62,7 +62,7 @@ namespace EtaxInvoice
         public static string globalPOSServerLogin = "sa";
         public static string globalPOSServerPassword = "12345";
         public static string globalStartUserPassword = "12345";
-        public static string globalStartUserName = "ผู้จัดการสาขา";
+        public static string globalStartUserName = "x10-tester";//"ผู้จัดการสาขา";
         public static int globalProgramMode = 1;
         /// <summary>
         /// The main entry point for the application.
