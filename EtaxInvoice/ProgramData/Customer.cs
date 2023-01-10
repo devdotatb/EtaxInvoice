@@ -18,13 +18,13 @@ namespace EtaxInvoice
         public string FTCsttrictInv { get; set; }
         public string FTDstCodeInv { get; set; }
         public string FTPvnCodeInv { get; set; }
+        public string FTDstName { get; set; }
+        public string FTPvnName { get; set; }
         public string FTCstPostCodeInv { get; set; }
         public string FTCstSize { get; set; }
         public string FTCstTelInv { get; set; }
         public string FTCstFaxInv { get; set; }
         public string FTCstEmail { get; set; }
         public string FTCYDescTh { get; set; }
-        public string FTPvnName { get; set; }
-        public string FTDstName { get; set; }
     }
 }

@@ -120,13 +120,13 @@ namespace EtaxInvoice
             switch (CurrentSelectedColumn)
             {
                 case "FTCYCode":
-                    prov = prov.Where(t => t.FTCYCode.Contains(textBox_search.Text)).ToList();
+                    prov = prov.Where(t => t.FTCYCode.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
                 case "FTCYDescTh":
-                    prov = prov.Where(t => t.FTCYDescTh.Contains(textBox_search.Text)).ToList();
+                    prov = prov.Where(t => t.FTCYDescTh.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
                 case "FTCYDescEn":
-                    prov = prov.Where(t => t.FTCYDescEn.Contains(textBox_search.Text)).ToList();
+                    prov = prov.Where(t => t.FTCYDescEn.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
                 default: break;
             }

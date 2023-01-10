@@ -24,7 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -100,12 +100,6 @@
     <Compile Include="frmEmailConfirm.Designer.cs">
       <DependentUpon>frmEmailConfirm.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmInvoiceCheckDate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmInvoiceCheckDate.Designer.cs">
-      <DependentUpon>frmInvoiceCheckDate.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmInvoiceTodayABB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,9 +157,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmailConfirm.resx">
       <DependentUpon>frmEmailConfirm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmInvoiceCheckDate.resx">
-      <DependentUpon>frmInvoiceCheckDate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInvoiceTodayABB.resx">
       <DependentUpon>frmInvoiceTodayABB.cs</DependentUpon>

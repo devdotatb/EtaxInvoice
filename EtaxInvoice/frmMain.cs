@@ -55,7 +55,7 @@ namespace EtaxInvoice
         }
         private void frmInvoiceMain_Load(object sender, EventArgs e)
         {
-            comboBox_cWeb_1.SelectedIndex = 0;
+            comboBox_cWeb_1.SelectedIndex = 1;
         }
         private void tabCustomerDetail_Click(object sender, EventArgs e)
         {
@@ -128,7 +128,6 @@ namespace EtaxInvoice
                                 this.textBox_customerCode.Text = cus.FTCstCode;
                                 this.textBox_customerName.Text = cus.FTCstName;
                                 this.textBox_customerTaxId.Text = cus.FTCstTaxNo;
-                                this.textBox_customerWeb.Text = cus.FTCstWeb;
                                 this.textBox_customerEmail.Text = cus.FTCstEmail;
                                 this.textBox_customerTel.Text = cus.FTCstTelInv;
                                 this.textBox_customerFax.Text = cus.FTCstFaxInv;
@@ -188,6 +187,7 @@ namespace EtaxInvoice
                                 break;
                             }
                     }
+                    EnableText();
                 }
             }
             catch (Exception ex)
@@ -214,30 +214,6 @@ namespace EtaxInvoice
                         break;
                     default:
                         break;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageHelper.ShowError(ex.Message);
-            }
-        }
-        private void OpenfrmInvoiceCheckDate()
-        {
-            try
-            {
-                frmInvoiceCheckDate frm = new frmInvoiceCheckDate();
-                frm.StartPosition = FormStartPosition.CenterParent;
-                var result = frm.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    if (frm.isToday)
-                    {
-                        OpenfrmInvoiceTodayABB();
-                    }
-                    else
-                    {
-                        OpenfrmInvoice(false, null);
-                    }
                 }
             }
             catch (Exception ex)
@@ -470,7 +446,6 @@ namespace EtaxInvoice
                         this.textBox_customerCode.Text = generatedcstcode;
                         this.textBox_customerName.Text = "";
                         this.textBox_customerTaxId.Text = "";
-                        this.textBox_customerWeb.Text = "";
                         this.textBox_customerEmail.Text = "";
                         this.textBox_customerTel.Text = "";
                         this.textBox_customerFax.Text = "";
@@ -534,6 +509,7 @@ namespace EtaxInvoice
                         break;
                     }
             }
+            EnableText();
         }
 
         private void toolStripButton_Save_Click(object sender, EventArgs e)
@@ -573,7 +549,7 @@ namespace EtaxInvoice
                         customerTel = textBox_customerTel.Text;
                         customerFax = textBox_customerFax.Text;
                         customerEmail = textBox_customerEmail.Text;
-                        customerWeb = textBox_customerWeb.Text;
+                        customerWeb = "";
                         countrycode = CurrentCountry.FTCYCode;
                         customerType = customerTypeDefault.NIDN;
 
@@ -690,6 +666,54 @@ namespace EtaxInvoice
             MessageHelper.ShowInfo("บันทึกสำเร็จ");
         }
 
+        private void EnableText()
+        {
+            switch (tabCustomerDetail.SelectedIndex)
+            {
+                case 0: // บุคคลธรรมดา
+                    {
+
+                        this.textBox_customerName.ReadOnly = false;
+                        this.textBox_customerTaxId.ReadOnly = false;
+                        this.textBox_customerTel.ReadOnly = false;
+                        this.textBox_customerFax.ReadOnly = false;
+
+                        this.textBox_customerAddress.ReadOnly = false;
+                        this.textBox_customerRoad.ReadOnly = false;
+                        this.textBox_customerSubDistrict.ReadOnly = false;
+                        this.textBox_customerPostCode.ReadOnly = false;
+
+                        break;
+                    }
+                case 1:// นิติบุคคล
+                    {
+                        this.textBox_customerName_1.ReadOnly = false;
+                        this.textBox_customerTaxId_1.ReadOnly = false;
+                        this.textBox_customerWeb_1.ReadOnly = false;
+                        this.textBox_customerTel_1.ReadOnly = false;
+                        this.textBox_customerFax_1.ReadOnly = false;
+
+                        this.textBox_customerAddress_1.ReadOnly = false;
+                        this.textBox_customerRoad_1.ReadOnly = false;
+                        this.textBox_customerSubDistrict_1.ReadOnly = false;
+                        this.textBox_customerPostCode_1.ReadOnly = false;
+                        comboBox_cWeb_1.Enabled = true;
+                        break;
+                    }
+
+                case 2:// ชาวต่างชาติ
+                    {
+                        this.textBox_customerName_2.ReadOnly = false;
+                        this.textBox_customerTaxId_2.ReadOnly = false;
+                        this.textBox_customerTel_2.ReadOnly = false;
+
+                        this.textBox_customerAddress_2.ReadOnly = false;
+                        this.textBox_customerPostCode_2.ReadOnly = false;
+
+                        break;
+                    }
+            }
+        }
         private void button_SearchCustomer_Click(object sender, EventArgs e)
         {
             OpenfrmUser();
@@ -833,7 +857,7 @@ namespace EtaxInvoice
 
                         building_customer.customerName = textBox_customerName.Text;
                         building_customer.customerTaxId = textBox_customerTaxId.Text;
-                        building_customer.customerBranch = textBox_customerWeb.Text;
+                        building_customer.customerBranch = "";
                         building_customer.templateLang = "TH";
                         building_customer.addressType = "LOCAL";
                         building_customer.buildingNo = textBox_customerAddress.Text;
@@ -1027,7 +1051,7 @@ namespace EtaxInvoice
                 logdata.FTResPara = responseContent;
                 logdata.FTResCode = response.StatusCode.ToString();
                 logdata.FTResMsg = obj_result.statusMessage;
-                logdata.FTResShwMsg = obj_result.statusMessage;
+                logdata.FTResShwMsg = "";
                 SaveLog(logdata);
 
                 if (response.IsSuccessStatusCode)
@@ -1082,7 +1106,7 @@ namespace EtaxInvoice
                 }
                 else
                 {
-                    string text = responseContent + "\n" + base64String;
+                    string text = responseContent;// + "\n" + base64String;
                     var result = MessageHelper.ShowError(text);
                 }
             }
@@ -1091,6 +1115,155 @@ namespace EtaxInvoice
         public void SaveLog(LogETAX logdata)
         {
             LogInserter.InsertLog(logdata);
+        }
+
+        private void only_number_TextChanged(object sender, EventArgs e, TextBox textBox)
+        {
+            int number;
+            if (!int.TryParse(textBox.Text, out number))
+            {
+                textBox.Text = string.Empty;
+            }
+        }
+        private void only_number_KeyDown(object sender, KeyEventArgs e, TextBox textBox)
+        {
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                string clipboardText = Clipboard.GetText();
+                int number;
+                if (int.TryParse(clipboardText, out number))
+                {
+                    textBox.Paste(clipboardText);
+                }
+                e.SuppressKeyPress = true;
+            }
+        }
+        private void only_number_contextMenustripChanged(object sender, EventArgs e, TextBox textBox)
+        {
+            ContextMenuStrip menu = textBox.ContextMenuStrip;
+            if (menu != null)
+            {
+                foreach (ToolStripItem item in menu.Items)
+                {
+                    if (item.Text == "Paste")
+                    {
+                        item.Enabled = false;
+                    }
+                }
+            }
+        }
+
+        // 0
+        private void textBox_customerTaxId_TextChanged(object sender, EventArgs e)
+        {
+            only_number_TextChanged(sender, e, textBox_customerTaxId);
+        }
+        private void textBox_customerTaxId_KeyDown(object sender, KeyEventArgs e)
+        {
+            only_number_KeyDown(sender, e, textBox_customerTaxId);
+        }
+        private void textBox_customerTaxId_ContextMenuStripChanged(object sender, EventArgs e)
+        {
+            only_number_contextMenustripChanged(sender, e, textBox_customerTaxId);
+        }
+        private void textBox_customerTel_TextChanged(object sender, EventArgs e)
+        {
+            only_number_TextChanged(sender, e, textBox_customerTel);
+        }
+        private void textBox_customerTel_KeyDown(object sender, KeyEventArgs e)
+        {
+            only_number_KeyDown(sender, e, textBox_customerTel);
+        }
+        private void textBox_customerTel_ContextMenuStripChanged(object sender, EventArgs e)
+        {
+            only_number_contextMenustripChanged(sender, e, textBox_customerTel);
+        }
+        private void textBox_customerPostCode_TextChanged(object sender, EventArgs e)
+        {
+            only_number_TextChanged(sender, e, textBox_customerPostCode);
+        }
+        private void textBox_customerPostCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            only_number_KeyDown(sender, e, textBox_customerPostCode);
+        }
+        private void textBox_customerPostCode_ContextMenuStripChanged(object sender, EventArgs e)
+        {
+            only_number_contextMenustripChanged(sender, e, textBox_customerPostCode);
+        }
+
+
+        // 1
+        private void textBox_customerTaxId_1_TextChanged(object sender, EventArgs e)
+        {
+            only_number_TextChanged(sender, e, textBox_customerTaxId_1);
+        }
+        private void textBox_customerTaxId_1_KeyDown(object sender, KeyEventArgs e)
+        {
+            only_number_KeyDown(sender, e, textBox_customerTaxId_1);
+        }
+        private void textBox_customerTaxId_1_ContextMenuStripChanged(object sender, EventArgs e)
+        {
+            only_number_contextMenustripChanged(sender, e, textBox_customerTaxId_1);
+        }
+        private void textBox_customerTel_1_TextChanged(object sender, EventArgs e)
+        {
+            only_number_TextChanged(sender, e, textBox_customerTel_1);
+        }
+        private void textBox_customerTel_1_KeyDown(object sender, KeyEventArgs e)
+        {
+            only_number_KeyDown(sender, e, textBox_customerTel_1);
+        }
+        private void textBox_customerTel_1_ContextMenuStripChanged(object sender, EventArgs e)
+        {
+            only_number_contextMenustripChanged(sender, e, textBox_customerTel_1);
+        }
+        private void textBox_customerPostCode_1_TextChanged(object sender, EventArgs e)
+        {
+            only_number_TextChanged(sender, e, textBox_customerPostCode_1);
+        }
+        private void textBox_customerPostCode_1_KeyDown(object sender, KeyEventArgs e)
+        {
+            only_number_KeyDown(sender, e, textBox_customerPostCode_1);
+        }
+        private void textBox_customerPostCode_1_ContextMenuStripChanged(object sender, EventArgs e)
+        {
+            only_number_contextMenustripChanged(sender, e, textBox_customerPostCode_1);
+        }
+
+        // 2
+        private void textBox_customerTel_2_TextChanged(object sender, EventArgs e)
+        {
+            only_number_TextChanged(sender, e, textBox_customerTel_2);
+        }
+        private void textBox_customerTel_2_KeyDown(object sender, KeyEventArgs e)
+        {
+            only_number_KeyDown(sender, e, textBox_customerTel_2);
+        }
+        private void textBox_customerTel_2_ContextMenuStripChanged(object sender, EventArgs e)
+        {
+            only_number_contextMenustripChanged(sender, e, textBox_customerTel_2);
+        }
+        private void textBox_customerPostCode_2_TextChanged(object sender, EventArgs e)
+        {
+            only_number_TextChanged(sender, e, textBox_customerPostCode_2);
+        }
+        private void textBox_customerPostCode_2_KeyDown(object sender, KeyEventArgs e)
+        {
+            only_number_KeyDown(sender, e, textBox_customerPostCode_2);
+        }
+        private void textBox_customerPostCode_2_ContextMenuStripChanged(object sender, EventArgs e)
+        {
+            only_number_contextMenustripChanged(sender, e, textBox_customerPostCode_2);
+        }
+
+        private void textBox_customerTel_1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //only_number_textChanged(sender, e);
+        }
+
+        private void textBox_customerTel_2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //only_number_textChanged(sender, e);
         }
     }
 }

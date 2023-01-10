@@ -47,8 +47,8 @@ namespace EtaxInvoice
             dataGridView1.Columns["FTCstAddrInv"].HeaderText = "ที่อยู่";
             dataGridView1.Columns["FTCstStreetInv"].HeaderText = "ถนน";
             dataGridView1.Columns["FTCsttrictInv"].HeaderText = "ตำบล/แขวง";
-            dataGridView1.Columns["FTDstCodeInv"].HeaderText = "รหัสอำเภอ";
-            dataGridView1.Columns["FTPvnCodeInv"].HeaderText = "รหัสจังหวัด";
+            dataGridView1.Columns["FTDstCodeInv"].Visible = false;
+            dataGridView1.Columns["FTPvnCodeInv"].Visible = false;
             dataGridView1.Columns["FTCstPostCodeInv"].HeaderText = "รหัสไปรษณีย์";
             dataGridView1.Columns["FTCstSize"].Visible = false;
             dataGridView1.Columns["FTCstTelInv"].HeaderText = "เบอร์โทรศัพท์";

@@ -96,8 +96,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.panel_c_1_7 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox_customerWeb = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel_c_1_8 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.button_DistrictSearch = new System.Windows.Forms.Button();
@@ -281,7 +279,6 @@
             this.panel_c_1_6.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.panel_c_1_7.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
             this.panel_c_1_8.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
             this.panel_c_1_9.SuspendLayout();
@@ -417,7 +414,8 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 73);
@@ -1020,6 +1018,7 @@
             this.textBox_customerAddress.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerAddress.MaxLength = 50;
             this.textBox_customerAddress.Name = "textBox_customerAddress";
+            this.textBox_customerAddress.ReadOnly = true;
             this.textBox_customerAddress.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerAddress.TabIndex = 120;
             // 
@@ -1065,6 +1064,7 @@
             this.textBox_customerName.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerName.MaxLength = 50;
             this.textBox_customerName.Name = "textBox_customerName";
+            this.textBox_customerName.ReadOnly = true;
             this.textBox_customerName.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerName.TabIndex = 132;
             // 
@@ -1110,6 +1110,7 @@
             this.textBox_customerRoad.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerRoad.MaxLength = 50;
             this.textBox_customerRoad.Name = "textBox_customerRoad";
+            this.textBox_customerRoad.ReadOnly = true;
             this.textBox_customerRoad.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerRoad.TabIndex = 123;
             // 
@@ -1153,10 +1154,14 @@
             this.textBox_customerTaxId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerTaxId.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerTaxId.MaxLength = 50;
+            this.textBox_customerTaxId.MaxLength = 13;
             this.textBox_customerTaxId.Name = "textBox_customerTaxId";
+            this.textBox_customerTaxId.ReadOnly = true;
             this.textBox_customerTaxId.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerTaxId.TabIndex = 134;
+            this.textBox_customerTaxId.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerTaxId_ContextMenuStripChanged);
+            this.textBox_customerTaxId.TextChanged += new System.EventHandler(this.textBox_customerTaxId_TextChanged);
+            this.textBox_customerTaxId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_customerTaxId_KeyDown);
             // 
             // label13
             // 
@@ -1200,6 +1205,7 @@
             this.textBox_customerSubDistrict.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerSubDistrict.MaxLength = 50;
             this.textBox_customerSubDistrict.Name = "textBox_customerSubDistrict";
+            this.textBox_customerSubDistrict.ReadOnly = true;
             this.textBox_customerSubDistrict.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerSubDistrict.TabIndex = 125;
             // 
@@ -1228,8 +1234,6 @@
             this.tableLayoutPanel9.ColumnCount = 2;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel9.Controls.Add(this.textBox_customerWeb, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.label4, 0, 0);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
@@ -1237,28 +1241,6 @@
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(415, 28);
             this.tableLayoutPanel9.TabIndex = 1;
-            // 
-            // textBox_customerWeb
-            // 
-            this.textBox_customerWeb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerWeb.Location = new System.Drawing.Point(128, 4);
-            this.textBox_customerWeb.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerWeb.MaxLength = 50;
-            this.textBox_customerWeb.Name = "textBox_customerWeb";
-            this.textBox_customerWeb.ReadOnly = true;
-            this.textBox_customerWeb.Size = new System.Drawing.Size(283, 20);
-            this.textBox_customerWeb.TabIndex = 142;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(84, 7);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 13);
-            this.label4.TabIndex = 141;
-            this.label4.Text = "สาขาที่";
             // 
             // panel_c_1_8
             // 
@@ -1363,6 +1345,7 @@
             this.textBox_customerEmail.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerEmail.MaxLength = 50;
             this.textBox_customerEmail.Name = "textBox_customerEmail";
+            this.textBox_customerEmail.ReadOnly = true;
             this.textBox_customerEmail.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerEmail.TabIndex = 136;
             // 
@@ -1484,8 +1467,12 @@
             this.textBox_customerTel.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTel.MaxLength = 50;
             this.textBox_customerTel.Name = "textBox_customerTel";
+            this.textBox_customerTel.ReadOnly = true;
             this.textBox_customerTel.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerTel.TabIndex = 138;
+            this.textBox_customerTel.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerTel_ContextMenuStripChanged);
+            this.textBox_customerTel.TextChanged += new System.EventHandler(this.textBox_customerTel_TextChanged);
+            this.textBox_customerTel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_customerTel_KeyDown);
             // 
             // textBox_customerFax
             // 
@@ -1494,6 +1481,7 @@
             this.textBox_customerFax.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerFax.MaxLength = 50;
             this.textBox_customerFax.Name = "textBox_customerFax";
+            this.textBox_customerFax.ReadOnly = true;
             this.textBox_customerFax.Size = new System.Drawing.Size(91, 20);
             this.textBox_customerFax.TabIndex = 140;
             // 
@@ -1565,10 +1553,14 @@
             this.textBox_customerPostCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerPostCode.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerPostCode.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerPostCode.MaxLength = 50;
+            this.textBox_customerPostCode.MaxLength = 5;
             this.textBox_customerPostCode.Name = "textBox_customerPostCode";
+            this.textBox_customerPostCode.ReadOnly = true;
             this.textBox_customerPostCode.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerPostCode.TabIndex = 143;
+            this.textBox_customerPostCode.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerPostCode_ContextMenuStripChanged);
+            this.textBox_customerPostCode.TextChanged += new System.EventHandler(this.textBox_customerPostCode_TextChanged);
+            this.textBox_customerPostCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_customerPostCode_KeyDown);
             // 
             // label16
             // 
@@ -1724,6 +1716,7 @@
             this.textBox_customerAddress_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerAddress_1.MaxLength = 50;
             this.textBox_customerAddress_1.Name = "textBox_customerAddress_1";
+            this.textBox_customerAddress_1.ReadOnly = true;
             this.textBox_customerAddress_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerAddress_1.TabIndex = 120;
             // 
@@ -1769,6 +1762,7 @@
             this.textBox_customerName_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerName_1.MaxLength = 50;
             this.textBox_customerName_1.Name = "textBox_customerName_1";
+            this.textBox_customerName_1.ReadOnly = true;
             this.textBox_customerName_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerName_1.TabIndex = 132;
             // 
@@ -1814,6 +1808,7 @@
             this.textBox_customerRoad_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerRoad_1.MaxLength = 50;
             this.textBox_customerRoad_1.Name = "textBox_customerRoad_1";
+            this.textBox_customerRoad_1.ReadOnly = true;
             this.textBox_customerRoad_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerRoad_1.TabIndex = 123;
             // 
@@ -1857,10 +1852,14 @@
             this.textBox_customerTaxId_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerTaxId_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerTaxId_1.MaxLength = 50;
+            this.textBox_customerTaxId_1.MaxLength = 13;
             this.textBox_customerTaxId_1.Name = "textBox_customerTaxId_1";
+            this.textBox_customerTaxId_1.ReadOnly = true;
             this.textBox_customerTaxId_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerTaxId_1.TabIndex = 134;
+            this.textBox_customerTaxId_1.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerTaxId_1_ContextMenuStripChanged);
+            this.textBox_customerTaxId_1.TextChanged += new System.EventHandler(this.textBox_customerTaxId_1_TextChanged);
+            this.textBox_customerTaxId_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_customerTaxId_1_KeyDown);
             // 
             // label18
             // 
@@ -1904,6 +1903,7 @@
             this.textBox_customerSubDistrict_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerSubDistrict_1.MaxLength = 50;
             this.textBox_customerSubDistrict_1.Name = "textBox_customerSubDistrict_1";
+            this.textBox_customerSubDistrict_1.ReadOnly = true;
             this.textBox_customerSubDistrict_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerSubDistrict_1.TabIndex = 125;
             // 
@@ -1949,12 +1949,14 @@
             this.textBox_customerWeb_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerWeb_1.MaxLength = 50;
             this.textBox_customerWeb_1.Name = "textBox_customerWeb_1";
+            this.textBox_customerWeb_1.ReadOnly = true;
             this.textBox_customerWeb_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerWeb_1.TabIndex = 142;
             // 
             // comboBox_cWeb_1
             // 
             this.comboBox_cWeb_1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBox_cWeb_1.Enabled = false;
             this.comboBox_cWeb_1.FormattingEnabled = true;
             this.comboBox_cWeb_1.Items.AddRange(new object[] {
             "สาขาที่",
@@ -2068,6 +2070,7 @@
             this.textBox_customerEmail_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerEmail_1.MaxLength = 50;
             this.textBox_customerEmail_1.Name = "textBox_customerEmail_1";
+            this.textBox_customerEmail_1.ReadOnly = true;
             this.textBox_customerEmail_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerEmail_1.TabIndex = 136;
             // 
@@ -2189,8 +2192,12 @@
             this.textBox_customerTel_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTel_1.MaxLength = 50;
             this.textBox_customerTel_1.Name = "textBox_customerTel_1";
+            this.textBox_customerTel_1.ReadOnly = true;
             this.textBox_customerTel_1.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerTel_1.TabIndex = 138;
+            this.textBox_customerTel_1.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerTel_1_ContextMenuStripChanged);
+            this.textBox_customerTel_1.TextChanged += new System.EventHandler(this.textBox_customerTel_1_TextChanged);
+            this.textBox_customerTel_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_customerTel_1_KeyDown);
             // 
             // textBox_customerFax_1
             // 
@@ -2199,6 +2206,7 @@
             this.textBox_customerFax_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerFax_1.MaxLength = 50;
             this.textBox_customerFax_1.Name = "textBox_customerFax_1";
+            this.textBox_customerFax_1.ReadOnly = true;
             this.textBox_customerFax_1.Size = new System.Drawing.Size(91, 20);
             this.textBox_customerFax_1.TabIndex = 140;
             // 
@@ -2270,10 +2278,12 @@
             this.textBox_customerPostCode_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerPostCode_1.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerPostCode_1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerPostCode_1.MaxLength = 50;
+            this.textBox_customerPostCode_1.MaxLength = 5;
             this.textBox_customerPostCode_1.Name = "textBox_customerPostCode_1";
+            this.textBox_customerPostCode_1.ReadOnly = true;
             this.textBox_customerPostCode_1.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerPostCode_1.TabIndex = 143;
+            this.textBox_customerPostCode_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_customerPostCode_1_KeyDown);
             // 
             // label33
             // 
@@ -2447,6 +2457,7 @@
             this.textBox_customerAddress_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerAddress_2.MaxLength = 50;
             this.textBox_customerAddress_2.Name = "textBox_customerAddress_2";
+            this.textBox_customerAddress_2.ReadOnly = true;
             this.textBox_customerAddress_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerAddress_2.TabIndex = 120;
             // 
@@ -2492,6 +2503,7 @@
             this.textBox_customerName_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerName_2.MaxLength = 50;
             this.textBox_customerName_2.Name = "textBox_customerName_2";
+            this.textBox_customerName_2.ReadOnly = true;
             this.textBox_customerName_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerName_2.TabIndex = 132;
             // 
@@ -2559,6 +2571,7 @@
             this.textBox_customerTaxId_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTaxId_2.MaxLength = 50;
             this.textBox_customerTaxId_2.Name = "textBox_customerTaxId_2";
+            this.textBox_customerTaxId_2.ReadOnly = true;
             this.textBox_customerTaxId_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerTaxId_2.TabIndex = 134;
             // 
@@ -2672,6 +2685,7 @@
             this.textBox_customerEmail_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerEmail_2.MaxLength = 50;
             this.textBox_customerEmail_2.Name = "textBox_customerEmail_2";
+            this.textBox_customerEmail_2.ReadOnly = true;
             this.textBox_customerEmail_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerEmail_2.TabIndex = 136;
             // 
@@ -2730,6 +2744,7 @@
             this.textBox_customerProvinceName_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceName_2.MaxLength = 50;
             this.textBox_customerProvinceName_2.Name = "textBox_customerProvinceName_2";
+            this.textBox_customerProvinceName_2.ReadOnly = true;
             this.textBox_customerProvinceName_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerProvinceName_2.TabIndex = 150;
             // 
@@ -2766,8 +2781,10 @@
             this.textBox_customerTel_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTel_2.MaxLength = 50;
             this.textBox_customerTel_2.Name = "textBox_customerTel_2";
+            this.textBox_customerTel_2.ReadOnly = true;
             this.textBox_customerTel_2.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerTel_2.TabIndex = 138;
+            this.textBox_customerTel_2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_customerTel_2_KeyPress);
             // 
             // label48
             // 
@@ -2826,8 +2843,9 @@
             this.textBox_customerPostCode_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerPostCode_2.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerPostCode_2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerPostCode_2.MaxLength = 50;
+            this.textBox_customerPostCode_2.MaxLength = 5;
             this.textBox_customerPostCode_2.Name = "textBox_customerPostCode_2";
+            this.textBox_customerPostCode_2.ReadOnly = true;
             this.textBox_customerPostCode_2.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerPostCode_2.TabIndex = 143;
             // 
@@ -3032,8 +3050,6 @@
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
             this.panel_c_1_7.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel9.PerformLayout();
             this.panel_c_1_8.ResumeLayout(false);
             this.tableLayoutPanel13.ResumeLayout(false);
             this.tableLayoutPanel13.PerformLayout();
@@ -3163,7 +3179,6 @@
         private System.Windows.Forms.TextBox textBox_customerName;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.TextBox textBox_customerEmail;
         private System.Windows.Forms.Label label12;
@@ -3172,7 +3187,6 @@
         private System.Windows.Forms.TextBox textBox_customerTaxId;
         private System.Windows.Forms.TextBox textBox_customerSubDistrict;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox textBox_customerWeb;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox_customerTel;
