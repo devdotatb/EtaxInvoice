@@ -40,14 +40,6 @@ namespace EtaxInvoice
             dataGridView1.DataSource = data;
             dataGridView1.Columns["FTDstCode"].HeaderText = "รหัส";
             dataGridView1.Columns["FTDstName"].HeaderText = "ชื่อ";
-            dataGridView1.Columns["FTDstPost"].Visible = false;
-            dataGridView1.Columns["FTPvnCode"].Visible = false;
-            dataGridView1.Columns["FDDateUpd"].Visible = false;
-            dataGridView1.Columns["FTTimeUpd"].Visible = false;
-            dataGridView1.Columns["FTWhoUpd"].Visible = false;
-            dataGridView1.Columns["FDDateIns"].Visible = false;
-            dataGridView1.Columns["FTTimeIns"].Visible = false;
-            dataGridView1.Columns["FTWhoIns"].Visible = false;
         }
         private List<District> GetDistricts()
         {
@@ -55,14 +47,6 @@ namespace EtaxInvoice
             SqlConnection connection = new SqlConnection(connstr);
             string sql = string.Format(@"SELECT  [FTDstCode]
       ,[FTDstName]
-      ,[FTDstPost]
-      ,[FTPvnCode]
-      ,[FDDateUpd]
-      ,[FTTimeUpd]
-      ,[FTWhoUpd]
-      ,[FDDateIns]
-      ,[FTTimeIns]
-      ,[FTWhoIns]
   FROM [SFMPOS].[dbo].[TCNMDistrict]");
             connection.Open();
             SqlCommand cmd = new SqlCommand(sql, connection);

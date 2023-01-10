@@ -40,12 +40,6 @@ namespace EtaxInvoice
             dataGridView1.DataSource = data;
             dataGridView1.Columns["FTPvnCode"].HeaderText = "รหัส";
             dataGridView1.Columns["FTPvnName"].HeaderText = "ชื่อ";
-            dataGridView1.Columns["FDDateUpd"].Visible = false;
-            dataGridView1.Columns["FTTimeUpd"].Visible = false;
-            dataGridView1.Columns["FTWhoUpd"].Visible = false;
-            dataGridView1.Columns["FDDateIns"].Visible = false;
-            dataGridView1.Columns["FTTimeIns"].Visible = false;
-            dataGridView1.Columns["FTWhoIns"].Visible = false;
         }
         private List<Province> GetProvinces()
         {
@@ -70,12 +64,6 @@ namespace EtaxInvoice
                 {
                     FTPvnCode = SQLHelper.SafeGetString(reader, 0),
                     FTPvnName = SQLHelper.SafeGetString(reader, 1),
-                    /*FDDateUpd = SQLHelper.SafeGetString(reader,2),
-                    FTTimeUpd = SQLHelper.SafeGetString(reader,3),
-                    FTWhoUpd = SQLHelper.SafeGetString(reader,4),
-                    FDDateIns = SQLHelper.SafeGetString(reader,5),
-                    FTTimeIns = SQLHelper.SafeGetString(reader,6),
-                    FTWhoIns = SQLHelper.SafeGetString(reader,7),*/
                 };
                 result.Add(prov);
             }

@@ -10,11 +10,5 @@ namespace EtaxInvoice
     {
         public string FTPvnCode { get; set; }
         public string FTPvnName { get; set; }
-        public string FDDateUpd { get; set; }
-        public string FTTimeUpd { get; set; }
-        public string FTWhoUpd { get; set; }
-        public DateTime FDDateIns { get; set; }
-        public string FTTimeIns { get; set; }
-        public string FTWhoIns { get; set; }
     }
 }

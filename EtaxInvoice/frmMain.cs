@@ -112,6 +112,11 @@ namespace EtaxInvoice
                 {
                     Customer cus = frm.CurrentCustomer;
                     //Do something here with these values
+                    if (frm.CurrentCustomer == null)
+                    {
+                        MessageHelper.ShowError("ไม่พบข้อมูลลูกค้า");
+                        return;
+                    }
                     this.CurrentCustomer = frm.CurrentCustomer;
                     Country cnty = new Country();
                     var findingcnty = CountryList.Where(t => t.FTCYCode == cus.FTCstSize);
@@ -170,17 +175,10 @@ namespace EtaxInvoice
                                 this.textBox_customerCode_2.Text = cus.FTCstCode;
                                 this.textBox_customerName_2.Text = cus.FTCstName;
                                 this.textBox_customerTaxId_2.Text = cus.FTCstTaxNo;
-                                //this.textBox_customerWeb_2.Text = cus.FTCstWeb;
                                 this.textBox_customerEmail_2.Text = cus.FTCstEmail;
                                 this.textBox_customerTel_2.Text = cus.FTCstTelInv;
-                                //this.textBox_customerFax_2.Text = cus.FTCstFaxInv;
 
                                 this.textBox_customerAddress_2.Text = cus.FTCstAddrInv;
-                                //this.textBox_customerRoad_2.Text = cus.FTCstStreetInv;
-                                //this.textBox_customerSubDistrict_2.Text = cus.FTCsttrictInv;
-                                //this.textBox_customerDistrictCode_2.Text = cus.FTDstCodeInv;
-                                //this.textBox_customerDistrictName_2.Text = cus.FTDstName;
-                                //this.textBox_customerProvinceCode_2.Text = cus.FTPvnCodeInv;
                                 this.textBox_customerProvinceName_2.Text = cus.FTPvnName;
                                 this.textBox_customerPostCode_2.Text = cus.FTCstPostCodeInv;
                                 this.textBox_customerCountry_2.Text = cnty.FTCYDescTh;
@@ -247,6 +245,11 @@ namespace EtaxInvoice
                 frm.isToday = isToday;
                 frm.POSnumber = POSno;
                 var result = frm.ShowDialog(this);
+                if (frm.CurrentInvoice == null)
+                {
+                    MessageHelper.ShowError("ไม่พบข้อมูลใบกำกับภาษี");
+                    return;
+                }
                 if (result == DialogResult.OK)
                 {
                     Invoice inv = frm.CurrentInvoice;
@@ -282,6 +285,11 @@ namespace EtaxInvoice
                 frmCountrySearch frm = new frmCountrySearch();
                 frm.StartPosition = FormStartPosition.CenterParent;
                 var result = frm.ShowDialog(this);
+                if (frm.CurrentCountry == null)
+                {
+                    MessageHelper.ShowError("ไม่พบข้อมูลประเทศ");
+                    return;
+                }
                 if (result == DialogResult.OK)
                 {
                     Country cus = frm.CurrentCountry;
@@ -324,6 +332,11 @@ namespace EtaxInvoice
                 frmProvinceSearch frm = new frmProvinceSearch();
                 frm.StartPosition = FormStartPosition.CenterParent;
                 var result = frm.ShowDialog(this);
+                if (frm.CurrentProvince == null)
+                {
+                    MessageHelper.ShowError("ไม่พบข้อมูลจังหวัด");
+                    return;
+                }
                 if (result == DialogResult.OK)
                 {
                     Province cus = frm.CurrentProvince;
@@ -365,6 +378,11 @@ namespace EtaxInvoice
                 frmDistrictSearch frm = new frmDistrictSearch();
                 frm.StartPosition = FormStartPosition.CenterParent;
                 var result = frm.ShowDialog(this);
+                if (frm.CurrentDistrict == null)
+                {
+                    MessageHelper.ShowError("ไม่พบข้อมูลอำเภอ");
+                    return;
+                }
                 if (result == DialogResult.OK)
                 {
                     District cus = frm.CurrentDistrict;
@@ -413,37 +431,16 @@ namespace EtaxInvoice
             dataGridView1.Columns["FCSdtSetPrice"].HeaderText = "ราคาต่อหน่วย";
             dataGridView1.Columns["FCSdtVat"].Visible = false;
             dataGridView1.Columns["FTSdtVatType"].Visible = false;
-            /*dataGridView1.Columns["FTCstCode"].HeaderText = "รหัสลูกค้า";
-            dataGridView1.Columns["FTCstName"].HeaderText = "ชื่อลูกค้า";
-            dataGridView1.Columns["FTCstTaxNo"].HeaderText = "หมายเลขประจำตัวผู้เสียภาษี";
-            dataGridView1.Columns["FTCstWeb"].Visible = false;
-            dataGridView1.Columns["FTCstAddrInv"].HeaderText = "ที่อยู่";
-            dataGridView1.Columns["FTCstStreetInv"].HeaderText = "ถนน";
-            dataGridView1.Columns["FTCsttrictInv"].HeaderText = "ตำบล/แขวง";
-            dataGridView1.Columns["FTDstCodeInv"].HeaderText = "รหัสอำเภอ";
-            dataGridView1.Columns["FTPvnCodeInv"].HeaderText = "รหัสจังหวัด";
-            dataGridView1.Columns["FTCstPostCodeInv"].HeaderText = "รหัสไปรษณีย์";
-            dataGridView1.Columns["FTCstSize"].Visible = false;
-            dataGridView1.Columns["FTCstTelInv"].HeaderText = "เบอร์โทรศัพท์";
-            dataGridView1.Columns["FTCstFaxInv"].HeaderText = "เบอร์โทรสาร";
-            dataGridView1.Columns["FTCstEmail"].HeaderText = "Email";
-            dataGridView1.Columns["FTCYDescTh"].Visible = false;
-            dataGridView1.Columns["FTPvnName"].HeaderText = "จังหวัด";
-            dataGridView1.Columns["FTDstName"].HeaderText = "อำเภอ";*/
         }
 
         private void toolStripButton_Add_Click(object sender, EventArgs e)
         {
-            string branch = "00000";
-            string yyyyMMddHHmmss = DateTime.Now.ToString("yyyyMMddHHmmss");
-            string yyMMddHHmmss = yyyyMMddHHmmss.Remove(0, 2);
-            string generatedcstcode = "CT" + branch + "-" + yyMMddHHmmss;
             switch (tabCustomerDetail.SelectedIndex)
             {
 
                 case 0:
                     {
-                        this.textBox_customerCode.Text = generatedcstcode;
+                        this.textBox_customerCode.Text = "";
                         this.textBox_customerName.Text = "";
                         this.textBox_customerTaxId.Text = "";
                         this.textBox_customerEmail.Text = "";
@@ -464,11 +461,11 @@ namespace EtaxInvoice
                     }
                 case 1:
                     {
-                        comboBox_cWeb_1.SelectedIndex = 0;
-                        this.textBox_customerCode_1.Text = generatedcstcode;
+                        comboBox_cWeb_1.SelectedIndex = 1;
+                        this.textBox_customerCode_1.Text = "";
                         this.textBox_customerName_1.Text = "";
                         this.textBox_customerTaxId_1.Text = "";
-                        this.textBox_customerWeb_1.Text = "";
+                        this.textBox_customerWeb_1.Text = "00000";
                         this.textBox_customerEmail_1.Text = "";
                         this.textBox_customerTel_1.Text = "";
                         this.textBox_customerFax_1.Text = "";
@@ -483,25 +480,20 @@ namespace EtaxInvoice
                         this.textBox_customerPostCode_1.Text = "";
                         this.textBox_customerCountry_1.Text = "";
 
+                        comboBox_cWeb_1.Enabled = true;
+
                         break;
                     }
 
                 case 2:
                     {
-                        this.textBox_customerCode_2.Text = generatedcstcode;
+                        this.textBox_customerCode_2.Text = "";
                         this.textBox_customerName_2.Text = "";
                         this.textBox_customerTaxId_2.Text = "";
-                        //this.textBox_customerWeb_2.Text = "";
                         this.textBox_customerEmail_2.Text = "";
                         this.textBox_customerTel_2.Text = "";
-                        //this.textBox_customerFax_2.Text = "";
 
                         this.textBox_customerAddress_2.Text = "";
-                        //this.textBox_customerRoad_2.Text = "";
-                        //this.textBox_customerSubDistrict_2.Text = "";
-                        //this.textBox_customerDistrictCode_2.Text = "";
-                        //this.textBox_customerDistrictName_2.Text = "";
-                        //this.textBox_customerProvinceCode_2.Text = "";
                         this.textBox_customerProvinceName_2.Text = "";
                         this.textBox_customerPostCode_2.Text = "";
                         this.textBox_customerCountry_2.Text = "";
@@ -514,6 +506,44 @@ namespace EtaxInvoice
 
         private void toolStripButton_Save_Click(object sender, EventArgs e)
         {
+            string branch = "00000";
+            switch (tabCustomerDetail.SelectedIndex)
+            {
+
+                case 0:
+                    {
+                        branch = "00000";
+                        break;
+                    }
+                case 1:
+                    {
+                        if (textBox_customerWeb_1.Text.Length == 5)
+                        {
+                            branch = textBox_customerWeb_1.Text;
+                        }
+                        else if (textBox_customerWeb_1.Text.Length == 4)
+                        {
+                            branch = "0" + textBox_customerWeb_1.Text;
+                        }
+                        else
+                        {
+                            MessageHelper.ShowError("กรุณากรอกสาขา 4-5 หลัก");
+                            return;
+                        }
+                        break;
+                    }
+
+                case 2:
+                    {
+                        branch = "00000";
+                        break;
+                    }
+            }
+            string yyyyMMddHHmmss = DateTime.Now.ToString("yyyyMMddHHmmss");
+            string yyMMddHHmmss = yyyyMMddHHmmss.Remove(0, 2);
+            string generatedcstcode = "CT" + branch + "-" + yyMMddHHmmss;
+
+
             string customerCode = "";
             string customerName = "";
             string customerTaxId = "";
@@ -536,7 +566,6 @@ namespace EtaxInvoice
             {
                 case 0: // บุคคลธรรมดา
                     {
-
                         customerCode = textBox_customerCode.Text;
                         customerName = textBox_customerName.Text;
                         customerTaxId = textBox_customerTaxId.Text;
@@ -557,7 +586,6 @@ namespace EtaxInvoice
                     }
                 case 1:// นิติบุคคล
                     {
-
                         customerCode = textBox_customerCode_1.Text;
                         customerName = textBox_customerName_1.Text;
                         customerTaxId = textBox_customerTaxId_1.Text;
@@ -579,7 +607,6 @@ namespace EtaxInvoice
 
                 case 2:// ชาวต่างชาติ
                     {
-
                         customerCode = textBox_customerCode_2.Text;
                         customerName = textBox_customerName_2.Text;
                         customerTaxId = textBox_customerTaxId_2.Text;
@@ -593,6 +620,12 @@ namespace EtaxInvoice
                         break;
                     }
             }
+            if (customerCode == "")
+            {
+                // new cst
+                customerCode = generatedcstcode;
+            }
+
             if (string.IsNullOrEmpty(customerCode))
             {
                 MessageHelper.ShowError("กรุณากด \"เพิ่ม\"");
@@ -677,6 +710,7 @@ namespace EtaxInvoice
                         this.textBox_customerTaxId.ReadOnly = false;
                         this.textBox_customerTel.ReadOnly = false;
                         this.textBox_customerFax.ReadOnly = false;
+                        this.textBox_customerEmail.ReadOnly = false;
 
                         this.textBox_customerAddress.ReadOnly = false;
                         this.textBox_customerRoad.ReadOnly = false;
@@ -689,15 +723,15 @@ namespace EtaxInvoice
                     {
                         this.textBox_customerName_1.ReadOnly = false;
                         this.textBox_customerTaxId_1.ReadOnly = false;
-                        this.textBox_customerWeb_1.ReadOnly = false;
+                        this.textBox_customerWeb_1.ReadOnly = (comboBox_cWeb_1.SelectedIndex == 1);
                         this.textBox_customerTel_1.ReadOnly = false;
                         this.textBox_customerFax_1.ReadOnly = false;
+                        this.textBox_customerEmail_1.ReadOnly = false;
 
                         this.textBox_customerAddress_1.ReadOnly = false;
                         this.textBox_customerRoad_1.ReadOnly = false;
                         this.textBox_customerSubDistrict_1.ReadOnly = false;
                         this.textBox_customerPostCode_1.ReadOnly = false;
-                        comboBox_cWeb_1.Enabled = true;
                         break;
                     }
 
@@ -706,6 +740,7 @@ namespace EtaxInvoice
                         this.textBox_customerName_2.ReadOnly = false;
                         this.textBox_customerTaxId_2.ReadOnly = false;
                         this.textBox_customerTel_2.ReadOnly = false;
+                        this.textBox_customerEmail_2.ReadOnly = false;
 
                         this.textBox_customerAddress_2.ReadOnly = false;
                         this.textBox_customerPostCode_2.ReadOnly = false;
@@ -721,7 +756,6 @@ namespace EtaxInvoice
 
         private void button_InvoiceSearch_Click(object sender, EventArgs e)
         {
-            //OpenfrmInvoiceCheckDate();
             ShowConfirmCheckDate();
         }
 
@@ -1122,7 +1156,11 @@ namespace EtaxInvoice
             int number;
             if (!int.TryParse(textBox.Text, out number))
             {
-                textBox.Text = string.Empty;
+                if (textBox.Text.Length > 0)
+                {
+                    textBox.Text = textBox.Text.Substring(0, textBox.Text.Length - 1);
+                    textBox.SelectionStart = textBox.Text.Length;
+                }
             }
         }
         private void only_number_KeyDown(object sender, KeyEventArgs e, TextBox textBox)
@@ -1256,14 +1294,38 @@ namespace EtaxInvoice
             only_number_contextMenustripChanged(sender, e, textBox_customerPostCode_2);
         }
 
-        private void textBox_customerTel_1_KeyPress(object sender, KeyPressEventArgs e)
+        private void email_text_TextChanged(object sender, EventArgs e, TextBox textBox)
         {
-            //only_number_textChanged(sender, e);
+            if (!IsValidEmailFormat(textBox.Text))
+            {
+                int index = textBox.SelectionStart - 1;
+                textBox.Text = textBox.Text.Remove(index, 1);
+                textBox.SelectionStart = index;
+            }
         }
-
-        private void textBox_customerTel_2_KeyPress(object sender, KeyPressEventArgs e)
+        private bool IsValidEmailFormat(string text)
         {
-            //only_number_textChanged(sender, e);
+            string allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-";
+            foreach (char c in text)
+            {
+                if (!allowedChars.Contains(c))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private void textBox_customerEmail_TextChanged(object sender, EventArgs e)
+        {
+            email_text_TextChanged(sender, e, textBox_customerEmail);
+        }
+        private void textBox_customerEmail_1_TextChanged(object sender, EventArgs e)
+        {
+            email_text_TextChanged(sender, e, textBox_customerEmail_1);
+        }
+        private void textBox_customerEmail_2_TextChanged(object sender, EventArgs e)
+        {
+            email_text_TextChanged(sender, e, textBox_customerEmail_2);
         }
     }
 }

@@ -1348,6 +1348,7 @@
             this.textBox_customerEmail.ReadOnly = true;
             this.textBox_customerEmail.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerEmail.TabIndex = 136;
+            this.textBox_customerEmail.TextChanged += new System.EventHandler(this.textBox_customerEmail_TextChanged);
             // 
             // label12
             // 
@@ -2073,6 +2074,7 @@
             this.textBox_customerEmail_1.ReadOnly = true;
             this.textBox_customerEmail_1.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerEmail_1.TabIndex = 136;
+            this.textBox_customerEmail_1.TextChanged += new System.EventHandler(this.textBox_customerEmail_1_TextChanged);
             // 
             // label23
             // 
@@ -2283,6 +2285,8 @@
             this.textBox_customerPostCode_1.ReadOnly = true;
             this.textBox_customerPostCode_1.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerPostCode_1.TabIndex = 143;
+            this.textBox_customerPostCode_1.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerPostCode_1_ContextMenuStripChanged);
+            this.textBox_customerPostCode_1.TextChanged += new System.EventHandler(this.textBox_customerPostCode_1_TextChanged);
             this.textBox_customerPostCode_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_customerPostCode_1_KeyDown);
             // 
             // label33
@@ -2569,7 +2573,7 @@
             this.textBox_customerTaxId_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerTaxId_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId_2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_customerTaxId_2.MaxLength = 50;
+            this.textBox_customerTaxId_2.MaxLength = 9;
             this.textBox_customerTaxId_2.Name = "textBox_customerTaxId_2";
             this.textBox_customerTaxId_2.ReadOnly = true;
             this.textBox_customerTaxId_2.Size = new System.Drawing.Size(283, 20);
@@ -2688,6 +2692,7 @@
             this.textBox_customerEmail_2.ReadOnly = true;
             this.textBox_customerEmail_2.Size = new System.Drawing.Size(283, 20);
             this.textBox_customerEmail_2.TabIndex = 136;
+            this.textBox_customerEmail_2.TextChanged += new System.EventHandler(this.textBox_customerEmail_2_TextChanged);
             // 
             // label46
             // 
@@ -2784,7 +2789,9 @@
             this.textBox_customerTel_2.ReadOnly = true;
             this.textBox_customerTel_2.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerTel_2.TabIndex = 138;
-            this.textBox_customerTel_2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_customerTel_2_KeyPress);
+            this.textBox_customerTel_2.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerTel_2_ContextMenuStripChanged);
+            this.textBox_customerTel_2.TextChanged += new System.EventHandler(this.textBox_customerTel_2_TextChanged);
+            this.textBox_customerTel_2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_customerTel_2_KeyDown);
             // 
             // label48
             // 
@@ -2848,6 +2855,9 @@
             this.textBox_customerPostCode_2.ReadOnly = true;
             this.textBox_customerPostCode_2.Size = new System.Drawing.Size(88, 20);
             this.textBox_customerPostCode_2.TabIndex = 143;
+            this.textBox_customerPostCode_2.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerPostCode_2_ContextMenuStripChanged);
+            this.textBox_customerPostCode_2.TextChanged += new System.EventHandler(this.textBox_customerPostCode_2_TextChanged);
+            this.textBox_customerPostCode_2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_customerPostCode_2_KeyDown);
             // 
             // label50
             // 
