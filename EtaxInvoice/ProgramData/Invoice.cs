@@ -22,5 +22,6 @@ namespace EtaxInvoice
         public decimal FCShdAftDisChg { get; set; }
         public decimal FCShdVatRate { get; set; }
         public DateTime FDShdDocDate { get; set; }
+        public string FTShdPosCN { get; set; }
     }
 }

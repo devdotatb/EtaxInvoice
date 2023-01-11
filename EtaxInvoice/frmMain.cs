@@ -27,12 +27,15 @@ namespace EtaxInvoice
         public static string userBu;
         public static string OAuth_URL;
         public static string Web_Service_Timeout;
+        public static string b2cauthorize = "test";
+        public static string otherCNreasoncode = "CDNG99";
 
         public static string PrintConfirmText;
         private CustomerTypeDefault customerTypeDefault { get; set; } = new CustomerTypeDefault();
         private Customer CurrentCustomer { get; set; }
         private Invoice CurrentInvoice { get; set; }
         private Country CurrentCountry { get; set; } = new Country();
+        private ReasonCN CurrentReasonCN { get; set; }
         public List<InvoiceDetail> CurrentInvoiceDetailList { get; set; }
         public List<Country> CountryList { get; set; }
         private InvoicePayment CurrentInvoicePayment { get; set; }
@@ -42,12 +45,19 @@ namespace EtaxInvoice
             InitializeComponent();
             InitializeType();
             LoadCountry();
+            LoadReasonCN();
             LoadConfig();
+            DefaultData_Fortest_removed_required();
+        }
+        private void DefaultData_Fortest_removed_required()
+        {
+            userBu = "CFR";
+            userLoc = "6001";
         }
         private void button_testCN_Click(object sender, EventArgs e)
         {
-            if(Program.globalProgramMode == 1)  Program.globalProgramMode = 2;
-            else if(Program.globalProgramMode == 2)  Program.globalProgramMode = 1;
+            if (Program.globalProgramMode == 1) Program.globalProgramMode = 2;
+            else if (Program.globalProgramMode == 2) Program.globalProgramMode = 1;
             InitializeType();
         }
         public void InitializeType()
@@ -59,14 +69,20 @@ namespace EtaxInvoice
                 this.tabPage4.Text = "ใบกำกับภาษีอย่างย่อ";
                 this.Text = "E-TAX Invoice";
                 PrintConfirmText = "กรุณายืนยันการออก E-TAX Invoice?";
+                label_ReasonCN.Visible = false;
+                comboBox_CNReason.Visible = false;
+                textBox_CNReason_Other.Visible = false;
 
             }
-            else if(Program.globalProgramMode == 2)
+            else if (Program.globalProgramMode == 2)
             {
                 //CN
                 this.tabPage4.Text = "ใบกำกับภาษีอย่างย่อใบใหม่จากการReturn Receipt";
                 this.Text = "E-TAX CN";
                 PrintConfirmText = "กรุณายืนยันการออก E-TAX CN?";
+                label_ReasonCN.Visible = true;
+                comboBox_CNReason.Visible = true;
+                textBox_CNReason_Other.Visible = true;
 
             }
         }
@@ -229,6 +245,27 @@ namespace EtaxInvoice
                 result.Add(prov);
             }
             CountryList = result;
+        }
+        private void LoadReasonCN()
+        {
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"select FTRsnCNCode,FTRsnCNDescTh,FTRsnCNDescEn from TCNMRsnCN");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            BindingList<ReasonCN> objects = new BindingList<ReasonCN>();
+            while (reader.Read())
+            {
+                var data = new ReasonCN
+                {
+                    FTRsnCNCode = SQLHelper.SafeGetString(reader, 0),
+                    FTRsnCNDescTh = SQLHelper.SafeGetString(reader, 1),
+                    FTRsnCNDescEn = SQLHelper.SafeGetString(reader, 1),
+                };
+                objects.Add(data);
+            }
+            comboBox_CNReason.DataSource = objects;
         }
         private void frmInvoiceMain_Load(object sender, EventArgs e)
         {
@@ -421,6 +458,7 @@ namespace EtaxInvoice
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.isToday = isToday;
                 frm.POSnumber = POSno;
+                frm.isCN = (Program.globalProgramMode == 2);
                 var result = frm.ShowDialog(this);
                 if (frm.CurrentInvoice == null)
                 {
@@ -1052,8 +1090,18 @@ namespace EtaxInvoice
                                         break;
                                     }
                             }
-                            InvoiceAPIData built = BuildAPIdata();
-                            Callapi_Invoice(built);
+                            if (Program.globalProgramMode == 1)
+                            {
+                                // invoice
+                                InvoiceAPIData built = BuildInvoiceAPIdata();
+                                Callapi_Invoice(built);
+                            }
+                            else if (Program.globalProgramMode == 2)
+                            {
+                                // CN
+                                CNAPIData built = BuildCNAPIdata();
+                                Callapi_CN(built);
+                            }
                         }
                         break;
                     case DialogResult.No:
@@ -1096,6 +1144,20 @@ namespace EtaxInvoice
             {
                 MessageHelper.ShowError("กรุณาเลือกใบกำกับภาษีอย่างย่อ");
                 return false;
+            }
+            if (Program.globalProgramMode == 2)
+            {
+                // CN
+                if (CurrentReasonCN == null)
+                {
+                    MessageHelper.ShowError("กรุณาเลือกเหตุผลในการออกใบลดหนี้");
+                    return false;
+                }
+                else if (CurrentReasonCN.FTRsnCNCode == otherCNreasoncode && string.IsNullOrWhiteSpace(textBox_CNReason_Other.Text))
+                {
+                    MessageHelper.ShowError("กรุณากรอกเหตุผลอื่นในการออกใบลดหนี้");
+                    return false;
+                }
             }
 
             string customerCode = "";
@@ -1216,7 +1278,7 @@ namespace EtaxInvoice
 
             return true;
         }
-        public InvoiceAPIData BuildAPIdata()
+        public InvoiceAPIData BuildInvoiceAPIdata()
         {
             var sendingdata = new InvoiceAPIData();
 
@@ -1225,8 +1287,33 @@ namespace EtaxInvoice
             sendingdata.userid = Program.globalStartUserName;
             sendingdata.userBu = "CFR";//userBu;//
             sendingdata.userLoc = "6001";//userLoc;//
-            sendingdata.userRole = "Test by ADMIN";
+            sendingdata.userRole = "admin";
 
+            sendingdata.customer = Build_CustomerData(isCN: false);
+            sendingdata.saleData = Build_SaleData(isCN: false);
+
+            return sendingdata;
+        }
+        public CNAPIData BuildCNAPIdata()
+        {
+            var sendingdata = new CNAPIData();
+
+            sendingdata.remark = "";
+            sendingdata.isShowBranchNo = true;
+            sendingdata.userid = Program.globalStartUserName;
+            sendingdata.userBu = userBu;
+            sendingdata.userLoc = userLoc;
+            sendingdata.userRole = "admin";
+            sendingdata.purposeCode = CurrentReasonCN.FTRsnCNCode;
+            sendingdata.purposeDesc = CurrentReasonCN.FTRsnCNCode == otherCNreasoncode ? textBox_CNReason_Other.Text: CurrentReasonCN.FTRsnCNDescEn;
+
+            sendingdata.customer = Build_CustomerData(isCN: true);
+            sendingdata.saleData = Build_SaleData(isCN: true);
+
+            return sendingdata;
+        }
+        public CustomerAPIData Build_CustomerData(bool isCN = false)
+        {
             CustomerAPIData building_customer = new CustomerAPIData();
             building_customer.consentInfo = true;
 
@@ -1318,10 +1405,14 @@ namespace EtaxInvoice
                         break;
                     }
             }
-            sendingdata.customer = building_customer;
 
+            return building_customer;
+
+        }
+        public SaleDataAPIData Build_SaleData(bool isCN = false)
+        {
             SaleDataAPIData building_saledata = new SaleDataAPIData();
-            building_saledata.bu = "CFR";//userBu;//
+            building_saledata.bu = userBu;
             building_saledata.total = CurrentInvoiceDetailList.Sum(t => t.FCSdtQty);
 
             SalesTicketAPIData building_salesTicket = new SalesTicketAPIData();
@@ -1364,7 +1455,7 @@ namespace EtaxInvoice
             building_payments.Add(each_payment);
             building_salesTicket.payments = building_payments;
 
-            building_salesTicket.loc = "6001";//userLoc;//
+            building_salesTicket.loc = userLoc;
             building_salesTicket.receiptDate = CurrentInvoice.FDDateIns;
             building_salesTicket.ticketNo = CurrentInvoice.FTShdDocNo;
             building_salesTicket.tpNo = CurrentInvoice.FTShdDocNo;
@@ -1375,7 +1466,7 @@ namespace EtaxInvoice
             building_salesTicket.totalVatItemAmt = CurrentInvoice.FCShdVatable;
             building_salesTicket.totalNonVatItemAmt = CurrentInvoice.FCShdNonVat;
             building_salesTicket.transType = "";
-            building_salesTicket.template_type = "Sales";
+            building_salesTicket.template_type = isCN ? "CN" : "Sales";
             building_salesTicket.taxValue = CurrentInvoice.FCShdVat;
             building_salesTicket.totalQty = CurrentInvoiceDetailList.Sum(t => t.FCSdtQty);
             building_salesTicket.totalDiscount = CurrentInvoice.FCShdDis;
@@ -1386,57 +1477,64 @@ namespace EtaxInvoice
             building_salesTicket.depositAmt = CurrentInvoice.FCShdGndAE;
             building_salesTicket.orderNo = "";
 
+            if (isCN)
+            {
+                building_salesTicket.refTicket = new RefTicketAPIData()
+                {
+                    tpNo = CurrentInvoice.FTShdPosCN,
+                    receiptNo = CurrentInvoice.FTShdPosCN,
+                    totalSaleAmt = CurrentInvoice.FCShdTotal,
+                    correctAmt = CurrentInvoice.FCShdTotal,
+                    variance = CurrentInvoice.FCShdTotal - CurrentInvoice.FCShdTotal,
+                };
+            }
+
             building_saledata.salesTicket = building_salesTicket;
-            sendingdata.saleData = building_saledata;
 
-            return sendingdata;
+            return building_saledata;
         }
-public void Callapi_Invoice(InvoiceAPIData data)
-{
-    string apiUrl = ETAX_Invoice_EndPoint;
-    string serviceName = "std-genft-document";
+        public void Callapi_Invoice(InvoiceAPIData data)
+        {
+            string apiUrl = ETAX_Invoice_EndPoint;
+            string serviceName = "std-genft-document";
 
-    string jsonString = JsonConvert.SerializeObject(data);
+            string jsonString = JsonConvert.SerializeObject(data);
 
-    string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(jsonString));
+            string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(jsonString));
 
-    using (var client = new HttpClient())
-    {
-        client.DefaultRequestHeaders.Accept.Clear();
-        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //client.DefaultRequestHeaders.Add("Authorization", "Bearer your-api-key");
-        client.DefaultRequestHeaders.Add("b2cauthorize", "test");
-        client.DefaultRequestHeaders.Add("api-key", API_Key);
+            CallApi_share(apiUrl, serviceName, base64String);
+        }
+        public void Callapi_CN(CNAPIData data)
+        {
+            string apiUrl = ETAX_CN_EndPoint;
+            string serviceName = "std-gencn-document";
 
-        //var payload = new StringContent(base64String);
+            string jsonString = JsonConvert.SerializeObject(data);
 
-        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
-        request.Content = new StringContent(base64String, Encoding.UTF8, "text/plain");
+            string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(jsonString));
 
-        HttpResponseMessage response = client.SendAsync(request).Result;
-        string responseContent = response.Content.ReadAsStringAsync().Result;
-        var obj_result = JsonConvert.DeserializeObject<resultAPIData>(responseContent);
+            CallApi_share(apiUrl, serviceName, base64String);
+        }
+        public void CallApi_share(string apiUrl, string serviceName, string base64String)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //client.DefaultRequestHeaders.Add("Authorization", "Bearer your-api-key");
+                client.DefaultRequestHeaders.Add("b2cauthorize", b2cauthorize);
+                client.DefaultRequestHeaders.Add("api-key", API_Key);
 
-                //log response ?
-                LogETAX logdata = new LogETAX();
-                logdata.FDDateIns = DateTime.Now;
-                logdata.FTTimeIns = DateTime.Now.ToString("HHmmss");
-                logdata.FTWhoIns = Program.globalStartUserName;
-                logdata.FTRemark = "";
-                logdata.FTBchCode = Program.globalBranchNumber;
-                logdata.FTDeviceID = "Storeback";
-                logdata.FTShdDocNo = CurrentInvoice.FTShdDocNo;
-                logdata.FDShdDocDate = CurrentInvoice.FDShdDocDate;
-                logdata.FTShdDocType = "1";
-                logdata.FTReqType = "สร้างใบกำกับภาษี";
-                logdata.FNStep = 0;
-                logdata.FTServiceName = serviceName;
-                logdata.FTReqPara = base64String;
-                logdata.FTResPara = responseContent;
-                logdata.FTResCode = response.StatusCode.ToString();
-                logdata.FTResMsg = obj_result.statusMessage;
-                logdata.FTResShwMsg = "";
-                SaveLog(logdata);
+                //var payload = new StringContent(base64String);
+
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
+                request.Content = new StringContent(base64String, Encoding.UTF8, "text/plain");
+
+                HttpResponseMessage response = client.SendAsync(request).Result;
+                string responseContent = response.Content.ReadAsStringAsync().Result;
+                var obj_result = JsonConvert.DeserializeObject<resultAPIData>(responseContent);
+
+                SaveLog(serviceName, base64String, responseContent, response.StatusCode.ToString(), obj_result.statusMessage);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -1482,6 +1580,27 @@ public void Callapi_Invoice(InvoiceAPIData data)
                             }
                         }
                     }
+
+                    else if (obj_result.statusCode == "SUC006")
+                    {
+                        //CN
+                        var obj_result_full = JsonConvert.DeserializeObject<resultSuccessNewAPIData>(responseContent);
+                        pdflink = obj_result_full.data.pdfURL;
+
+                        string text = "ระบบได้ดำเนินการส่งรายละเอียด\nเพื่อสร้างเอกสารอิเล็กทรอนิกส์เรียบร้อยแล้ว\nโดยนำส่งตาม E-mail ที่มีการระบุไว้";
+                        string textheader = "";
+                        var result = MessageHelper.ShowInfo(text, textheader);
+                        if (result == DialogResult.OK)
+                        {
+                            string text_p = "คลิก OK เพื่อแสดงเอกสาร";
+                            string textheader_p = "";
+                            var result_p = MessageHelper.ShowInfo(text_p, textheader_p);
+                            if (result_p == DialogResult.OK)
+                            {
+                                System.Diagnostics.Process.Start(pdflink);
+                            }
+                        }
+                    }
                     else
                     {
                         string text = obj_result.statusMessage;
@@ -1493,10 +1612,28 @@ public void Callapi_Invoice(InvoiceAPIData data)
                     string text = responseContent;// + "\n" + base64String;
                     var result = MessageHelper.ShowError(text);
                 }
-    }
-}
-        public void SaveLog(LogETAX logdata)
+            }
+        }
+        public void SaveLog(string serviceName, string base64String, string responseContent, string responseStatusCodeToString, string obj_resultstatusMessage)
         {
+            LogETAX logdata = new LogETAX();
+            logdata.FDDateIns = DateTime.Now;
+            logdata.FTTimeIns = DateTime.Now.ToString("HHmmss");
+            logdata.FTWhoIns = Program.globalStartUserName;
+            logdata.FTRemark = "";
+            logdata.FTBchCode = Program.globalBranchNumber;
+            logdata.FTDeviceID = "Storeback";
+            logdata.FTShdDocNo = CurrentInvoice.FTShdDocNo;
+            logdata.FDShdDocDate = CurrentInvoice.FDShdDocDate;
+            logdata.FTShdDocType = Program.globalProgramMode == 1 ? "1" : "9";
+            logdata.FTReqType = Program.globalProgramMode == 1 ? "สร้างใบกำกับภาษี" : "สร้างใบลดหนี้";
+            logdata.FNStep = 0;
+            logdata.FTServiceName = serviceName;
+            logdata.FTReqPara = base64String;
+            logdata.FTResPara = responseContent;
+            logdata.FTResCode = responseStatusCodeToString;
+            logdata.FTResMsg = obj_resultstatusMessage;
+            logdata.FTResShwMsg = "";
             LogInserter.InterfaceInsertLog(logdata);
         }
 
@@ -1690,6 +1827,16 @@ public void Callapi_Invoice(InvoiceAPIData data)
         private void textBox_customerEmail_2_TextChanged(object sender, EventArgs e)
         {
             email_text_TextChanged(sender, e, textBox_customerEmail_2);
+        }
+
+        private void comboBox_CNReason_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (comboBox_CNReason.SelectedValue != null)
+            {
+                ReasonCN current = (ReasonCN)comboBox_CNReason.SelectedValue;
+                CurrentReasonCN = current;
+                textBox_CNReason_Other.ReadOnly = (current.FTRsnCNCode != otherCNreasoncode);
+            }
         }
     }
 }

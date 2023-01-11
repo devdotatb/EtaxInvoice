@@ -10,7 +10,7 @@ namespace EtaxInvoice.APIData
     {
         public List<ProductAPIData> products { get; set; } = new List<ProductAPIData>();
         public List<PaymentAPIData> payments { get; set; } = new List<PaymentAPIData>();
-        public RefTicketAPIData refTicket { get; set; } = new RefTicketAPIData();
+        public RefTicketAPIData refTicket { get; set; }
         public string loc { get; set; }
         public string receiptDate { get; set; }
         public string ticketNo { get; set; }

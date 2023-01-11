@@ -240,6 +240,10 @@
             this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
             this.button_print = new System.Windows.Forms.Button();
             this.button_close = new System.Windows.Forms.Button();
+            this.tableLayoutPanel50 = new System.Windows.Forms.TableLayoutPanel();
+            this.label_ReasonCN = new System.Windows.Forms.Label();
+            this.comboBox_CNReason = new System.Windows.Forms.ComboBox();
+            this.textBox_CNReason_Other = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabInvoice.SuspendLayout();
@@ -340,6 +344,7 @@
             this.tableLayoutPanel40.SuspendLayout();
             this.tableLayoutPanel47.SuspendLayout();
             this.tableLayoutPanel49.SuspendLayout();
+            this.tableLayoutPanel50.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -752,6 +757,7 @@
             this.tableLayoutPanel44.Controls.Add(this.tableLayoutPanel48, 0, 1);
             this.tableLayoutPanel44.Controls.Add(this.tableLayoutPanel45, 0, 0);
             this.tableLayoutPanel44.Controls.Add(this.tableLayoutPanel46, 1, 1);
+            this.tableLayoutPanel44.Controls.Add(this.tableLayoutPanel50, 1, 0);
             this.tableLayoutPanel44.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel44.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel44.Name = "tableLayoutPanel44";
@@ -950,6 +956,7 @@
             this.button_testCN.TabIndex = 12;
             this.button_testCN.Text = "Inv/CN";
             this.button_testCN.UseVisualStyleBackColor = true;
+            this.button_testCN.Visible = false;
             this.button_testCN.Click += new System.EventHandler(this.button_testCN_Click);
             // 
             // panel_c_1_1
@@ -3009,6 +3016,56 @@
             this.button_close.UseVisualStyleBackColor = true;
             this.button_close.Click += new System.EventHandler(this.button_close_Click);
             // 
+            // tableLayoutPanel50
+            // 
+            this.tableLayoutPanel50.ColumnCount = 3;
+            this.tableLayoutPanel50.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel50.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel50.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel50.Controls.Add(this.textBox_CNReason_Other, 2, 0);
+            this.tableLayoutPanel50.Controls.Add(this.label_ReasonCN, 0, 0);
+            this.tableLayoutPanel50.Controls.Add(this.comboBox_CNReason, 1, 0);
+            this.tableLayoutPanel50.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel50.Location = new System.Drawing.Point(421, 3);
+            this.tableLayoutPanel50.Name = "tableLayoutPanel50";
+            this.tableLayoutPanel50.RowCount = 1;
+            this.tableLayoutPanel50.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel50.Size = new System.Drawing.Size(412, 26);
+            this.tableLayoutPanel50.TabIndex = 5;
+            // 
+            // label_ReasonCN
+            // 
+            this.label_ReasonCN.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label_ReasonCN.AutoSize = true;
+            this.label_ReasonCN.Location = new System.Drawing.Point(9, 6);
+            this.label_ReasonCN.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_ReasonCN.Name = "label_ReasonCN";
+            this.label_ReasonCN.Size = new System.Drawing.Size(131, 13);
+            this.label_ReasonCN.TabIndex = 113;
+            this.label_ReasonCN.Text = "เหตุผลในการออกใบลดหนี้";
+            // 
+            // comboBox_CNReason
+            // 
+            this.comboBox_CNReason.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_CNReason.DisplayMember = "FTRsnCNDescTh";
+            this.comboBox_CNReason.FormattingEnabled = true;
+            this.comboBox_CNReason.Location = new System.Drawing.Point(147, 3);
+            this.comboBox_CNReason.Name = "comboBox_CNReason";
+            this.comboBox_CNReason.Size = new System.Drawing.Size(158, 21);
+            this.comboBox_CNReason.TabIndex = 114;
+            this.comboBox_CNReason.SelectedValueChanged += new System.EventHandler(this.comboBox_CNReason_SelectedValueChanged);
+            // 
+            // textBox_CNReason_Other
+            // 
+            this.textBox_CNReason_Other.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_CNReason_Other.Location = new System.Drawing.Point(312, 4);
+            this.textBox_CNReason_Other.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_CNReason_Other.MaxLength = 50;
+            this.textBox_CNReason_Other.Name = "textBox_CNReason_Other";
+            this.textBox_CNReason_Other.ReadOnly = true;
+            this.textBox_CNReason_Other.Size = new System.Drawing.Size(96, 20);
+            this.textBox_CNReason_Other.TabIndex = 115;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3158,6 +3215,8 @@
             this.tableLayoutPanel40.PerformLayout();
             this.tableLayoutPanel47.ResumeLayout(false);
             this.tableLayoutPanel49.ResumeLayout(false);
+            this.tableLayoutPanel50.ResumeLayout(false);
+            this.tableLayoutPanel50.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3375,6 +3434,10 @@
         private System.Windows.Forms.Button button_countrySearch_2;
         private System.Windows.Forms.TextBox textBox_customerCountry_2;
         private System.Windows.Forms.Button button_testCN;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel50;
+        private System.Windows.Forms.TextBox textBox_CNReason_Other;
+        private System.Windows.Forms.Label label_ReasonCN;
+        private System.Windows.Forms.ComboBox comboBox_CNReason;
     }
 }
 

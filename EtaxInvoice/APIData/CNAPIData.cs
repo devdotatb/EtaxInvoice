@@ -14,8 +14,10 @@ namespace EtaxInvoice.APIData
         public string userBu { get; set; }
         public string userLoc { get; set; }
         public string userRole { get; set; }
+        public string purposeCode { get; set; }
+        public string purposeDesc { get; set; }
         public CustomerAPIData customer { get; set; } = new CustomerAPIData();
-        public CustomerAPIData shipTo { get; set; } = new CustomerAPIData();
+        public Dictionary<string, object> shipTo { get; set; } = new Dictionary<string, object>();
         public SaleDataAPIData saleData { get; set; } = new SaleDataAPIData();
     }
 }

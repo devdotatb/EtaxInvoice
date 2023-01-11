@@ -15,6 +15,7 @@ namespace EtaxInvoice
     public partial class frmInvoiceSearch : Form
     {
         public bool isToday { get; set; }
+        public bool isCN { get; set; }
         public string POSnumber { get; set; }
         public List<Invoice> Invoices { get; set; }
         public string CurrentSelectedColumn { get; set; }
@@ -55,6 +56,7 @@ namespace EtaxInvoice
             dataGridView1.Columns["FCShdAftDisChg"].Visible = false;
             dataGridView1.Columns["FCShdVatRate"].Visible = false;
             dataGridView1.Columns["FDShdDocDate"].Visible = false;
+            dataGridView1.Columns["FTShdPosCN"].Visible = false;
         }
         private List<Invoice> GetInvoices()
         {
@@ -67,9 +69,9 @@ namespace EtaxInvoice
                 sql = string.Format(@"
 select FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo
 , FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat
-, FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate
+, FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate , FTShdPosCN
 from TSHD{0} HD with(nolock)
-where isnull(FTShdDocVatFull,'') = '' and FTShdStaDoc = '1' and FTShdDocNo like '{1}%'", this.POSnumber,"S");
+where isnull(FTShdDocVatFull,'') = '' and FTShdStaDoc = '1' and FTShdDocNo like '{1}%'", this.POSnumber, isCN ? "R" : "S");
             }
             else
             {
@@ -77,9 +79,9 @@ where isnull(FTShdDocVatFull,'') = '' and FTShdStaDoc = '1' and FTShdDocNo like 
                 sql = string.Format(@"select 
 FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo, 
 FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat, 
-FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate
+FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate , FTShdPosCN
 from TPSTSalHD HD with(nolock)
-where isnull(FTShdDocVatFull,'') = ''  and FTShdDocNo like '{0}%'", "S");
+where isnull(FTShdDocVatFull,'') = ''  and FTShdDocNo like '{0}%'", isCN ? "R" : "S");
             }
             connection.Open();
             SqlCommand cmd = new SqlCommand(sql, connection);
@@ -103,6 +105,7 @@ where isnull(FTShdDocVatFull,'') = ''  and FTShdDocNo like '{0}%'", "S");
                     FCShdAftDisChg = SQLHelper.SafeGetDecimal(reader, 11),
                     FCShdVatRate = SQLHelper.SafeGetDecimal(reader, 12),
                     FDShdDocDate = SQLHelper.SafeGetDate(reader, 13),
+                    FTShdPosCN = SQLHelper.SafeGetString(reader, 14),
                 };
                 result.Add(each_data);
             }

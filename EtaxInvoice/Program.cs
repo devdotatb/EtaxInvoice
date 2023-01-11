@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace EtaxInvoice
 {
-    internal static class Program
+    static class Program
     {
         /*
          * การส่ง parameter จากโปรแกรมของ Ada ไปเรียกโปรแกรม E_TAX
@@ -64,15 +64,37 @@ namespace EtaxInvoice
         public static string globalStartUserPassword = "12345";
         public static string globalStartUserName = "x10-tester";//"ผู้จัดการสาขา";
         public static int globalProgramMode = 1;
+
+        public static string testargument = "Meng";
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            string recieve_argument = args.Length > 0 ? args[0] : null;   //  extract form name from command line parameter
+            if (recieve_argument != null)
+            {
+                testargument = recieve_argument;
+                string[] each_rec = recieve_argument.Split('|');
+                if (each_rec.Length != 8)
+                {
+                    MessageHelper.ShowError("argument: \"" + recieve_argument + "\" ไม่เท่ากับ 8 ตัว");
+                    return;
+                }
+                globalBranchNumber = each_rec[0];
+                globalPOSServer = each_rec[1];
+                globalDBName = each_rec[2];
+                globalPOSServerLogin = each_rec[3];
+                globalPOSServerPassword = each_rec[4];
+                globalStartUserPassword = each_rec[5];
+                globalStartUserName = each_rec[6];
+                globalProgramMode = int.Parse(each_rec[7]);
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            Application.Run(new frmMain());    //  use factory method to instantiate form you need to open
         }
     }
 }
