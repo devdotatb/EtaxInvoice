@@ -179,32 +179,32 @@ where a.FTCtyCode = '{0}'",this.CustomerTypeCode);
             switch (CurrentSelectedColumn)
             {
                 case "FTCstCode":
-                    cus = cus.Where(t => t.FTCstCode.Contains(textBox_search.Text)).ToList();
+                    cus = cus.Where(t => t.FTCstCode.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
                 case "FTCstName":
-                    cus = cus.Where(t => t.FTCstName.Contains(textBox_search.Text)).ToList();
+                    cus = cus.Where(t => t.FTCstName.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
                 case "FTCstTaxNo":
-                    cus = cus.Where(t => t.FTCstTaxNo.Contains(textBox_search.Text)).ToList();
+                    cus = cus.Where(t => t.FTCstTaxNo.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
                 case "FTCstWeb":
                     cus = cus.Where(t => t.FTCstWeb.Contains(textBox_search.Text)).ToList();
                     break;
                 case "FTCstAddrInv":
-                    cus = cus.Where(t => t.FTCstAddrInv.Contains(textBox_search.Text)).ToList();
+                    cus = cus.Where(t => t.FTCstAddrInv.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
                 case "FTCstStreetInv":
-                    cus = cus.Where(t => t.FTCstStreetInv.Contains(textBox_search.Text)).ToList();
+                    cus = cus.Where(t => t.FTCstStreetInv.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
                 case "FTCsttrictInv":
-                    cus = cus.Where(t => t.FTCsttrictInv.Contains(textBox_search.Text)).ToList();
+                    cus = cus.Where(t => t.FTCsttrictInv.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
-                case "FTDstCodeInv":
+                /*case "FTDstCodeInv":
                     cus = cus.Where(t => t.FTDstCodeInv.Contains(textBox_search.Text)).ToList();
                     break;
                 case "FTPvnCodeInv":
                     cus = cus.Where(t => t.FTPvnCodeInv.Contains(textBox_search.Text)).ToList();
-                    break;
+                    break;*/
                 case "FTCstPostCodeInv":
                     cus = cus.Where(t => t.FTCstPostCodeInv.Contains(textBox_search.Text)).ToList();
                     break;
@@ -218,7 +218,7 @@ where a.FTCtyCode = '{0}'",this.CustomerTypeCode);
                     cus = cus.Where(t => t.FTCstFaxInv.Contains(textBox_search.Text)).ToList();
                     break;
                 case "FTCstEmail":
-                    cus = cus.Where(t => t.FTCstEmail.Contains(textBox_search.Text)).ToList();
+                    cus = cus.Where(t => t.FTCstEmail.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
                 case "FTCYDescTh":
                     cus = cus.Where(t => t.FTCYDescTh.Contains(textBox_search.Text)).ToList();

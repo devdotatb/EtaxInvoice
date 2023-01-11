@@ -11,8 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
-using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace EtaxInvoice
 {
@@ -27,6 +27,8 @@ namespace EtaxInvoice
         public static string userBu;
         public static string OAuth_URL;
         public static string Web_Service_Timeout;
+
+        public static string PrintConfirmText;
         private CustomerTypeDefault customerTypeDefault { get; set; } = new CustomerTypeDefault();
         private Customer CurrentCustomer { get; set; }
         private Invoice CurrentInvoice { get; set; }
@@ -38,8 +40,35 @@ namespace EtaxInvoice
         public frmMain()
         {
             InitializeComponent();
+            InitializeType();
             LoadCountry();
             LoadConfig();
+        }
+        private void button_testCN_Click(object sender, EventArgs e)
+        {
+            if(Program.globalProgramMode == 1)  Program.globalProgramMode = 2;
+            else if(Program.globalProgramMode == 2)  Program.globalProgramMode = 1;
+            InitializeType();
+        }
+        public void InitializeType()
+        {
+            //Invoice || CN
+            if (Program.globalProgramMode == 1)
+            {
+                //Invoice
+                this.tabPage4.Text = "ใบกำกับภาษีอย่างย่อ";
+                this.Text = "E-TAX Invoice";
+                PrintConfirmText = "กรุณายืนยันการออก E-TAX Invoice?";
+
+            }
+            else if(Program.globalProgramMode == 2)
+            {
+                //CN
+                this.tabPage4.Text = "ใบกำกับภาษีอย่างย่อใบใหม่จากการReturn Receipt";
+                this.Text = "E-TAX CN";
+                PrintConfirmText = "กรุณายืนยันการออก E-TAX CN?";
+
+            }
         }
         private void LoadConfig()
         {
@@ -844,6 +873,26 @@ namespace EtaxInvoice
             cmd.ExecuteNonQuery();
             connection.Close();
             MessageHelper.ShowInfo("บันทึกสำเร็จ");
+            switch (tabCustomerDetail.SelectedIndex)
+            {
+
+                case 0:
+                    {
+                        textBox_customerCode.Text = customerCode;
+                        break;
+                    }
+                case 1:
+                    {
+                        textBox_customerCode_1.Text = customerCode;
+                        break;
+                    }
+
+                case 2:
+                    {
+                        textBox_customerCode_2.Text = customerCode;
+                        break;
+                    }
+            }
         }
 
         private void EnableText()
@@ -879,6 +928,7 @@ namespace EtaxInvoice
                         this.textBox_customerRoad_1.ReadOnly = false;
                         this.textBox_customerSubDistrict_1.ReadOnly = false;
                         this.textBox_customerPostCode_1.ReadOnly = false;
+                        comboBox_cWeb_1.Enabled = true;
                         break;
                     }
 
@@ -890,6 +940,7 @@ namespace EtaxInvoice
                         this.textBox_customerEmail_2.ReadOnly = false;
 
                         this.textBox_customerAddress_2.ReadOnly = false;
+                        this.textBox_customerProvinceName_2.ReadOnly = false;
                         this.textBox_customerPostCode_2.ReadOnly = false;
 
                         break;
@@ -936,7 +987,11 @@ namespace EtaxInvoice
         {
             try
             {
-                string text = "กรุณายืนยันการออก E-TAX Invoice";
+                if (!ValidateBeforeAPI())
+                {
+                    return;
+                }
+                string text = PrintConfirmText;
                 string textheader = "";
                 var result = MessageHelper.ShowConfirm(text, textheader);
                 switch (result)
@@ -969,6 +1024,34 @@ namespace EtaxInvoice
                         if (email_result == DialogResult.OK)
                         {
                             APIEmail = frm.Email;
+                            switch (tabCustomerDetail.SelectedIndex)
+                            {
+                                case 0: // บุคคลธรรมดา
+                                    {
+                                        textBox_customerEmail.Text = APIEmail;
+
+                                        SQLHelper.UpdateEmail(APIEmail, textBox_customerCode.Text);
+
+                                        break;
+                                    }
+                                case 1:// นิติบุคคล
+                                    {
+                                        textBox_customerEmail_1.Text = APIEmail;
+
+                                        SQLHelper.UpdateEmail(APIEmail, textBox_customerCode_1.Text);
+
+                                        break;
+                                    }
+
+                                case 2:// ชาวต่างชาติ
+                                    {
+                                        textBox_customerEmail_2.Text = APIEmail;
+
+                                        SQLHelper.UpdateEmail(APIEmail, textBox_customerCode_2.Text);
+
+                                        break;
+                                    }
+                            }
                             InvoiceAPIData built = BuildAPIdata();
                             Callapi_Invoice(built);
                         }
@@ -992,26 +1075,40 @@ namespace EtaxInvoice
             this.Close();
         }
 
-        public void ValidateBeforeAPI()
+        public bool ValidateBeforeAPI()
         {
+            if (string.IsNullOrEmpty(Program.globalStartUserName))
+            {
+                MessageHelper.ShowError("ไม่พบข้อมูลลูกค้า");
+                return false;
+            }
+            if (string.IsNullOrEmpty(userBu))
+            {
+                MessageHelper.ShowError("ไม่พบข้อมูลลูกค้า");
+                return false;
+            }
+            if (string.IsNullOrEmpty(userLoc))
+            {
+                MessageHelper.ShowError("ไม่พบข้อมูลลูกค้า");
+                return false;
+            }
+            if (CurrentInvoice == null)
+            {
+                MessageHelper.ShowError("กรุณาเลือกใบกำกับภาษีอย่างย่อ");
+                return false;
+            }
+
             string customerCode = "";
             string customerName = "";
             string customerTaxId = "";
             string customerAddress = "";
-            string customerRoad = "";
             string customerSubDistrict = "";
-            string customerDistrictCode = "";
-            string customerProvinceCode = "";
+            string customerDistrictName = "";
+            string customerProvinceName = "";
             string customerPostCode = "";
-            string customerTel = "";
-            string customerFax = "";
-            string customerEmail = "";
-            string customerWeb = "";
             string countrycode = "";
             string customerType = "";
 
-            string errorstring = "กรุณากรอก : ";
-            string tmperror = errorstring;
             switch (tabCustomerDetail.SelectedIndex)
             {
                 case 0: // บุคคลธรรมดา
@@ -1020,15 +1117,10 @@ namespace EtaxInvoice
                         customerName = textBox_customerName.Text;
                         customerTaxId = textBox_customerTaxId.Text;
                         customerAddress = textBox_customerAddress.Text;
-                        customerRoad = textBox_customerRoad.Text;
                         customerSubDistrict = textBox_customerSubDistrict.Text;
-                        customerDistrictCode = textBox_customerDistrictCode.Text;
-                        customerProvinceCode = textBox_customerProvinceCode.Text;
+                        customerDistrictName = textBox_customerDistrictName.Text;
+                        customerProvinceName = textBox_customerProvinceName.Text;
                         customerPostCode = textBox_customerPostCode.Text;
-                        customerTel = textBox_customerTel.Text;
-                        customerFax = textBox_customerFax.Text;
-                        customerEmail = textBox_customerEmail.Text;
-                        customerWeb = "";
                         countrycode = CurrentCountry.FTCYCode;
                         customerType = customerTypeDefault.NIDN;
 
@@ -1040,15 +1132,10 @@ namespace EtaxInvoice
                         customerName = textBox_customerName_1.Text;
                         customerTaxId = textBox_customerTaxId_1.Text;
                         customerAddress = textBox_customerAddress_1.Text;
-                        customerRoad = textBox_customerRoad_1.Text;
                         customerSubDistrict = textBox_customerSubDistrict_1.Text;
-                        customerDistrictCode = textBox_customerDistrictCode_1.Text;
-                        customerProvinceCode = textBox_customerProvinceCode_1.Text;
+                        customerDistrictName = textBox_customerDistrictName_1.Text;
+                        customerProvinceName = textBox_customerProvinceName_1.Text;
                         customerPostCode = textBox_customerPostCode_1.Text;
-                        customerTel = textBox_customerTel_1.Text;
-                        customerFax = textBox_customerFax_1.Text;
-                        customerEmail = textBox_customerEmail_1.Text;
-                        customerWeb = textBox_customerWeb_1.Text;
                         countrycode = CurrentCountry.FTCYCode;
                         customerType = customerTypeDefault.TXID;
 
@@ -1060,10 +1147,9 @@ namespace EtaxInvoice
                         customerCode = textBox_customerCode_2.Text;
                         customerName = textBox_customerName_2.Text;
                         customerTaxId = textBox_customerTaxId_2.Text;
-                        customerAddress = textBox_customerAddress_2.Text + "|" + textBox_customerProvinceName_2.Text;
+                        customerAddress = textBox_customerAddress_2.Text;
+                        customerProvinceName = textBox_customerProvinceName_2.Text;
                         customerPostCode = textBox_customerPostCode_2.Text;
-                        customerTel = textBox_customerTel_2.Text;
-                        customerEmail = textBox_customerEmail_2.Text;
                         countrycode = CurrentCountry.FTCYCode;
                         customerType = customerTypeDefault.CCPT;
 
@@ -1073,23 +1159,62 @@ namespace EtaxInvoice
 
             if (string.IsNullOrEmpty(customerCode))
             {
-                MessageHelper.ShowError("กรุณากด \"เพิ่ม\"");
-                return;
+                MessageHelper.ShowError("ไม่พบข้อมูลลูกค้า");
+                return false;
             }
+
+            if (string.IsNullOrEmpty(customerCode))
+            {
+                MessageHelper.ShowError("ไม่พบข้อมูลลูกค้า");
+                return false;
+            }
+
+            string errorstring = "กรุณากรอก : ";
+            string tmperror = errorstring;
             if (string.IsNullOrEmpty(customerName))
             {
                 errorstring += "ชื่อ,";
+            }
+            if (string.IsNullOrEmpty(customerAddress))
+            {
+                errorstring += "ที่อยู่,";
+            }
+            if (tabCustomerDetail.SelectedIndex != 2) //!ต่างชาติ
+            {
+                if (customerTaxId.Length != 13)
+                {
+                    errorstring += "เลขที่ประจำตัวผู้เสียภาษี(13 หลัก),";
+                }
+                if (string.IsNullOrEmpty(customerSubDistrict))
+                {
+                    errorstring += "ตำบล/แขวง,";
+                }
+                if (string.IsNullOrEmpty(customerDistrictName))
+                {
+                    errorstring += "อำเภอ/เขต,";
+                }
+                if (string.IsNullOrEmpty(customerProvinceName))
+                {
+                    errorstring += "จังหวัด,";
+                }
+            }
+            if (string.IsNullOrEmpty(customerPostCode))
+            {
+                errorstring += "ไปรษณีย์,";
             }
             if (string.IsNullOrEmpty(countrycode))
             {
                 errorstring += "ประเทศ,";
             }
 
+
             if (errorstring != tmperror)
             {
                 MessageHelper.ShowError(errorstring.Remove(errorstring.Length - 1));
-                return;
+                return false;
             }
+
+            return true;
         }
         public InvoiceAPIData BuildAPIdata()
         {
@@ -1109,9 +1234,7 @@ namespace EtaxInvoice
             {
                 case 0: // บุคคลธรรมดา
                     {
-
                         building_customer.customerType = customerTypeDefault.NIDN;
-
                         building_customer.customerName = textBox_customerName.Text;
                         building_customer.customerTaxId = textBox_customerTaxId.Text;
                         building_customer.customerBranch = "";
@@ -1125,8 +1248,8 @@ namespace EtaxInvoice
                         building_customer.soi = "";
                         building_customer.road = textBox_customerRoad.Text;
                         building_customer.subDistrict = textBox_customerSubDistrict.Text;
-                        building_customer.district = textBox_customerDistrictCode.Text;
-                        building_customer.province = textBox_customerProvinceCode.Text;
+                        building_customer.district = textBox_customerDistrictName.Text;
+                        building_customer.province = textBox_customerProvinceName.Text;
                         building_customer.postcode = textBox_customerPostCode.Text;
                         building_customer.country = CurrentCountry.FTCYDescTh;
                         building_customer.countryCode = CurrentCountry.FTCYCode;
@@ -1139,15 +1262,13 @@ namespace EtaxInvoice
                     }
                 case 1:// นิติบุคคล
                     {
-
                         building_customer.customerType = customerTypeDefault.TXID;
-
                         building_customer.customerName = textBox_customerName_1.Text;
                         building_customer.customerTaxId = textBox_customerTaxId_1.Text;
                         building_customer.customerBranch = textBox_customerWeb_1.Text;
                         building_customer.templateLang = "TH";
                         building_customer.addressType = "LOCAL";
-                        building_customer.buildingNo = textBox_customerAddress.Text;
+                        building_customer.buildingNo = textBox_customerAddress_1.Text;
                         building_customer.buildingName = "";
                         building_customer.roomNo = "";
                         building_customer.moo = "";
@@ -1155,8 +1276,8 @@ namespace EtaxInvoice
                         building_customer.soi = "";
                         building_customer.road = textBox_customerRoad_1.Text;
                         building_customer.subDistrict = textBox_customerSubDistrict_1.Text;
-                        building_customer.district = textBox_customerDistrictCode_1.Text;
-                        building_customer.province = textBox_customerProvinceCode_1.Text;
+                        building_customer.district = textBox_customerDistrictName_1.Text;
+                        building_customer.province = textBox_customerProvinceName_1.Text;
                         building_customer.postcode = textBox_customerPostCode_1.Text;
                         building_customer.country = CurrentCountry.FTCYDescTh;
                         building_customer.countryCode = CurrentCountry.FTCYCode;
@@ -1170,25 +1291,29 @@ namespace EtaxInvoice
 
                 case 2:// ชาวต่างชาติ
                     {
-
                         building_customer.customerType = customerTypeDefault.CCPT;
-
                         building_customer.customerName = textBox_customerName_2.Text;
                         building_customer.customerTaxId = textBox_customerTaxId_2.Text;
+                        building_customer.customerBranch = "";
                         building_customer.templateLang = "EN";
                         building_customer.addressType = "INTER";
-                        building_customer.buildingNo = textBox_customerAddress.Text;
+                        building_customer.buildingNo = "-";
                         building_customer.buildingName = "";
                         building_customer.roomNo = "";
                         building_customer.moo = "";
                         building_customer.floor = "";
                         building_customer.soi = "";
+                        building_customer.road = "";
+                        building_customer.subDistrict = "";
+                        building_customer.district = "";
+                        building_customer.province = textBox_customerProvinceName_2.Text;
                         building_customer.postcode = textBox_customerPostCode_2.Text;
                         building_customer.country = CurrentCountry.FTCYDescTh;
                         building_customer.countryCode = CurrentCountry.FTCYCode;
                         building_customer.tel = textBox_customerTel_2.Text;
+                        building_customer.fax = "";
                         building_customer.email = APIEmail;
-                        building_customer.addressLine = "";
+                        building_customer.addressLine = textBox_customerAddress_2.Text;
 
                         break;
                     }
@@ -1266,29 +1391,32 @@ namespace EtaxInvoice
 
             return sendingdata;
         }
-        public async void Callapi_Invoice(InvoiceAPIData data)
-        {
-            string apiUrl = ETAX_Invoice_EndPoint;
-            string serviceName = "std-genft-document";
+public void Callapi_Invoice(InvoiceAPIData data)
+{
+    string apiUrl = ETAX_Invoice_EndPoint;
+    string serviceName = "std-genft-document";
 
-            string jsonString = JsonConvert.SerializeObject(data);
+    string jsonString = JsonConvert.SerializeObject(data);
 
-            string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(jsonString));
+    string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(jsonString));
 
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                //client.DefaultRequestHeaders.Add("Authorization", "Bearer your-api-key");
-                client.DefaultRequestHeaders.Add("b2cauthorize", "test");
-                client.DefaultRequestHeaders.Add("api-key", API_Key);
+    using (var client = new HttpClient())
+    {
+        client.DefaultRequestHeaders.Accept.Clear();
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //client.DefaultRequestHeaders.Add("Authorization", "Bearer your-api-key");
+        client.DefaultRequestHeaders.Add("b2cauthorize", "test");
+        client.DefaultRequestHeaders.Add("api-key", API_Key);
 
-                var payload = new StringContent(base64String);
+        //var payload = new StringContent(base64String);
 
-                HttpResponseMessage response = await client.PostAsync(apiUrl, payload);
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
+        request.Content = new StringContent(base64String, Encoding.UTF8, "text/plain");
 
-                string responseContent = await response.Content.ReadAsStringAsync();
-                var obj_result = JsonConvert.DeserializeObject<resultAPIData>(responseContent);
+        HttpResponseMessage response = client.SendAsync(request).Result;
+        string responseContent = response.Content.ReadAsStringAsync().Result;
+        var obj_result = JsonConvert.DeserializeObject<resultAPIData>(responseContent);
+
                 //log response ?
                 LogETAX logdata = new LogETAX();
                 logdata.FDDateIns = DateTime.Now;
@@ -1365,11 +1493,11 @@ namespace EtaxInvoice
                     string text = responseContent;// + "\n" + base64String;
                     var result = MessageHelper.ShowError(text);
                 }
-            }
-        }
+    }
+}
         public void SaveLog(LogETAX logdata)
         {
-            LogInserter.InsertLog(logdata);
+            LogInserter.InterfaceInsertLog(logdata);
         }
 
         private void only_number_TextChanged(object sender, EventArgs e, TextBox textBox)
@@ -1389,8 +1517,8 @@ namespace EtaxInvoice
             if (e.Control && e.KeyCode == Keys.V)
             {
                 string clipboardText = Clipboard.GetText();
-                int number;
-                if (int.TryParse(clipboardText, out number))
+                long number;
+                if (!Int64.TryParse(textBox.Text, out number))
                 {
                     textBox.Paste(clipboardText);
                 }

@@ -34,8 +34,8 @@ namespace EtaxInvoice
         }
         private void SetDefaultData()
         {
-            CurrentSelectedColumn = "FTPvnName";
-            label2.Text = "ชื่อ";
+            CurrentSelectedColumn = "FTShdDocNo";
+            label2.Text = "รหัส";
         }
         private void UpdateDataGridView(List<Invoice> data)
         {
@@ -69,7 +69,7 @@ select FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo
 , FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat
 , FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate
 from TSHD{0} HD with(nolock)
-where isnull(FTShdDocVatFull,'') = '' and FTShdStaDoc = '1'", this.POSnumber);
+where isnull(FTShdDocVatFull,'') = '' and FTShdStaDoc = '1' and FTShdDocNo like '{1}%'", this.POSnumber,"S");
             }
             else
             {
@@ -79,7 +79,7 @@ FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo,
 FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat, 
 FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate
 from TPSTSalHD HD with(nolock)
-where isnull(FTShdDocVatFull,'') = '' ");
+where isnull(FTShdDocVatFull,'') = ''  and FTShdDocNo like '{0}%'", "S");
             }
             connection.Open();
             SqlCommand cmd = new SqlCommand(sql, connection);
@@ -262,7 +262,7 @@ where isnull(FTShdDocVatFull,'') = '' and RC.FTShdDocNo = '{0}'", this.CurrentIn
                     prov = prov.Where(t => t.FTTimeIns.Contains(textBox_search.Text)).ToList();
                     break;*/
                 case "FTShdDocNo":
-                    prov = prov.Where(t => t.FTShdDocNo.Contains(textBox_search.Text)).ToList();
+                    prov = prov.Where(t => t.FTShdDocNo.ToUpper().Contains(textBox_search.Text.ToUpper())).ToList();
                     break;
                 /*case "FCShdTotal":
                     prov = prov.Where(t => t.FCShdTotal.Contains(textBox_search.Text)).ToList();
@@ -292,7 +292,15 @@ where isnull(FTShdDocVatFull,'') = '' and RC.FTShdDocNo = '{0}'", this.CurrentIn
 
         private void button_OK_Click(object sender, EventArgs e)
         {
-            seachDetailthenClose();
+            if (CurrentInvoice != null)
+            {
+                seachDetailthenClose();
+            }
+            else
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)

@@ -45,5 +45,37 @@ namespace EtaxInvoice
                 return (decimal)reader.GetDouble(colIndex);
             return 0;
         }
+
+        public static void UpdateEmail(string FTCstEmail, string FTCstCode)
+        {
+            try
+            {
+                string connectionString = ConfigHelper.ConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    // Open the connection
+                    connection.Open();
+
+                    // Create a new command
+                    SqlCommand command = connection.CreateCommand();
+
+                    // Set the command text
+                    // This is the query that will insert the data into the TPSTLogETAX table
+                    command.CommandText = "update TCNMCst set FTCstEmail = @FTCstEmail where FTCstCode = @FTCstCode";
+
+                    // Add the parameters for the query
+                    command.Parameters.AddWithValue("@FTCstEmail", FTCstEmail);
+                    command.Parameters.AddWithValue("@FTCstCode", FTCstCode);
+
+                    command.ExecuteNonQuery();
+
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
 }

@@ -70,6 +70,7 @@
             this.tabCustomerDetail = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel_Customer_1 = new System.Windows.Forms.TableLayoutPanel();
+            this.button_testCN = new System.Windows.Forms.Button();
             this.panel_c_1_1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_customerCode = new System.Windows.Forms.TextBox();
@@ -389,7 +390,7 @@
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(945, 359);
             this.tabPage4.TabIndex = 0;
-            this.tabPage4.Text = "ใบกำกับภาษีอย่างย่อ";
+            this.tabPage4.Text = "page4 InitializeType error";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // tablebottom_1
@@ -914,6 +915,7 @@
             this.tableLayoutPanel_Customer_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel_Customer_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel_Customer_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel_Customer_1.Controls.Add(this.button_testCN, 2, 0);
             this.tableLayoutPanel_Customer_1.Controls.Add(this.panel_c_1_1, 0, 0);
             this.tableLayoutPanel_Customer_1.Controls.Add(this.panel_c_1_2, 1, 0);
             this.tableLayoutPanel_Customer_1.Controls.Add(this.panel_c_1_3, 0, 1);
@@ -939,6 +941,16 @@
             this.tableLayoutPanel_Customer_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel_Customer_1.Size = new System.Drawing.Size(937, 209);
             this.tableLayoutPanel_Customer_1.TabIndex = 0;
+            // 
+            // button_testCN
+            // 
+            this.button_testCN.Location = new System.Drawing.Point(845, 3);
+            this.button_testCN.Name = "button_testCN";
+            this.button_testCN.Size = new System.Drawing.Size(75, 23);
+            this.button_testCN.TabIndex = 12;
+            this.button_testCN.Text = "Inv/CN";
+            this.button_testCN.UseVisualStyleBackColor = true;
+            this.button_testCN.Click += new System.EventHandler(this.button_testCN_Click);
             // 
             // panel_c_1_1
             // 
@@ -2980,7 +2992,7 @@
             this.button_print.Name = "button_print";
             this.button_print.Size = new System.Drawing.Size(152, 25);
             this.button_print.TabIndex = 0;
-            this.button_print.Text = "พิมพ์";
+            this.button_print.Text = "ออกใบกำกับภาษี";
             this.button_print.UseVisualStyleBackColor = true;
             this.button_print.Click += new System.EventHandler(this.button_print_Click);
             // 
@@ -3005,7 +3017,7 @@
             this.ClientSize = new System.Drawing.Size(959, 712);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmMain";
-            this.Text = "E-TAX Invoice";
+            this.Text = "Main program Name";
             this.Load += new System.EventHandler(this.frmInvoiceMain_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -3362,6 +3374,7 @@
         private System.Windows.Forms.Button button_countrySearch_1;
         private System.Windows.Forms.Button button_countrySearch_2;
         private System.Windows.Forms.TextBox textBox_customerCountry_2;
+        private System.Windows.Forms.Button button_testCN;
     }
 }
 
