@@ -44,8 +44,8 @@ namespace EtaxInvoice
         {
             InitializeComponent();
             InitializeType();
-            LoadCountry();
-            LoadReasonCN();
+            CountryList = SQLHelper.LoadCountry();
+            comboBox_CNReason.DataSource = SQLHelper.LoadReasonCN();
             LoadConfig();
             DefaultData_Fortest_removed_required();
         }
@@ -88,211 +88,19 @@ namespace EtaxInvoice
         }
         private void LoadConfig()
         {
-            LoaduserLoc();
-            LoadETAX_Invoice_EndPoint();
-            LoadETAX_CN_EndPoint();
-            LoadAPI_Key();
-            LoadClient_ID();
-            LoadClient_Secret();
-            LoaduserBu();
-            LoadOAuth_URL();
-            LoadWeb_Service_Timeout();
-        }
-        private void LoaduserLoc()
-        {
-
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"select top 1 FTBchCode from TCNMComp");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                userLoc = SQLHelper.SafeGetString(reader, 0);
-            }
-        }
-        private void LoadETAX_Invoice_EndPoint()
-        {
-
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '001'");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                ETAX_Invoice_EndPoint = SQLHelper.SafeGetString(reader, 0);
-            }
-        }
-        private void LoadETAX_CN_EndPoint()
-        {
-
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '002'");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                ETAX_CN_EndPoint = SQLHelper.SafeGetString(reader, 0);
-            }
-        }
-        private void LoadAPI_Key()
-        {
-
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '003'");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                API_Key = SQLHelper.SafeGetString(reader, 0);
-            }
-        }
-        private void LoadClient_ID()
-        {
-
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '004'");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                Client_ID = SQLHelper.SafeGetString(reader, 0);
-            }
-        }
-        private void LoadClient_Secret()
-        {
-
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '005'");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                Client_Secret = SQLHelper.SafeGetString(reader, 0);
-            }
-        }
-        private void LoaduserBu()
-        {
-
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"select FTSysUsrValue from TSysConfig where FTSysCode = 'ETAX' and FTSysSeq = '006'");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                userBu = SQLHelper.SafeGetString(reader, 0);
-            }
-        }
-        private void LoadOAuth_URL()
-        {
-
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '007'");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                OAuth_URL = SQLHelper.SafeGetString(reader, 0);
-            }
-        }
-        private void LoadWeb_Service_Timeout()
-        {
-
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"SELECT FTSysUsrValue FROM TSysConfig WHERE FTSysCode = 'ETAX' AND FTSysSeq = '008'");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                Web_Service_Timeout = SQLHelper.SafeGetString(reader, 0);
-            }
-        }
-
-        private void LoadCountry()
-        {
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"select FTCYCode,FTCYDescTh,FTCYDescEn from TCNMCountry");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            var result = new List<Country>();
-            while (reader.Read())
-            {
-                var prov = new Country
-                {
-                    FTCYCode = SQLHelper.SafeGetString(reader, 0),
-                    FTCYDescTh = SQLHelper.SafeGetString(reader, 1),
-                    FTCYDescEn = SQLHelper.SafeGetString(reader, 1),
-                };
-                result.Add(prov);
-            }
-            CountryList = result;
-        }
-        private void LoadReasonCN()
-        {
-            string connstr = ConfigHelper.ConnectionString;
-            SqlConnection connection = new SqlConnection(connstr);
-            string sql = string.Format(@"select FTRsnCNCode,FTRsnCNDescTh,FTRsnCNDescEn from TCNMRsnCN");
-            connection.Open();
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            BindingList<ReasonCN> objects = new BindingList<ReasonCN>();
-            while (reader.Read())
-            {
-                var data = new ReasonCN
-                {
-                    FTRsnCNCode = SQLHelper.SafeGetString(reader, 0),
-                    FTRsnCNDescTh = SQLHelper.SafeGetString(reader, 1),
-                    FTRsnCNDescEn = SQLHelper.SafeGetString(reader, 1),
-                };
-                objects.Add(data);
-            }
-            comboBox_CNReason.DataSource = objects;
+            userLoc = SQLHelper.LoaduserLoc();
+            ETAX_Invoice_EndPoint = SQLHelper.LoadConfig("001");
+            ETAX_CN_EndPoint = SQLHelper.LoadConfig("002");
+            API_Key = SQLHelper.LoadConfig("003");
+            Client_ID = SQLHelper.LoadConfig("004");
+            Client_Secret = SQLHelper.LoadConfig("005");
+            userBu = SQLHelper.LoadConfig("006");
+            OAuth_URL = SQLHelper.LoadConfig("007");
+            Web_Service_Timeout = SQLHelper.LoadConfig("008");
         }
         private void frmInvoiceMain_Load(object sender, EventArgs e)
         {
             comboBox_cWeb_1.SelectedIndex = 1;
-        }
-        private void tabCustomerDetail_Click(object sender, EventArgs e)
-        {
-            switch (tabCustomerDetail.SelectedIndex)
-            {
-
-                case 0:
-                    {
-
-                        break;
-                    }
-                case 1:
-                    {
-
-                        break;
-                    }
-
-                case 2:
-                    {
-
-                        break;
-                    }
-            }
         }
         private void OpenfrmUser()
         {
@@ -1519,6 +1327,8 @@ namespace EtaxInvoice
         {
             using (var client = new HttpClient())
             {
+                client.Timeout = TimeSpan.FromSeconds(5);
+
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 //client.DefaultRequestHeaders.Add("Authorization", "Bearer your-api-key");
