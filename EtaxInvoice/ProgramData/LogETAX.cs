@@ -26,5 +26,5 @@ namespace EtaxInvoice
         public string FTResMsg { get; set; }
         public string FTResShwMsg { get; set; }
 
-}
+    }
 }

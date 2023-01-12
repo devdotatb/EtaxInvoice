@@ -72,16 +72,28 @@ namespace EtaxInvoice
         [STAThread]
         static void Main(string[] args)
         {
+            try
+            {
+                if (!SetArguments(args)) return;
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ShowError("เกิดข้อผิดพลาดในขั้นตอนการเซ็ตค่า argument" + "\n" + ex.Message);
+                return;
+            }
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frmMain());    //  use factory method to instantiate form you need to open
+        }
+
+        static bool SetArguments(string[] args)
+        {
             string recieve_argument = args.Length > 0 ? args[0] : null;   //  extract form name from command line parameter
             if (recieve_argument != null)
             {
                 testargument = recieve_argument;
                 string[] each_rec = recieve_argument.Split('|');
-                if (each_rec.Length != 8)
-                {
-                    MessageHelper.ShowError("argument: \"" + recieve_argument + "\" ไม่เท่ากับ 8 ตัว");
-                    return;
-                }
+                if (!validateArguments(each_rec, recieve_argument)) return false;
                 globalBranchNumber = each_rec[0];
                 globalPOSServer = each_rec[1];
                 globalDBName = each_rec[2];
@@ -90,11 +102,36 @@ namespace EtaxInvoice
                 globalStartUserPassword = each_rec[5];
                 globalStartUserName = each_rec[6];
                 globalProgramMode = int.Parse(each_rec[7]);
-            }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());    //  use factory method to instantiate form you need to open
+                LogAccessETAX logAccessETAX = new LogAccessETAX();
+                logAccessETAX.FDDateIns = DateTime.Now;
+                logAccessETAX.FTBranchNumber = each_rec[0];
+                logAccessETAX.FTPOSServer = each_rec[1];
+                logAccessETAX.FTDBName = each_rec[2];
+                logAccessETAX.FTPOSServerLogin = each_rec[3];
+                logAccessETAX.FTPOSServerPassword = each_rec[4];
+                logAccessETAX.FTStartUserPassword = each_rec[5];
+                logAccessETAX.FTStartUserName = each_rec[6];
+                logAccessETAX.FTProgramMode = each_rec[7];
+
+                LogInserter.InsertAccessLog(logAccessETAX);
+            }
+            return true;
+        }
+        static bool validateArguments(string[] each_rec, string recieve_argument)
+        {
+            if (each_rec.Length != 8)
+            {
+                MessageHelper.ShowError("argument: \"" + recieve_argument + "\" ไม่เท่ากับ 8 ตัว");
+                return false;
+            }
+            int output;
+            if (!int.TryParse(each_rec[7], out output))
+            {
+                MessageHelper.ShowError("argument: globalProgramMode ไม่ใช่ตัวเลข");
+                return false;
+            }
+            return true;
         }
     }
 }

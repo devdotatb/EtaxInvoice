@@ -62,7 +62,7 @@ namespace EtaxInvoice
             {
 
             }
-        } 
+        }
 
         private static decimal CheckDoc(string FTShdDocNo)
         {
@@ -101,5 +101,67 @@ namespace EtaxInvoice
                 return -1;
             }
         }
+
+
+        public static void InsertAccessLog(LogAccessETAX data)
+        {
+            try
+            {
+                // Replace YOUR_CONNECTION_STRING with your actual connection string
+                string connectionString = ConfigHelper.ConnectionString;
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    // Open the connection
+                    connection.Open();
+
+                    // Create a new command
+                    SqlCommand command = connection.CreateCommand();
+
+                    // Set the command text
+                    // This is the query that will insert the data into the TPSTLogETAX table
+                    command.CommandText = @"INSERT INTO [dbo].[TPSTLogAccessETAX]
+                           ([FDDateIns]
+                           ,[FTBranchNumber]
+                           ,[FTPOSServer]
+                           ,[FTDBName]
+                           ,[FTPOSServerLogin]
+                           ,[FTPOSServerPassword]
+                           ,[FTStartUserPassword]
+                           ,[FTStartUserName]
+                           ,[FTProgramMode])
+                     VALUES
+                           (@FDDateIns,
+                           @FTBranchNumber,
+                           @FTPOSServer,
+                           @FTDBName,
+                           @FTPOSServerLogin,
+                           @FTPOSServerPassword,
+                           @FTStartUserPassword,
+                           @FTStartUserName,
+                           @FTProgramMode)";
+
+                    // Add the parameters for the query
+                    command.Parameters.AddWithValue("@FDDateIns", data.FDDateIns);
+                    command.Parameters.AddWithValue("@FTBranchNumber", data.FTBranchNumber);
+                    command.Parameters.AddWithValue("@FTPOSServer", data.FTPOSServer);
+                    command.Parameters.AddWithValue("@FTDBName", data.FTDBName);
+                    command.Parameters.AddWithValue("@FTPOSServerLogin", data.FTPOSServerLogin);
+                    command.Parameters.AddWithValue("@FTPOSServerPassword", data.FTPOSServerPassword);
+                    command.Parameters.AddWithValue("@FTStartUserPassword", data.FTStartUserPassword);
+                    command.Parameters.AddWithValue("@FTStartUserName", data.FTStartUserName);
+                    command.Parameters.AddWithValue("@FTProgramMode", data.FTProgramMode);
+
+                    command.ExecuteNonQuery();
+
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ShowError(ex.Message);
+            }
+        }
+
     }
 }
