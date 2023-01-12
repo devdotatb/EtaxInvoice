@@ -102,7 +102,7 @@ namespace EtaxInvoice
         {
             comboBox_cWeb_1.SelectedIndex = 1;
         }
-        private void OpenfrmUser()
+        private void OpenfrmCustomer()
         {
             try
             {
@@ -565,22 +565,7 @@ namespace EtaxInvoice
             string yyMMddHHmmss = yyyyMMddHHmmss.Remove(0, 2);
             string generatedcstcode = "CT" + branch + "-" + yyMMddHHmmss;
 
-
-            string customerCode = "";
-            string customerName = "";
-            string customerTaxId = "";
-            string customerAddress = "";
-            string customerRoad = "";
-            string customerSubDistrict = "";
-            string customerDistrictCode = "";
-            string customerProvinceCode = "";
-            string customerPostCode = "";
-            string customerTel = "";
-            string customerFax = "";
-            string customerEmail = "";
-            string customerWeb = "";
-            string countrycode = "";
-            string customerType = "";
+            AddCustomer addCustomerdata = new AddCustomer();
 
             string errorstring = "กรุณากรอก : ";
             string tmperror = errorstring;
@@ -588,76 +573,76 @@ namespace EtaxInvoice
             {
                 case 0: // บุคคลธรรมดา
                     {
-                        customerCode = textBox_customerCode.Text;
-                        customerName = textBox_customerName.Text;
-                        customerTaxId = textBox_customerTaxId.Text;
-                        customerAddress = textBox_customerAddress.Text;
-                        customerRoad = textBox_customerRoad.Text;
-                        customerSubDistrict = textBox_customerSubDistrict.Text;
-                        customerDistrictCode = textBox_customerDistrictCode.Text;
-                        customerProvinceCode = textBox_customerProvinceCode.Text;
-                        customerPostCode = textBox_customerPostCode.Text;
-                        customerTel = textBox_customerTel.Text;
-                        customerFax = textBox_customerFax.Text;
-                        customerEmail = textBox_customerEmail.Text;
-                        customerWeb = "";
-                        countrycode = CurrentCountry.FTCYCode;
-                        customerType = customerTypeDefault.NIDN;
+                        addCustomerdata.customerCode = textBox_customerCode.Text;
+                        addCustomerdata.customerName = textBox_customerName.Text;
+                        addCustomerdata.customerTaxId = textBox_customerTaxId.Text;
+                        addCustomerdata.customerAddress = textBox_customerAddress.Text;
+                        addCustomerdata.customerRoad = textBox_customerRoad.Text;
+                        addCustomerdata.customerSubDistrict = textBox_customerSubDistrict.Text;
+                        addCustomerdata.customerDistrictCode = textBox_customerDistrictCode.Text;
+                        addCustomerdata.customerProvinceCode = textBox_customerProvinceCode.Text;
+                        addCustomerdata.customerPostCode = textBox_customerPostCode.Text;
+                        addCustomerdata.customerTel = textBox_customerTel.Text;
+                        addCustomerdata.customerFax = textBox_customerFax.Text;
+                        addCustomerdata.customerEmail = textBox_customerEmail.Text;
+                        addCustomerdata.customerWeb = "";
+                        addCustomerdata.countrycode = CurrentCountry.FTCYCode;
+                        addCustomerdata.customerType = customerTypeDefault.NIDN;
 
                         break;
                     }
                 case 1:// นิติบุคคล
                     {
-                        customerCode = textBox_customerCode_1.Text;
-                        customerName = textBox_customerName_1.Text;
-                        customerTaxId = textBox_customerTaxId_1.Text;
-                        customerAddress = textBox_customerAddress_1.Text;
-                        customerRoad = textBox_customerRoad_1.Text;
-                        customerSubDistrict = textBox_customerSubDistrict_1.Text;
-                        customerDistrictCode = textBox_customerDistrictCode_1.Text;
-                        customerProvinceCode = textBox_customerProvinceCode_1.Text;
-                        customerPostCode = textBox_customerPostCode_1.Text;
-                        customerTel = textBox_customerTel_1.Text;
-                        customerFax = textBox_customerFax_1.Text;
-                        customerEmail = textBox_customerEmail_1.Text;
-                        customerWeb = textBox_customerWeb_1.Text;
-                        countrycode = CurrentCountry.FTCYCode;
-                        customerType = customerTypeDefault.TXID;
+                        addCustomerdata.customerCode = textBox_customerCode_1.Text;
+                        addCustomerdata.customerName = textBox_customerName_1.Text;
+                        addCustomerdata.customerTaxId = textBox_customerTaxId_1.Text;
+                        addCustomerdata.customerAddress = textBox_customerAddress_1.Text;
+                        addCustomerdata.customerRoad = textBox_customerRoad_1.Text;
+                        addCustomerdata.customerSubDistrict = textBox_customerSubDistrict_1.Text;
+                        addCustomerdata.customerDistrictCode = textBox_customerDistrictCode_1.Text;
+                        addCustomerdata.customerProvinceCode = textBox_customerProvinceCode_1.Text;
+                        addCustomerdata.customerPostCode = textBox_customerPostCode_1.Text;
+                        addCustomerdata.customerTel = textBox_customerTel_1.Text;
+                        addCustomerdata.customerFax = textBox_customerFax_1.Text;
+                        addCustomerdata.customerEmail = textBox_customerEmail_1.Text;
+                        addCustomerdata.customerWeb = textBox_customerWeb_1.Text;
+                        addCustomerdata.countrycode = CurrentCountry.FTCYCode;
+                        addCustomerdata.customerType = customerTypeDefault.TXID;
 
                         break;
                     }
 
                 case 2:// ชาวต่างชาติ
                     {
-                        customerCode = textBox_customerCode_2.Text;
-                        customerName = textBox_customerName_2.Text;
-                        customerTaxId = textBox_customerTaxId_2.Text;
-                        customerAddress = textBox_customerAddress_2.Text + "|" + textBox_customerProvinceName_2.Text;
-                        customerPostCode = textBox_customerPostCode_2.Text;
-                        customerTel = textBox_customerTel_2.Text;
-                        customerEmail = textBox_customerEmail_2.Text;
-                        countrycode = CurrentCountry.FTCYCode;
-                        customerType = customerTypeDefault.CCPT;
+                        addCustomerdata.customerCode = textBox_customerCode_2.Text;
+                        addCustomerdata.customerName = textBox_customerName_2.Text;
+                        addCustomerdata.customerTaxId = textBox_customerTaxId_2.Text;
+                        addCustomerdata.customerAddress = textBox_customerAddress_2.Text + "|" + textBox_customerProvinceName_2.Text;
+                        addCustomerdata.customerPostCode = textBox_customerPostCode_2.Text;
+                        addCustomerdata.customerTel = textBox_customerTel_2.Text;
+                        addCustomerdata.customerEmail = textBox_customerEmail_2.Text;
+                        addCustomerdata.countrycode = CurrentCountry.FTCYCode;
+                        addCustomerdata.customerType = customerTypeDefault.CCPT;
 
                         break;
                     }
             }
-            if (customerCode == "")
+            if (addCustomerdata.customerCode == "")
             {
                 // new cst
-                customerCode = generatedcstcode;
+                addCustomerdata.customerCode = generatedcstcode;
             }
 
-            if (string.IsNullOrEmpty(customerCode))
+            if (string.IsNullOrEmpty(addCustomerdata.customerCode))
             {
                 MessageHelper.ShowError("กรุณากด \"เพิ่ม\"");
                 return;
             }
-            if (string.IsNullOrEmpty(customerName))
+            if (string.IsNullOrEmpty(addCustomerdata.customerName))
             {
                 errorstring += "ชื่อ,";
             }
-            if (string.IsNullOrEmpty(countrycode))
+            if (string.IsNullOrEmpty(addCustomerdata.countrycode))
             {
                 errorstring += "ประเทศ,";
             }
@@ -668,74 +653,27 @@ namespace EtaxInvoice
                 return;
             }
 
-            string connstr = ConfigHelper.ConnectionString;
-            string insertformat = @"
-                            IF NOT EXISTS (SELECT * FROM TCNMCst WHERE FTCstCode = @customerCode)
-                            BEGIN
-                                INSERT INTO TCNMCst (FTCstCode, FTCstName, FTCstTaxNo, FTCstAddrInv, FTCstStreetInv, FTCsttrictInv, FTDstCodeInv, FTPvnCodeInv, FTCstPostCodeInv, FTCstTelInv, FTCstFaxInv, FTCstEmail,FTCstWeb,FTCstSize,FTCtyCode)
-                                VALUES (@customerCode, @customerName, @customerTaxId, @customerAddress, @customerRoad, @customerSubDistrict, @customerDistrictCode, @customerProvinceCode, @customerPostCode, @customerTel, @customerFax, @customerEmail,@customerWeb,@countrycode,@customerType)
-                            END
-                            ELSE
-                            BEGIN
-                                UPDATE TCNMCst
-                                SET FTCstName = @customerName,
-                                    FTCstTaxNo = @customerTaxId,
-                                    FTCstAddrInv = @customerAddress,
-                                    FTCstStreetInv = @customerRoad,
-                                    FTCsttrictInv = @customerSubDistrict,
-                                    FTDstCodeInv = @customerDistrictCode,
-                                    FTPvnCodeInv = @customerProvinceCode,
-                                    FTCstPostCodeInv = @customerPostCode,
-                                    FTCstTelInv = @customerTel,
-                                    FTCstFaxInv = @customerFax,
-                                    FTCstEmail = @customerEmail,
-                                    FTCstWeb = @customerWeb,
-                                    FTCstSize = @countrycode,
-                                    FTCtyCode = @customerType
-                                WHERE FTCstCode = @customerCode
-                            END
-                        ";
+            SQLHelper.AddCustomer(addCustomerdata);
 
-            SqlConnection connection = new SqlConnection(connstr);
-            connection.Open();
-
-            SqlCommand cmd = new SqlCommand(insertformat, connection);
-            cmd.Parameters.AddWithValue("@customerCode", customerCode);
-            cmd.Parameters.AddWithValue("@customerName", customerName);
-            cmd.Parameters.AddWithValue("@customerTaxId", customerTaxId);
-            cmd.Parameters.AddWithValue("@customerAddress", customerAddress);
-            cmd.Parameters.AddWithValue("@customerRoad", customerRoad);
-            cmd.Parameters.AddWithValue("@customerSubDistrict", customerSubDistrict);
-            cmd.Parameters.AddWithValue("@customerDistrictCode", customerDistrictCode);
-            cmd.Parameters.AddWithValue("@customerProvinceCode", customerProvinceCode);
-            cmd.Parameters.AddWithValue("@customerPostCode", customerPostCode);
-            cmd.Parameters.AddWithValue("@customerTel", customerTel);
-            cmd.Parameters.AddWithValue("@customerFax", customerFax);
-            cmd.Parameters.AddWithValue("@customerEmail", customerEmail);
-            cmd.Parameters.AddWithValue("@customerWeb", customerWeb);
-            cmd.Parameters.AddWithValue("@countrycode", countrycode);
-            cmd.Parameters.AddWithValue("@customerType", customerType);
-
-            cmd.ExecuteNonQuery();
-            connection.Close();
             MessageHelper.ShowInfo("บันทึกสำเร็จ");
+
             switch (tabCustomerDetail.SelectedIndex)
             {
 
                 case 0:
                     {
-                        textBox_customerCode.Text = customerCode;
+                        textBox_customerCode.Text = addCustomerdata.customerCode;
                         break;
                     }
                 case 1:
                     {
-                        textBox_customerCode_1.Text = customerCode;
+                        textBox_customerCode_1.Text = addCustomerdata.customerCode;
                         break;
                     }
 
                 case 2:
                     {
-                        textBox_customerCode_2.Text = customerCode;
+                        textBox_customerCode_2.Text = addCustomerdata.customerCode;
                         break;
                     }
             }
@@ -795,7 +733,7 @@ namespace EtaxInvoice
         }
         private void button_SearchCustomer_Click(object sender, EventArgs e)
         {
-            OpenfrmUser();
+            OpenfrmCustomer();
         }
         private void button_InvoiceSearch_Click(object sender, EventArgs e)
         {

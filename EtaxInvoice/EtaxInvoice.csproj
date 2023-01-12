@@ -146,6 +146,7 @@
     <Compile Include="HelperClasses\MessageHelper.cs" />
     <Compile Include="HelperClasses\SQLHelper.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramData\AddCustomer.cs" />
     <Compile Include="ProgramData\LogAccessETAX.cs" />
     <Compile Include="ProgramData\ReasonCN.cs" />
     <Compile Include="ProgramData\Country.cs" />

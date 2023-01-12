@@ -78,6 +78,59 @@ namespace EtaxInvoice
 
             }
         }
+        public static void AddCustomer(AddCustomer addCustomerdata)
+        {
+            string connstr = ConfigHelper.ConnectionString;
+            string insertformat = @"
+                            IF NOT EXISTS (SELECT * FROM TCNMCst WHERE FTCstCode = @customerCode)
+                            BEGIN
+                                INSERT INTO TCNMCst (FTCstCode, FTCstName, FTCstTaxNo, FTCstAddrInv, FTCstStreetInv, FTCsttrictInv, FTDstCodeInv, FTPvnCodeInv, FTCstPostCodeInv, FTCstTelInv, FTCstFaxInv, FTCstEmail,FTCstWeb,FTCstSize,FTCtyCode)
+                                VALUES (@customerCode, @customerName, @customerTaxId, @customerAddress, @customerRoad, @customerSubDistrict, @customerDistrictCode, @customerProvinceCode, @customerPostCode, @customerTel, @customerFax, @customerEmail,@customerWeb,@countrycode,@customerType)
+                            END
+                            ELSE
+                            BEGIN
+                                UPDATE TCNMCst
+                                SET FTCstName = @customerName,
+                                    FTCstTaxNo = @customerTaxId,
+                                    FTCstAddrInv = @customerAddress,
+                                    FTCstStreetInv = @customerRoad,
+                                    FTCsttrictInv = @customerSubDistrict,
+                                    FTDstCodeInv = @customerDistrictCode,
+                                    FTPvnCodeInv = @customerProvinceCode,
+                                    FTCstPostCodeInv = @customerPostCode,
+                                    FTCstTelInv = @customerTel,
+                                    FTCstFaxInv = @customerFax,
+                                    FTCstEmail = @customerEmail,
+                                    FTCstWeb = @customerWeb,
+                                    FTCstSize = @countrycode,
+                                    FTCtyCode = @customerType
+                                WHERE FTCstCode = @customerCode
+                            END
+                        ";
+
+            SqlConnection connection = new SqlConnection(connstr);
+            connection.Open();
+
+            SqlCommand cmd = new SqlCommand(insertformat, connection);
+            cmd.Parameters.AddWithValue("@customerCode", addCustomerdata.customerCode);
+            cmd.Parameters.AddWithValue("@customerName", addCustomerdata.customerName);
+            cmd.Parameters.AddWithValue("@customerTaxId", addCustomerdata.customerTaxId);
+            cmd.Parameters.AddWithValue("@customerAddress", addCustomerdata.customerAddress);
+            cmd.Parameters.AddWithValue("@customerRoad", addCustomerdata.customerRoad);
+            cmd.Parameters.AddWithValue("@customerSubDistrict", addCustomerdata.customerSubDistrict);
+            cmd.Parameters.AddWithValue("@customerDistrictCode", addCustomerdata.customerDistrictCode);
+            cmd.Parameters.AddWithValue("@customerProvinceCode", addCustomerdata.customerProvinceCode);
+            cmd.Parameters.AddWithValue("@customerPostCode", addCustomerdata.customerPostCode);
+            cmd.Parameters.AddWithValue("@customerTel", addCustomerdata.customerTel);
+            cmd.Parameters.AddWithValue("@customerFax", addCustomerdata.customerFax);
+            cmd.Parameters.AddWithValue("@customerEmail", addCustomerdata.customerEmail);
+            cmd.Parameters.AddWithValue("@customerWeb", addCustomerdata.customerWeb);
+            cmd.Parameters.AddWithValue("@countrycode", addCustomerdata.countrycode);
+            cmd.Parameters.AddWithValue("@customerType", addCustomerdata.customerType);
+
+            cmd.ExecuteNonQuery();
+            connection.Close();
+        }
 
         public static string LoadConfig(string configenum)
         {
@@ -152,7 +205,7 @@ namespace EtaxInvoice
                 };
                 objects.Add(data);
             }
-            return = objects;
+            return objects;
         }
     }
 }
