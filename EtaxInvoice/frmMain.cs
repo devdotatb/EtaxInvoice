@@ -285,13 +285,13 @@ namespace EtaxInvoice
                     textBox_invoiceBranchCode.Text = inv.FTBchCode;
                     textBox_invoiceDate.Text = inv.FDDateIns;
 
-                    numericUpDown_sumNet.Value = (decimal)this.CurrentInvoice.FCShdTotal;
-                    numericUpDown_sumDiscount.Value = (decimal)this.CurrentInvoice.FCShdDis;
-                    numericUpDown_NetAfter.Value = (decimal)this.CurrentInvoice.FCShdAftDisChg;
-                    numericUpDown_sumVat.Value = (decimal)this.CurrentInvoice.FCShdVat;
-                    numericUpDown_Total.Value = (decimal)this.CurrentInvoice.FCShdB4DisChg;
+                    numericUpDown_sumNet.Value = this.CurrentInvoice.FCShdTotal;
+                    numericUpDown_sumDiscount.Value = this.CurrentInvoice.FCShdDis;
+                    numericUpDown_NetAfter.Value = this.CurrentInvoice.FCShdAftDisChg;
+                    numericUpDown_sumVat.Value = this.CurrentInvoice.FCShdVat;
+                    numericUpDown_Total.Value = this.CurrentInvoice.FCShdB4DisChg;
 
-                    numericUpDown_VAT.Value = (decimal)this.CurrentInvoice.FCShdVatRate;
+                    numericUpDown_VAT.Value = this.CurrentInvoice.FCShdVatRate;
 
                     UpdateDataGridView();
                 }
