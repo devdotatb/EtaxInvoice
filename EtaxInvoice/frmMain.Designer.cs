@@ -802,6 +802,7 @@ namespace EtaxInvoice
             this.textBox_invoiceBranchCode.Location = new System.Drawing.Point(127, 7);
             this.textBox_invoiceBranchCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_invoiceBranchCode.MaxLength = 50;
+            this.textBox_invoiceBranchCode.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_invoiceBranchCode.Name = "textBox_invoiceBranchCode";
             this.textBox_invoiceBranchCode.ReadOnly = true;
             this.textBox_invoiceBranchCode.Size = new System.Drawing.Size(281, 20);
@@ -852,6 +853,7 @@ namespace EtaxInvoice
             this.textBox_invoiceDocNo.Location = new System.Drawing.Point(127, 7);
             this.textBox_invoiceDocNo.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_invoiceDocNo.MaxLength = 50;
+            this.textBox_invoiceDocNo.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_invoiceDocNo.Name = "textBox_invoiceDocNo";
             this.textBox_invoiceDocNo.ReadOnly = true;
             this.textBox_invoiceDocNo.Size = new System.Drawing.Size(239, 20);
@@ -878,6 +880,7 @@ namespace EtaxInvoice
             this.textBox_invoiceDate.Location = new System.Drawing.Point(127, 7);
             this.textBox_invoiceDate.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_invoiceDate.MaxLength = 50;
+            this.textBox_invoiceDate.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_invoiceDate.Name = "textBox_invoiceDate";
             this.textBox_invoiceDate.ReadOnly = true;
             this.textBox_invoiceDate.Size = new System.Drawing.Size(281, 20);
@@ -917,6 +920,7 @@ namespace EtaxInvoice
             this.textBox_CNReason_Other.Location = new System.Drawing.Point(312, 7);
             this.textBox_CNReason_Other.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_CNReason_Other.MaxLength = 50;
+            this.textBox_CNReason_Other.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_CNReason_Other.Name = "textBox_CNReason_Other";
             this.textBox_CNReason_Other.ReadOnly = true;
             this.textBox_CNReason_Other.Size = new System.Drawing.Size(96, 20);
@@ -1044,6 +1048,7 @@ namespace EtaxInvoice
             this.textBox_customerCode.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerCode.MaxLength = 50;
+            this.textBox_customerCode.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerCode.Name = "textBox_customerCode";
             this.textBox_customerCode.ReadOnly = true;
             this.textBox_customerCode.Size = new System.Drawing.Size(283, 20);
@@ -1091,6 +1096,7 @@ namespace EtaxInvoice
             this.textBox_customerAddress.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerAddress.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerAddress.MaxLength = 50;
+            this.textBox_customerAddress.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerAddress.Name = "textBox_customerAddress";
             this.textBox_customerAddress.ReadOnly = true;
             this.textBox_customerAddress.Size = new System.Drawing.Size(283, 20);
@@ -1138,6 +1144,7 @@ namespace EtaxInvoice
             this.textBox_customerName.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerName.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerName.MaxLength = 50;
+            this.textBox_customerName.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerName.Name = "textBox_customerName";
             this.textBox_customerName.ReadOnly = true;
             this.textBox_customerName.Size = new System.Drawing.Size(283, 20);
@@ -1185,6 +1192,7 @@ namespace EtaxInvoice
             this.textBox_customerRoad.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerRoad.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerRoad.MaxLength = 50;
+            this.textBox_customerRoad.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerRoad.Name = "textBox_customerRoad";
             this.textBox_customerRoad.ReadOnly = true;
             this.textBox_customerRoad.Size = new System.Drawing.Size(283, 20);
@@ -1232,6 +1240,7 @@ namespace EtaxInvoice
             this.textBox_customerTaxId.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTaxId.MaxLength = 13;
+            this.textBox_customerTaxId.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerTaxId.Name = "textBox_customerTaxId";
             this.textBox_customerTaxId.ReadOnly = true;
             this.textBox_customerTaxId.Size = new System.Drawing.Size(283, 20);
@@ -1282,6 +1291,7 @@ namespace EtaxInvoice
             this.textBox_customerSubDistrict.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerSubDistrict.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerSubDistrict.MaxLength = 50;
+            this.textBox_customerSubDistrict.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerSubDistrict.Name = "textBox_customerSubDistrict";
             this.textBox_customerSubDistrict.ReadOnly = true;
             this.textBox_customerSubDistrict.Size = new System.Drawing.Size(283, 20);
@@ -1368,6 +1378,7 @@ namespace EtaxInvoice
             this.textBox_customerDistrictName.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerDistrictName.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerDistrictName.MaxLength = 50;
+            this.textBox_customerDistrictName.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerDistrictName.Name = "textBox_customerDistrictName";
             this.textBox_customerDistrictName.ReadOnly = true;
             this.textBox_customerDistrictName.Size = new System.Drawing.Size(132, 20);
@@ -1390,6 +1401,7 @@ namespace EtaxInvoice
             this.textBox_customerDistrictCode.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerDistrictCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerDistrictCode.MaxLength = 50;
+            this.textBox_customerDistrictCode.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerDistrictCode.Name = "textBox_customerDistrictCode";
             this.textBox_customerDistrictCode.ReadOnly = true;
             this.textBox_customerDistrictCode.Size = new System.Drawing.Size(88, 20);
@@ -1426,6 +1438,7 @@ namespace EtaxInvoice
             this.textBox_customerEmail.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerEmail.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerEmail.MaxLength = 50;
+            this.textBox_customerEmail.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerEmail.Name = "textBox_customerEmail";
             this.textBox_customerEmail.ReadOnly = true;
             this.textBox_customerEmail.Size = new System.Drawing.Size(283, 20);
@@ -1500,6 +1513,7 @@ namespace EtaxInvoice
             this.textBox_customerProvinceCode.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerProvinceCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceCode.MaxLength = 50;
+            this.textBox_customerProvinceCode.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerProvinceCode.Name = "textBox_customerProvinceCode";
             this.textBox_customerProvinceCode.ReadOnly = true;
             this.textBox_customerProvinceCode.Size = new System.Drawing.Size(88, 20);
@@ -1511,6 +1525,7 @@ namespace EtaxInvoice
             this.textBox_customerProvinceName.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerProvinceName.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceName.MaxLength = 50;
+            this.textBox_customerProvinceName.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerProvinceName.Name = "textBox_customerProvinceName";
             this.textBox_customerProvinceName.ReadOnly = true;
             this.textBox_customerProvinceName.Size = new System.Drawing.Size(132, 20);
@@ -1551,6 +1566,7 @@ namespace EtaxInvoice
             this.textBox_customerTel.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerTel.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTel.MaxLength = 50;
+            this.textBox_customerTel.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerTel.Name = "textBox_customerTel";
             this.textBox_customerTel.ReadOnly = true;
             this.textBox_customerTel.Size = new System.Drawing.Size(88, 20);
@@ -1565,6 +1581,7 @@ namespace EtaxInvoice
             this.textBox_customerFax.Location = new System.Drawing.Point(320, 6);
             this.textBox_customerFax.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerFax.MaxLength = 50;
+            this.textBox_customerFax.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerFax.Name = "textBox_customerFax";
             this.textBox_customerFax.ReadOnly = true;
             this.textBox_customerFax.Size = new System.Drawing.Size(91, 20);
@@ -1640,6 +1657,7 @@ namespace EtaxInvoice
             this.textBox_customerPostCode.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerPostCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerPostCode.MaxLength = 5;
+            this.textBox_customerPostCode.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerPostCode.Name = "textBox_customerPostCode";
             this.textBox_customerPostCode.ReadOnly = true;
             this.textBox_customerPostCode.Size = new System.Drawing.Size(88, 20);
@@ -1674,6 +1692,7 @@ namespace EtaxInvoice
             // 
             this.textBox_customerCountry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerCountry.Location = new System.Drawing.Point(278, 6);
+            this.textBox_customerCountry.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerCountry.Name = "textBox_customerCountry";
             this.textBox_customerCountry.ReadOnly = true;
             this.textBox_customerCountry.Size = new System.Drawing.Size(90, 20);
@@ -1755,6 +1774,7 @@ namespace EtaxInvoice
             this.textBox_customerCode_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerCode_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerCode_1.MaxLength = 50;
+            this.textBox_customerCode_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerCode_1.Name = "textBox_customerCode_1";
             this.textBox_customerCode_1.ReadOnly = true;
             this.textBox_customerCode_1.Size = new System.Drawing.Size(283, 20);
@@ -1801,6 +1821,7 @@ namespace EtaxInvoice
             this.textBox_customerAddress_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerAddress_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerAddress_1.MaxLength = 50;
+            this.textBox_customerAddress_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerAddress_1.Name = "textBox_customerAddress_1";
             this.textBox_customerAddress_1.ReadOnly = true;
             this.textBox_customerAddress_1.Size = new System.Drawing.Size(283, 20);
@@ -1847,6 +1868,7 @@ namespace EtaxInvoice
             this.textBox_customerName_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerName_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerName_1.MaxLength = 50;
+            this.textBox_customerName_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerName_1.Name = "textBox_customerName_1";
             this.textBox_customerName_1.ReadOnly = true;
             this.textBox_customerName_1.Size = new System.Drawing.Size(283, 20);
@@ -1893,6 +1915,7 @@ namespace EtaxInvoice
             this.textBox_customerRoad_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerRoad_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerRoad_1.MaxLength = 50;
+            this.textBox_customerRoad_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerRoad_1.Name = "textBox_customerRoad_1";
             this.textBox_customerRoad_1.ReadOnly = true;
             this.textBox_customerRoad_1.Size = new System.Drawing.Size(283, 20);
@@ -1939,6 +1962,7 @@ namespace EtaxInvoice
             this.textBox_customerTaxId_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTaxId_1.MaxLength = 13;
+            this.textBox_customerTaxId_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerTaxId_1.Name = "textBox_customerTaxId_1";
             this.textBox_customerTaxId_1.ReadOnly = true;
             this.textBox_customerTaxId_1.Size = new System.Drawing.Size(283, 20);
@@ -1988,6 +2012,7 @@ namespace EtaxInvoice
             this.textBox_customerSubDistrict_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerSubDistrict_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerSubDistrict_1.MaxLength = 50;
+            this.textBox_customerSubDistrict_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerSubDistrict_1.Name = "textBox_customerSubDistrict_1";
             this.textBox_customerSubDistrict_1.ReadOnly = true;
             this.textBox_customerSubDistrict_1.Size = new System.Drawing.Size(283, 20);
@@ -2034,6 +2059,7 @@ namespace EtaxInvoice
             this.textBox_customerWeb_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerWeb_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerWeb_1.MaxLength = 50;
+            this.textBox_customerWeb_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerWeb_1.Name = "textBox_customerWeb_1";
             this.textBox_customerWeb_1.ReadOnly = true;
             this.textBox_customerWeb_1.Size = new System.Drawing.Size(283, 20);
@@ -2098,6 +2124,7 @@ namespace EtaxInvoice
             this.textBox_customerDistrictName_1.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerDistrictName_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerDistrictName_1.MaxLength = 50;
+            this.textBox_customerDistrictName_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerDistrictName_1.Name = "textBox_customerDistrictName_1";
             this.textBox_customerDistrictName_1.ReadOnly = true;
             this.textBox_customerDistrictName_1.Size = new System.Drawing.Size(132, 20);
@@ -2120,6 +2147,7 @@ namespace EtaxInvoice
             this.textBox_customerDistrictCode_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerDistrictCode_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerDistrictCode_1.MaxLength = 50;
+            this.textBox_customerDistrictCode_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerDistrictCode_1.Name = "textBox_customerDistrictCode_1";
             this.textBox_customerDistrictCode_1.ReadOnly = true;
             this.textBox_customerDistrictCode_1.Size = new System.Drawing.Size(88, 20);
@@ -2155,6 +2183,7 @@ namespace EtaxInvoice
             this.textBox_customerEmail_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerEmail_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerEmail_1.MaxLength = 50;
+            this.textBox_customerEmail_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerEmail_1.Name = "textBox_customerEmail_1";
             this.textBox_customerEmail_1.ReadOnly = true;
             this.textBox_customerEmail_1.Size = new System.Drawing.Size(283, 20);
@@ -2228,6 +2257,7 @@ namespace EtaxInvoice
             this.textBox_customerProvinceCode_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerProvinceCode_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceCode_1.MaxLength = 50;
+            this.textBox_customerProvinceCode_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerProvinceCode_1.Name = "textBox_customerProvinceCode_1";
             this.textBox_customerProvinceCode_1.ReadOnly = true;
             this.textBox_customerProvinceCode_1.Size = new System.Drawing.Size(88, 20);
@@ -2239,6 +2269,7 @@ namespace EtaxInvoice
             this.textBox_customerProvinceName_1.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerProvinceName_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceName_1.MaxLength = 50;
+            this.textBox_customerProvinceName_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerProvinceName_1.Name = "textBox_customerProvinceName_1";
             this.textBox_customerProvinceName_1.ReadOnly = true;
             this.textBox_customerProvinceName_1.Size = new System.Drawing.Size(132, 20);
@@ -2278,6 +2309,7 @@ namespace EtaxInvoice
             this.textBox_customerTel_1.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerTel_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTel_1.MaxLength = 50;
+            this.textBox_customerTel_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerTel_1.Name = "textBox_customerTel_1";
             this.textBox_customerTel_1.ReadOnly = true;
             this.textBox_customerTel_1.Size = new System.Drawing.Size(88, 20);
@@ -2292,6 +2324,7 @@ namespace EtaxInvoice
             this.textBox_customerFax_1.Location = new System.Drawing.Point(320, 6);
             this.textBox_customerFax_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerFax_1.MaxLength = 50;
+            this.textBox_customerFax_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerFax_1.Name = "textBox_customerFax_1";
             this.textBox_customerFax_1.ReadOnly = true;
             this.textBox_customerFax_1.Size = new System.Drawing.Size(91, 20);
@@ -2366,6 +2399,7 @@ namespace EtaxInvoice
             this.textBox_customerPostCode_1.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerPostCode_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerPostCode_1.MaxLength = 5;
+            this.textBox_customerPostCode_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerPostCode_1.Name = "textBox_customerPostCode_1";
             this.textBox_customerPostCode_1.ReadOnly = true;
             this.textBox_customerPostCode_1.Size = new System.Drawing.Size(88, 20);
@@ -2400,6 +2434,7 @@ namespace EtaxInvoice
             // 
             this.textBox_customerCountry_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerCountry_1.Location = new System.Drawing.Point(278, 6);
+            this.textBox_customerCountry_1.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerCountry_1.Name = "textBox_customerCountry_1";
             this.textBox_customerCountry_1.ReadOnly = true;
             this.textBox_customerCountry_1.Size = new System.Drawing.Size(90, 20);
@@ -2499,6 +2534,7 @@ namespace EtaxInvoice
             this.textBox_customerCode_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerCode_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerCode_2.MaxLength = 50;
+            this.textBox_customerCode_2.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerCode_2.Name = "textBox_customerCode_2";
             this.textBox_customerCode_2.ReadOnly = true;
             this.textBox_customerCode_2.Size = new System.Drawing.Size(283, 20);
@@ -2545,6 +2581,7 @@ namespace EtaxInvoice
             this.textBox_customerAddress_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerAddress_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerAddress_2.MaxLength = 50;
+            this.textBox_customerAddress_2.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerAddress_2.Name = "textBox_customerAddress_2";
             this.textBox_customerAddress_2.ReadOnly = true;
             this.textBox_customerAddress_2.Size = new System.Drawing.Size(283, 20);
@@ -2591,6 +2628,7 @@ namespace EtaxInvoice
             this.textBox_customerName_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerName_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerName_2.MaxLength = 50;
+            this.textBox_customerName_2.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerName_2.Name = "textBox_customerName_2";
             this.textBox_customerName_2.ReadOnly = true;
             this.textBox_customerName_2.Size = new System.Drawing.Size(283, 20);
@@ -2659,6 +2697,7 @@ namespace EtaxInvoice
             this.textBox_customerTaxId_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTaxId_2.MaxLength = 9;
+            this.textBox_customerTaxId_2.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerTaxId_2.Name = "textBox_customerTaxId_2";
             this.textBox_customerTaxId_2.ReadOnly = true;
             this.textBox_customerTaxId_2.Size = new System.Drawing.Size(283, 20);
@@ -2773,6 +2812,7 @@ namespace EtaxInvoice
             this.textBox_customerEmail_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerEmail_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerEmail_2.MaxLength = 50;
+            this.textBox_customerEmail_2.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerEmail_2.Name = "textBox_customerEmail_2";
             this.textBox_customerEmail_2.ReadOnly = true;
             this.textBox_customerEmail_2.Size = new System.Drawing.Size(283, 20);
@@ -2833,6 +2873,7 @@ namespace EtaxInvoice
             this.textBox_customerProvinceName_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerProvinceName_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceName_2.MaxLength = 50;
+            this.textBox_customerProvinceName_2.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerProvinceName_2.Name = "textBox_customerProvinceName_2";
             this.textBox_customerProvinceName_2.ReadOnly = true;
             this.textBox_customerProvinceName_2.Size = new System.Drawing.Size(283, 20);
@@ -2870,6 +2911,7 @@ namespace EtaxInvoice
             this.textBox_customerTel_2.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerTel_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTel_2.MaxLength = 50;
+            this.textBox_customerTel_2.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerTel_2.Name = "textBox_customerTel_2";
             this.textBox_customerTel_2.ReadOnly = true;
             this.textBox_customerTel_2.Size = new System.Drawing.Size(88, 20);
@@ -2936,6 +2978,7 @@ namespace EtaxInvoice
             this.textBox_customerPostCode_2.Location = new System.Drawing.Point(128, 6);
             this.textBox_customerPostCode_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerPostCode_2.MaxLength = 5;
+            this.textBox_customerPostCode_2.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerPostCode_2.Name = "textBox_customerPostCode_2";
             this.textBox_customerPostCode_2.ReadOnly = true;
             this.textBox_customerPostCode_2.Size = new System.Drawing.Size(88, 20);
@@ -2970,6 +3013,7 @@ namespace EtaxInvoice
             // 
             this.textBox_customerCountry_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_customerCountry_2.Location = new System.Drawing.Point(278, 6);
+            this.textBox_customerCountry_2.MinimumSize = new System.Drawing.Size(0, 23);
             this.textBox_customerCountry_2.Name = "textBox_customerCountry_2";
             this.textBox_customerCountry_2.ReadOnly = true;
             this.textBox_customerCountry_2.Size = new System.Drawing.Size(90, 20);
