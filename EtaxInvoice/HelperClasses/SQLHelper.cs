@@ -25,7 +25,8 @@ namespace EtaxInvoice
         public static string SafeGetDateToString(this SqlDataReader reader, int colIndex)
         {
             if (!reader.IsDBNull(colIndex))
-                return Convert.ToDateTime(reader[colIndex]).ToString("yyyy-MM-dd HH:mm:ss");
+                //return Convert.ToDateTime(reader[colIndex]).ToString("yyyy-MM-dd HH:mm:ss");
+                return Convert.ToDateTime(reader[colIndex]).ToString("yyyy-MM-dd");
             return string.Empty;
         }
         public static int SafeGetInt(this SqlDataReader reader, int colIndex)

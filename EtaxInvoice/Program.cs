@@ -63,9 +63,7 @@ namespace EtaxInvoice
         public static string globalPOSServerPassword = "12345";
         public static string globalStartUserPassword = "12345";
         public static string globalStartUserName = "x10-tester";//"ผู้จัดการสาขา";
-        public static int globalProgramMode = 1;
-
-        public static string testargument = "Meng";
+        public static int globalProgramMode = 2;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -91,7 +89,6 @@ namespace EtaxInvoice
             string recieve_argument = args.Length > 0 ? args[0] : null;   //  extract form name from command line parameter
             if (recieve_argument != null)
             {
-                testargument = recieve_argument;
                 string[] each_rec = recieve_argument.Split('|');
                 if (!validateArguments(each_rec, recieve_argument)) return false;
                 globalBranchNumber = each_rec[0];

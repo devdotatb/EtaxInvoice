@@ -795,9 +795,42 @@ namespace EtaxInvoice
         {
             try
             {
-                if (!ValidateBeforeAPI())
+                if (!Validate_Customer_BeforeAPI())
                 {
                     return;
+                }
+
+                if (Program.globalProgramMode == 1)
+                {
+                    // invoice
+                    if (!Validate_Invoice_BeforeAPI(CurrentInvoice, CurrentInvoiceDetailList, CurrentInvoicePayment,"Invoice"))
+                    {
+                        return;
+                    }
+                }
+                else if (Program.globalProgramMode == 2)
+                {
+                    // invoice
+                    if (REF_CurrentInvoice == null)
+                    {
+                        if (!Validate_Invoice_BeforeAPI(CurrentInvoice, CurrentInvoiceDetailList, CurrentInvoicePayment, "CN"))
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+
+                        if (!Validate_Invoice_BeforeAPI(REF_CurrentInvoice, REF_CurrentInvoiceDetailList, REF_CurrentInvoicePayment, "Ref Invoice"))
+                        {
+                            return;
+                        }
+
+                        if (!Validate_Invoice_BeforeAPI(CurrentInvoice, CurrentInvoiceDetailList, CurrentInvoicePayment, "CN"))
+                        {
+                            return;
+                        }
+                    }
                 }
                 string text = PrintConfirmText;
                 string textheader = "";
@@ -907,7 +940,7 @@ namespace EtaxInvoice
             this.Close();
         }
 
-        public bool ValidateBeforeAPI()
+        public bool Validate_Customer_BeforeAPI()
         {
             if (string.IsNullOrEmpty(Program.globalStartUserName))
             {
@@ -1051,6 +1084,75 @@ namespace EtaxInvoice
             if (string.IsNullOrEmpty(countrycode))
             {
                 errorstring += "ประเทศ,";
+            }
+
+
+            if (errorstring != tmperror)
+            {
+                MessageHelper.ShowError(errorstring.Remove(errorstring.Length - 1));
+                return false;
+            }
+
+            return true;
+        }
+        public bool Validate_Invoice_BeforeAPI(Invoice input_invoice, List<InvoiceDetail> input_invoiceDetails, InvoicePayment input_invoicePayment,string mode)
+        {
+            if (input_invoice == null)
+            {
+                MessageHelper.ShowError(mode + " ไม่พบข้อมูล invoice");
+                return false;
+            }
+            if (input_invoiceDetails == null)
+            {
+                MessageHelper.ShowError(mode + " ไม่พบข้อมูล invoiceDetails");
+                return false;
+            }
+            if (input_invoicePayment == null)
+            {
+                MessageHelper.ShowError(mode + " ไม่พบข้อมูล invoicePayment");
+                return false;
+            }
+            if (string.IsNullOrEmpty(userBu))
+            {
+                MessageHelper.ShowError(mode + " ไม่พบข้อมูล userBu");
+                return false;
+            }
+            string errorstring = mode + " ไม่พบข้อมูล : ";
+            string tmperror = errorstring;
+            if (string.IsNullOrEmpty(input_invoice.FTBchCode))
+            {
+                errorstring += "loc,";
+            }
+            if (string.IsNullOrEmpty(input_invoice.FDDateIns))
+            {
+                errorstring += "receiptDate(date),";
+            }
+            if (string.IsNullOrEmpty(input_invoice.FTTimeIns))
+            {
+                errorstring += "receiptDate(time),";
+            }
+            if (string.IsNullOrEmpty(input_invoice.FTShdDocNo))
+            {
+                errorstring += "FTShdDocNo";
+            }
+            foreach(var each_detail in input_invoiceDetails)
+            {
+                if (string.IsNullOrEmpty(each_detail.FTSdtBarCode))
+                {
+                    errorstring += "FTSdtBarCode";
+                }
+                if (string.IsNullOrEmpty(each_detail.FTPdtName))
+                {
+                    errorstring += "FTPdtName";
+                }
+                if (string.IsNullOrEmpty(each_detail.FTSdtVatType))
+                {
+                    errorstring += "FTSdtVatType";
+                }
+            }
+            if (string.IsNullOrEmpty(input_invoicePayment.FTRcvName))
+            {
+                errorstring += "FTRcvName";
             }
 
 
@@ -1240,7 +1342,7 @@ namespace EtaxInvoice
             building_salesTicket.payments = building_payments;
 
             building_salesTicket.loc = userLoc;
-            building_salesTicket.receiptDate = input_invoice.FDDateIns;
+            building_salesTicket.receiptDate = input_invoice.FDDateIns + " " + input_invoice.FTTimeIns;
             building_salesTicket.ticketNo = input_invoice.FTShdDocNo;
             building_salesTicket.tpNo = input_invoice.FTShdDocNo;
             building_salesTicket.receiptNo = input_invoice.FTShdDocNo;
@@ -1280,7 +1382,7 @@ namespace EtaxInvoice
         public void Callapi_Invoice(InvoiceAPIData data)
         {
             string apiUrl = ETAX_Invoice_EndPoint;
-            string serviceName = "std-genft-document";
+            string serviceName = ETAX_Invoice_EndPoint;
 
             string jsonString = JsonConvert.SerializeObject(data);
 
@@ -1291,7 +1393,7 @@ namespace EtaxInvoice
         public void Callapi_CN(CNAPIData data)
         {
             string apiUrl = ETAX_CN_EndPoint;
-            string serviceName = "std-gencn-document";
+            string serviceName = ETAX_CN_EndPoint;
 
             string jsonString = JsonConvert.SerializeObject(data);
 
@@ -1302,7 +1404,7 @@ namespace EtaxInvoice
         public bool Callapi_Ref_Invoice(InvoiceAPIData data)
         {
             string apiUrl = ETAX_Invoice_EndPoint;
-            string serviceName = "std-genft-document";
+            string serviceName = ETAX_Invoice_EndPoint;
 
             string jsonString = JsonConvert.SerializeObject(data);
 
