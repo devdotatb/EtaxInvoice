@@ -64,6 +64,7 @@ namespace EtaxInvoice
         public static string globalStartUserPassword = "12345";
         public static string globalStartUserName = "x10-tester";//"ผู้จัดการสาขา";
         public static int globalProgramMode = 2;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -83,7 +84,6 @@ namespace EtaxInvoice
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain());    //  use factory method to instantiate form you need to open
         }
-
         static bool SetArguments(string[] args)
         {
             string recieve_argument = args.Length > 0 ? args[0] : null;   //  extract form name from command line parameter
