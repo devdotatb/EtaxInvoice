@@ -951,6 +951,7 @@
             this.tabCustomerDetail.SelectedIndex = 0;
             this.tabCustomerDetail.Size = new System.Drawing.Size(953, 243);
             this.tabCustomerDetail.TabIndex = 2;
+            this.tabCustomerDetail.SelectedIndexChanged += new System.EventHandler(this.tabCustomerDetail_SelectedIndexChanged);
             // 
             // tabPage5
             // 

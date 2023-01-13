@@ -83,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIData\resultAuthAPIData.cs" />
     <Compile Include="APIData\resultAPIData.cs" />
     <Compile Include="APIData\CNAPIData.cs" />
     <Compile Include="APIData\CustomerAPIData.cs" />

@@ -19,9 +19,14 @@ namespace EtaxInvoice
         public string POSnumber { get; set; }
         public List<Invoice> Invoices { get; set; }
         public string CurrentSelectedColumn { get; set; }
+        // INV
         public Invoice CurrentInvoice { get; set; }
         public List<InvoiceDetail> CurrentInvoiceDetailList { get; set; }
         public InvoicePayment CurrentInvoicePayment { get; set; }
+        // REF INV
+        public Invoice REF_CurrentInvoice { get; set; }
+        public List<InvoiceDetail> REF_CurrentInvoiceDetailList { get; set; }
+        public InvoicePayment REF_CurrentInvoicePayment { get; set; }
         public frmInvoiceSearch()
         {
             InitializeComponent();
@@ -66,8 +71,7 @@ namespace EtaxInvoice
             if (isToday)
             {
                 // 001 002 003
-                sql = string.Format(@"
-select FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo
+                sql = string.Format(@"select FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo
 , FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat
 , FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate , FTShdPosCN
 from TSHD{0} HD with(nolock)
@@ -76,8 +80,7 @@ where isnull(FTShdDocVatFull,'') = '' and FTShdStaDoc = '1' and FTShdDocNo like 
             else
             {
                 // TPSTSalHD
-                sql = string.Format(@"select 
-FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo, 
+                sql = string.Format(@"select FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo, 
 FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat, 
 FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate , FTShdPosCN
 from TPSTSalHD HD with(nolock)
@@ -160,6 +163,12 @@ where isnull(FTShdDocVatFull,'') = ''  and FTShdDocNo like '{0}%'", isCN ? "R" :
             }
             saveDetail();
             savePayment();
+            if (isCN)
+            {
+                CN_saveRef_INV();
+                CN_saveRef_INVDetail();
+                CN_saveRef_INVPayment();
+            }
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -217,7 +226,7 @@ where isnull(HD.FTShdDocVatFull,'') = '' and DT.FTShdDocNo = '{0}'", this.Curren
             if (isToday)
             {
                 // 001 002 003
-                sql = string.Format(@"select RC.FCSrcNet, RC.FTRcvName, RC.FTSrcRef, HD.FTShdPosCN 
+                sql = string.Format(@"select RC.FCSrcNet, RC.FTRcvName, RC.FTSrcRef
 from TSHD{0} HD with(nolock)
 left join TSRC{0} RC with(nolock) on HD.FTShdDocNo = RC.FTShdDocNo
 where isnull(HD.FTShdDocVatFull,'') = '' and HD.FTShdStaDoc = '1' and RC.FTShdDocNo = '{1}'", this.POSnumber, this.CurrentInvoice.FTShdDocNo);
@@ -225,7 +234,7 @@ where isnull(HD.FTShdDocVatFull,'') = '' and HD.FTShdStaDoc = '1' and RC.FTShdDo
             else
             {
                 // TPSTSalHD
-                sql = string.Format(@"select RC.FCSrcNet, RC.FTRcvName, RC.FTSrcRef, HD.FTShdPosCN 
+                sql = string.Format(@"select RC.FCSrcNet, RC.FTRcvName, RC.FTSrcRef
 from TPSTSalHD HD with(nolock)
 left join TPSTSalRC RC with(nolock) on HD.FTShdDocNo = RC.FTShdDocNo
 where isnull(FTShdDocVatFull,'') = '' and RC.FTShdDocNo = '{0}'", this.CurrentInvoice.FTShdDocNo);
@@ -241,13 +250,150 @@ where isnull(FTShdDocVatFull,'') = '' and RC.FTShdDocNo = '{0}'", this.CurrentIn
                     FCSrcNet = SQLHelper.SafeGetDecimal(reader, 0),
                     FTRcvName = SQLHelper.SafeGetString(reader, 1),
                     FTSrcRef = SQLHelper.SafeGetString(reader, 2),
-                    FTShdPosCN = SQLHelper.SafeGetString(reader, 3),
                 };
                 result.Add(each_data);
             }
             if (result.Any())
             {
                 this.CurrentInvoicePayment = result.FirstOrDefault();
+            }
+        }
+        private void CN_saveRef_INV()
+        {
+            var ref_invoice = CurrentInvoice.FTShdPosCN;
+            var ref_POSNumber = CurrentInvoice.FTShdPosCN.Substring(8,3);
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"select FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo
+, FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat
+, FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate , FTShdPosCN
+from TSHD{0} HD with(nolock)
+where isnull(FTShdDocVatFull,'') = '' and FTShdStaDoc = '1' and FTShdDocNo like '{1}'
+union all
+select FTBchCode, FDDateIns, FTTimeIns, FTShdDocNo, 
+FCShdTotal, FCShdVat, FCShdVatable, FCShdNonVat, 
+FCShdDis, FCShdB4DisChg, FCShdGndAE , FCShdAftDisChg , FCShdVatRate , FDShdDocDate , FTShdPosCN
+from TPSTSalHD HD with(nolock)
+where isnull(FTShdDocVatFull,'') = ''  and FTShdDocNo like '{1}'", ref_POSNumber, ref_invoice);
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            var result = new List<Invoice>();
+            while (reader.Read())
+            {
+                var each_data = new Invoice
+                {
+                    FTBchCode = SQLHelper.SafeGetString(reader, 0),
+                    FDDateIns = SQLHelper.SafeGetDateToString(reader, 1),
+                    FTTimeIns = SQLHelper.SafeGetString(reader, 2),
+                    FTShdDocNo = SQLHelper.SafeGetString(reader, 3),
+                    FCShdTotal = SQLHelper.SafeGetDecimal(reader, 4),
+                    FCShdVat = SQLHelper.SafeGetDecimal(reader, 5),
+                    FCShdVatable = SQLHelper.SafeGetDecimal(reader, 6),
+                    FCShdNonVat = SQLHelper.SafeGetDecimal(reader, 7),
+                    FCShdDis = SQLHelper.SafeGetDecimal(reader, 8),
+                    FCShdB4DisChg = SQLHelper.SafeGetDecimal(reader, 9),
+                    FCShdGndAE = SQLHelper.SafeGetDecimal(reader, 10),
+                    FCShdAftDisChg = SQLHelper.SafeGetDecimal(reader, 11),
+                    FCShdVatRate = SQLHelper.SafeGetDecimal(reader, 12),
+                    FDShdDocDate = SQLHelper.SafeGetDate(reader, 13),
+                    FTShdPosCN = SQLHelper.SafeGetString(reader, 14),
+                };
+                result.Add(each_data);
+            }
+            if (result.Any())
+            {
+                this.REF_CurrentInvoice = result.First();
+            }
+        }
+        private void CN_saveRef_INVDetail()
+        {
+            var ref_invoice = CurrentInvoice.FTShdPosCN;
+            var ref_POSNumber = CurrentInvoice.FTShdPosCN.Substring(8, 3);
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"select DT.FNSdtSeqNo, DT.FTSdtBarCode, DT.FTPdtName, DT.FTPdtCode, DT.FCSdtQty, DT.FCSdtDis, DT.FCSdtFootAvg, DT.FCSdtNet, DT.FCSdtB4DisChg, DT.FCSdtSetPrice, DT.FCSdtVat, DT.FTSdtVatType 
+from TPSTSalHD HD with(nolock)
+left join TPSTSalDT DT with(nolock) on HD.FTShdDocNo = DT.FTShdDocNo
+where isnull(HD.FTShdDocVatFull,'') = '' and DT.FTShdDocNo = '{1}'
+
+union all 
+
+select DT.FNSdtSeqNo, DT.FTSdtBarCode, DT.FTPdtName, DT.FTPdtCode, DT.FCSdtQty, DT.FCSdtDis, DT.FCSdtFootAvg, DT.FCSdtNet, DT.FCSdtB4DisChg, DT.FCSdtSetPrice, DT.FCSdtVat, DT.FTSdtVatType 
+from TSHD{0} HD with(nolock)
+left join TSDT{0} DT with(nolock) on HD.FTShdDocNo = DT.FTShdDocNo
+where isnull(HD.FTShdDocVatFull,'') = '' and HD.FTShdStaDoc = '1' and DT.FTShdDocNo = '{1}'", ref_POSNumber, ref_invoice);
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            var result = new List<InvoiceDetail>();
+            while (reader.Read())
+            {
+                var each_data = new InvoiceDetail
+                {
+                    FNSdtSeqNo = SQLHelper.SafeGetDecimal(reader, 0),
+                    FTSdtBarCode = SQLHelper.SafeGetString(reader, 1),
+                    FTPdtName = SQLHelper.SafeGetString(reader, 2),
+                    FTPdtCode = SQLHelper.SafeGetString(reader, 3),
+                    FCSdtQty = SQLHelper.SafeGetDecimal(reader, 4),
+                    FCSdtDis = SQLHelper.SafeGetDecimal(reader, 5),
+                    FCSdtFootAvg = SQLHelper.SafeGetDecimal(reader, 6),
+                    FCSdtNet = SQLHelper.SafeGetDecimal(reader, 7),
+                    FCSdtB4DisChg = SQLHelper.SafeGetDecimal(reader, 8),
+                    FCSdtSetPrice = SQLHelper.SafeGetDecimal(reader, 9),
+                    FCSdtVat = SQLHelper.SafeGetDecimal(reader, 10),
+                    FTSdtVatType = SQLHelper.SafeGetString(reader, 11),
+                };
+                result.Add(each_data);
+            }
+            if (result.Any())
+            {
+                this.REF_CurrentInvoiceDetailList = result;
+            }
+        }
+        private void CN_saveRef_INVPayment()
+        {
+            var ref_invoice = CurrentInvoice.FTShdPosCN;
+            var ref_POSNumber = CurrentInvoice.FTShdPosCN.Substring(8, 3);
+
+            string connstr = ConfigHelper.ConnectionString;
+            SqlConnection connection = new SqlConnection(connstr);
+            string sql = string.Format(@"select RC.FCSrcNet, RC.FTRcvName, RC.FTSrcRef, HD.FTShdPosCN
+
+from TPSTSalHD HD with(nolock)
+
+left join TPSTSalRC RC with(nolock) on HD.FTShdDocNo = RC.FTShdDocNo
+
+where isnull(FTShdDocVatFull,'') = '' and RC.FTShdDocNo = '{1}'
+
+union all
+
+select RC.FCSrcNet, RC.FTRcvName, RC.FTSrcRef, HD.FTShdPosCN
+
+from TSHD{0} HD with(nolock)
+
+left join TSRC{0} RC with(nolock) on HD.FTShdDocNo = RC.FTShdDocNo
+
+where isnull(HD.FTShdDocVatFull,'') = '' and HD.FTShdStaDoc = '1' and RC.FTShdDocNo = '{1}'", ref_POSNumber, ref_invoice);
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            var result = new List<InvoicePayment>();
+            while (reader.Read())
+            {
+                var each_data = new InvoicePayment
+                {
+                    FCSrcNet = SQLHelper.SafeGetDecimal(reader, 0),
+                    FTRcvName = SQLHelper.SafeGetString(reader, 1),
+                    FTSrcRef = SQLHelper.SafeGetString(reader, 2),
+                };
+                result.Add(each_data);
+            }
+            if (result.Any())
+            {
+                this.REF_CurrentInvoicePayment = result.FirstOrDefault();
             }
         }
         private void textBox_search_TextChanged(object sender, EventArgs e)

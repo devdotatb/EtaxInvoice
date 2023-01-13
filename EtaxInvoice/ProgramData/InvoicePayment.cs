@@ -11,6 +11,5 @@ namespace EtaxInvoice
         public decimal FCSrcNet { get; set; }
         public string FTRcvName { get; set; }
         public string FTSrcRef { get; set; }
-        public string FTShdPosCN { get; set; }
     }
 }

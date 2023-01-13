@@ -13,6 +13,8 @@ using System.Windows.Forms;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Net;
+using System.IO;
 
 namespace EtaxInvoice
 {
@@ -29,17 +31,28 @@ namespace EtaxInvoice
         public static string Web_Service_Timeout;
         public static string b2cauthorize = "test";
         public static string otherCNreasoncode = "CDNG99";
+        public static string auth_grant_type = "client_credentials";
+        public static string auth_scope = "https://centralgroupb2cdev.onmicrosoft.com/6aa53a06-30c0-438f-88ae-e337707de8f5/.default";
 
         public static string PrintConfirmText;
         private CustomerTypeDefault customerTypeDefault { get; set; } = new CustomerTypeDefault();
         private Customer CurrentCustomer { get; set; }
-        private Invoice CurrentInvoice { get; set; }
-        private Country CurrentCountry { get; set; } = new Country();
+        private Country CurrentCountry_0 { get; set; } = new Country();
+        private Country CurrentCountry_1 { get; set; } = new Country();
+        private Country CurrentCountry_2 { get; set; } = new Country();
         private ReasonCN CurrentReasonCN { get; set; }
-        public List<InvoiceDetail> CurrentInvoiceDetailList { get; set; }
         public List<Country> CountryList { get; set; }
-        private InvoicePayment CurrentInvoicePayment { get; set; }
         public string APIEmail { get; set; }
+
+        // INV
+        public Invoice CurrentInvoice { get; set; }
+        public List<InvoiceDetail> CurrentInvoiceDetailList { get; set; }
+        public InvoicePayment CurrentInvoicePayment { get; set; }
+        // REF INV
+        public Invoice REF_CurrentInvoice { get; set; }
+        public List<InvoiceDetail> REF_CurrentInvoiceDetailList { get; set; }
+        public InvoicePayment REF_CurrentInvoicePayment { get; set; }
+
         public frmMain()
         {
             InitializeComponent();
@@ -47,12 +60,14 @@ namespace EtaxInvoice
             CountryList = SQLHelper.LoadCountry();
             comboBox_CNReason.DataSource = SQLHelper.LoadReasonCN();
             LoadConfig();
-            DefaultData_Fortest_removed_required();
+            DefaultData_Fortest_removing_required();
         }
-        private void DefaultData_Fortest_removed_required()
+        private void DefaultData_Fortest_removing_required()
         {
             userBu = "CFR";
             userLoc = "6001";
+            Client_ID = "0a59924a-e33e-4faa-a8d5-57101c48879f";
+            Client_Secret = "pEZ8Q~8J-rr-MZdGlF_087CYUR1aiHcxu55Bvdoz";
         }
         private void button_testCN_Click(object sender, EventArgs e)
         {
@@ -146,12 +161,12 @@ namespace EtaxInvoice
                     {
                         cnty = findingcnty.FirstOrDefault();
                     }
-                    this.CurrentCountry = cnty;
 
                     switch (tabCustomerDetail.SelectedIndex)
                     {
                         case 0:
                             {
+                                this.CurrentCountry_0 = cnty;
                                 this.textBox_customerCode.Text = cus.FTCstCode;
                                 this.textBox_customerName.Text = cus.FTCstName;
                                 this.textBox_customerTaxId.Text = cus.FTCstTaxNo;
@@ -172,6 +187,7 @@ namespace EtaxInvoice
                             }
                         case 1:
                             {
+                                this.CurrentCountry_1 = cnty;
                                 this.textBox_customerCode_1.Text = cus.FTCstCode;
                                 this.textBox_customerName_1.Text = cus.FTCstName;
                                 this.textBox_customerTaxId_1.Text = cus.FTCstTaxNo;
@@ -194,6 +210,7 @@ namespace EtaxInvoice
 
                         case 2:
                             {
+                                this.CurrentCountry_2 = cnty;
                                 this.textBox_customerCode_2.Text = cus.FTCstCode;
                                 this.textBox_customerName_2.Text = cus.FTCstName;
                                 this.textBox_customerTaxId_2.Text = cus.FTCstTaxNo;
@@ -279,6 +296,11 @@ namespace EtaxInvoice
                     this.CurrentInvoice = frm.CurrentInvoice;
                     this.CurrentInvoiceDetailList = frm.CurrentInvoiceDetailList;
                     this.CurrentInvoicePayment = frm.CurrentInvoicePayment;
+                    // CN 
+
+                    this.REF_CurrentInvoice = frm.REF_CurrentInvoice;
+                    this.REF_CurrentInvoiceDetailList = frm.REF_CurrentInvoiceDetailList;
+                    this.REF_CurrentInvoicePayment = frm.REF_CurrentInvoicePayment;
 
 
                     textBox_invoiceDocNo.Text = inv.FTShdDocNo;
@@ -316,19 +338,20 @@ namespace EtaxInvoice
                 if (result == DialogResult.OK)
                 {
                     Country cus = frm.CurrentCountry;
-                    this.CurrentCountry = cus;
 
                     switch (tabCustomerDetail.SelectedIndex)
                     {
 
                         case 0:
                             {
+                                this.CurrentCountry_0 = cus;
                                 this.textBox_customerCountry.Text = cus.FTCYDescTh;
 
                                 break;
                             }
                         case 1:
                             {
+                                this.CurrentCountry_1 = cus;
                                 this.textBox_customerCountry_1.Text = cus.FTCYDescTh;
 
                                 break;
@@ -336,6 +359,7 @@ namespace EtaxInvoice
 
                         case 2:
                             {
+                                this.CurrentCountry_2 = cus;
                                 this.textBox_customerCountry_2.Text = cus.FTCYDescTh;
 
                                 break;
@@ -586,7 +610,7 @@ namespace EtaxInvoice
                         addCustomerdata.customerFax = textBox_customerFax.Text;
                         addCustomerdata.customerEmail = textBox_customerEmail.Text;
                         addCustomerdata.customerWeb = "";
-                        addCustomerdata.countrycode = CurrentCountry.FTCYCode;
+                        addCustomerdata.countrycode = CurrentCountry_0.FTCYCode;
                         addCustomerdata.customerType = customerTypeDefault.NIDN;
 
                         break;
@@ -606,7 +630,7 @@ namespace EtaxInvoice
                         addCustomerdata.customerFax = textBox_customerFax_1.Text;
                         addCustomerdata.customerEmail = textBox_customerEmail_1.Text;
                         addCustomerdata.customerWeb = textBox_customerWeb_1.Text;
-                        addCustomerdata.countrycode = CurrentCountry.FTCYCode;
+                        addCustomerdata.countrycode = CurrentCountry_1.FTCYCode;
                         addCustomerdata.customerType = customerTypeDefault.TXID;
 
                         break;
@@ -621,7 +645,7 @@ namespace EtaxInvoice
                         addCustomerdata.customerPostCode = textBox_customerPostCode_2.Text;
                         addCustomerdata.customerTel = textBox_customerTel_2.Text;
                         addCustomerdata.customerEmail = textBox_customerEmail_2.Text;
-                        addCustomerdata.countrycode = CurrentCountry.FTCYCode;
+                        addCustomerdata.countrycode = CurrentCountry_2.FTCYCode;
                         addCustomerdata.customerType = customerTypeDefault.CCPT;
 
                         break;
@@ -839,14 +863,28 @@ namespace EtaxInvoice
                             if (Program.globalProgramMode == 1)
                             {
                                 // invoice
-                                InvoiceAPIData built = BuildInvoiceAPIdata();
+                                InvoiceAPIData built = BuildInvoiceAPIdata(CurrentInvoice, CurrentInvoiceDetailList, CurrentInvoicePayment);
                                 Callapi_Invoice(built);
                             }
                             else if (Program.globalProgramMode == 2)
                             {
-                                // CN
-                                CNAPIData built = BuildCNAPIdata();
-                                Callapi_CN(built);
+                                // invoice
+                                if (REF_CurrentInvoice == null)
+                                {
+                                    // CN
+                                    CNAPIData CN_built = BuildCNAPIdata();
+                                    Callapi_CN(CN_built);
+                                }
+                                else
+                                {
+                                    InvoiceAPIData built = BuildInvoiceAPIdata(REF_CurrentInvoice, REF_CurrentInvoiceDetailList, REF_CurrentInvoicePayment);
+                                    if (Callapi_Ref_Invoice(built))
+                                    {
+                                        // CN
+                                        CNAPIData CN_built = BuildCNAPIdata();
+                                        Callapi_CN(CN_built);
+                                    }
+                                }
                             }
                         }
                         break;
@@ -929,7 +967,7 @@ namespace EtaxInvoice
                         customerDistrictName = textBox_customerDistrictName.Text;
                         customerProvinceName = textBox_customerProvinceName.Text;
                         customerPostCode = textBox_customerPostCode.Text;
-                        countrycode = CurrentCountry.FTCYCode;
+                        countrycode = CurrentCountry_0.FTCYCode;
                         customerType = customerTypeDefault.NIDN;
 
                         break;
@@ -944,7 +982,7 @@ namespace EtaxInvoice
                         customerDistrictName = textBox_customerDistrictName_1.Text;
                         customerProvinceName = textBox_customerProvinceName_1.Text;
                         customerPostCode = textBox_customerPostCode_1.Text;
-                        countrycode = CurrentCountry.FTCYCode;
+                        countrycode = CurrentCountry_1.FTCYCode;
                         customerType = customerTypeDefault.TXID;
 
                         break;
@@ -958,7 +996,7 @@ namespace EtaxInvoice
                         customerAddress = textBox_customerAddress_2.Text;
                         customerProvinceName = textBox_customerProvinceName_2.Text;
                         customerPostCode = textBox_customerPostCode_2.Text;
-                        countrycode = CurrentCountry.FTCYCode;
+                        countrycode = CurrentCountry_2.FTCYCode;
                         customerType = customerTypeDefault.CCPT;
 
                         break;
@@ -1024,7 +1062,7 @@ namespace EtaxInvoice
 
             return true;
         }
-        public InvoiceAPIData BuildInvoiceAPIdata()
+        public InvoiceAPIData BuildInvoiceAPIdata(Invoice input_invoice, List<InvoiceDetail> input_invoiceDetails, InvoicePayment input_invoicePayment)
         {
             var sendingdata = new InvoiceAPIData();
 
@@ -1036,7 +1074,7 @@ namespace EtaxInvoice
             sendingdata.userRole = "admin";
 
             sendingdata.customer = Build_CustomerData(isCN: false);
-            sendingdata.saleData = Build_SaleData(isCN: false);
+            sendingdata.saleData = Build_SaleData(input_invoice, input_invoiceDetails, input_invoicePayment, isCN: false);
 
             return sendingdata;
         }
@@ -1051,10 +1089,10 @@ namespace EtaxInvoice
             sendingdata.userLoc = userLoc;
             sendingdata.userRole = "admin";
             sendingdata.purposeCode = CurrentReasonCN.FTRsnCNCode;
-            sendingdata.purposeDesc = CurrentReasonCN.FTRsnCNCode == otherCNreasoncode ? textBox_CNReason_Other.Text: CurrentReasonCN.FTRsnCNDescEn;
+            sendingdata.purposeDesc = CurrentReasonCN.FTRsnCNCode == otherCNreasoncode ? textBox_CNReason_Other.Text : CurrentReasonCN.FTRsnCNDescEn;
 
             sendingdata.customer = Build_CustomerData(isCN: true);
-            sendingdata.saleData = Build_SaleData(isCN: true);
+            sendingdata.saleData = Build_SaleData(CurrentInvoice, CurrentInvoiceDetailList, CurrentInvoicePayment, isCN: true);
 
             return sendingdata;
         }
@@ -1084,8 +1122,8 @@ namespace EtaxInvoice
                         building_customer.district = textBox_customerDistrictName.Text;
                         building_customer.province = textBox_customerProvinceName.Text;
                         building_customer.postcode = textBox_customerPostCode.Text;
-                        building_customer.country = CurrentCountry.FTCYDescTh;
-                        building_customer.countryCode = CurrentCountry.FTCYCode;
+                        building_customer.country = CurrentCountry_0.FTCYDescTh;
+                        building_customer.countryCode = CurrentCountry_0.FTCYCode;
                         building_customer.tel = textBox_customerTel.Text;
                         building_customer.fax = textBox_customerFax.Text;
                         building_customer.email = APIEmail;
@@ -1112,8 +1150,8 @@ namespace EtaxInvoice
                         building_customer.district = textBox_customerDistrictName_1.Text;
                         building_customer.province = textBox_customerProvinceName_1.Text;
                         building_customer.postcode = textBox_customerPostCode_1.Text;
-                        building_customer.country = CurrentCountry.FTCYDescTh;
-                        building_customer.countryCode = CurrentCountry.FTCYCode;
+                        building_customer.country = CurrentCountry_1.FTCYDescTh;
+                        building_customer.countryCode = CurrentCountry_1.FTCYCode;
                         building_customer.tel = textBox_customerTel_1.Text;
                         building_customer.fax = textBox_customerFax_1.Text;
                         building_customer.email = APIEmail;
@@ -1141,8 +1179,8 @@ namespace EtaxInvoice
                         building_customer.district = "";
                         building_customer.province = textBox_customerProvinceName_2.Text;
                         building_customer.postcode = textBox_customerPostCode_2.Text;
-                        building_customer.country = CurrentCountry.FTCYDescTh;
-                        building_customer.countryCode = CurrentCountry.FTCYCode;
+                        building_customer.country = CurrentCountry_2.FTCYDescTh;
+                        building_customer.countryCode = CurrentCountry_2.FTCYCode;
                         building_customer.tel = textBox_customerTel_2.Text;
                         building_customer.fax = "";
                         building_customer.email = APIEmail;
@@ -1155,16 +1193,16 @@ namespace EtaxInvoice
             return building_customer;
 
         }
-        public SaleDataAPIData Build_SaleData(bool isCN = false)
+        public SaleDataAPIData Build_SaleData(Invoice input_invoice, List<InvoiceDetail> input_invoiceDetails, InvoicePayment input_invoicePayment, bool isCN = false)
         {
             SaleDataAPIData building_saledata = new SaleDataAPIData();
             building_saledata.bu = userBu;
-            building_saledata.total = CurrentInvoiceDetailList.Sum(t => t.FCSdtQty);
+            building_saledata.total = input_invoiceDetails.Sum(t => t.FCSdtQty);
 
             SalesTicketAPIData building_salesTicket = new SalesTicketAPIData();
 
             List<ProductAPIData> building_products = new List<ProductAPIData>();
-            foreach (var invdt in CurrentInvoiceDetailList)
+            foreach (var invdt in input_invoiceDetails)
             {
                 var each_product = new ProductAPIData();
                 each_product.seq = invdt.FNSdtSeqNo;
@@ -1195,43 +1233,43 @@ namespace EtaxInvoice
             var each_payment = new PaymentAPIData();
             each_payment.paymentType = "";
             each_payment.tenderCode = "";
-            each_payment.saleAmt = CurrentInvoicePayment.FCSrcNet;
-            each_payment.paymentDescription = CurrentInvoicePayment.FTRcvName;
-            each_payment.paymentMediaNumber = CurrentInvoicePayment.FTSrcRef;
+            each_payment.saleAmt = input_invoicePayment.FCSrcNet;
+            each_payment.paymentDescription = input_invoicePayment.FTRcvName;
+            each_payment.paymentMediaNumber = input_invoicePayment.FTSrcRef;
             building_payments.Add(each_payment);
             building_salesTicket.payments = building_payments;
 
             building_salesTicket.loc = userLoc;
-            building_salesTicket.receiptDate = CurrentInvoice.FDDateIns;
-            building_salesTicket.ticketNo = CurrentInvoice.FTShdDocNo;
-            building_salesTicket.tpNo = CurrentInvoice.FTShdDocNo;
-            building_salesTicket.receiptNo = CurrentInvoice.FTShdDocNo;
-            building_salesTicket.totalSaleAmt = CurrentInvoice.FCShdTotal;
-            building_salesTicket.totalVatSaleAmt = CurrentInvoice.FCShdVat + CurrentInvoice.FCShdVatable;
-            building_salesTicket.totalNetSaleAmt = CurrentInvoice.FCShdNonVat + CurrentInvoice.FCShdVatable;
-            building_salesTicket.totalVatItemAmt = CurrentInvoice.FCShdVatable;
-            building_salesTicket.totalNonVatItemAmt = CurrentInvoice.FCShdNonVat;
+            building_salesTicket.receiptDate = input_invoice.FDDateIns;
+            building_salesTicket.ticketNo = input_invoice.FTShdDocNo;
+            building_salesTicket.tpNo = input_invoice.FTShdDocNo;
+            building_salesTicket.receiptNo = input_invoice.FTShdDocNo;
+            building_salesTicket.totalSaleAmt = input_invoice.FCShdTotal;
+            building_salesTicket.totalVatSaleAmt = input_invoice.FCShdVat + input_invoice.FCShdVatable;
+            building_salesTicket.totalNetSaleAmt = input_invoice.FCShdNonVat + input_invoice.FCShdVatable;
+            building_salesTicket.totalVatItemAmt = input_invoice.FCShdVatable;
+            building_salesTicket.totalNonVatItemAmt = input_invoice.FCShdNonVat;
             building_salesTicket.transType = "";
             building_salesTicket.template_type = isCN ? "CN" : "Sales";
-            building_salesTicket.taxValue = CurrentInvoice.FCShdVat;
-            building_salesTicket.totalQty = CurrentInvoiceDetailList.Sum(t => t.FCSdtQty);
-            building_salesTicket.totalDiscount = CurrentInvoice.FCShdDis;
-            building_salesTicket.totalAmtExdiscount = CurrentInvoice.FCShdB4DisChg;
-            building_salesTicket.receiptNumber = CurrentInvoice.FTShdDocNo;
-            building_salesTicket.barcodeComplete = CurrentInvoice.FTShdDocNo;
+            building_salesTicket.taxValue = input_invoice.FCShdVat;
+            building_salesTicket.totalQty = input_invoiceDetails.Sum(t => t.FCSdtQty);
+            building_salesTicket.totalDiscount = input_invoice.FCShdDis;
+            building_salesTicket.totalAmtExdiscount = input_invoice.FCShdB4DisChg;
+            building_salesTicket.receiptNumber = input_invoice.FTShdDocNo;
+            building_salesTicket.barcodeComplete = input_invoice.FTShdDocNo;
             building_salesTicket.remainderAmt = 0;
-            building_salesTicket.depositAmt = CurrentInvoice.FCShdGndAE;
+            building_salesTicket.depositAmt = input_invoice.FCShdGndAE;
             building_salesTicket.orderNo = "";
 
             if (isCN)
             {
                 building_salesTicket.refTicket = new RefTicketAPIData()
                 {
-                    tpNo = CurrentInvoice.FTShdPosCN,
-                    receiptNo = CurrentInvoice.FTShdPosCN,
-                    totalSaleAmt = CurrentInvoice.FCShdTotal,
-                    correctAmt = CurrentInvoice.FCShdTotal,
-                    variance = CurrentInvoice.FCShdTotal - CurrentInvoice.FCShdTotal,
+                    tpNo = input_invoice.FTShdPosCN,
+                    receiptNo = input_invoice.FTShdPosCN,
+                    totalSaleAmt = input_invoice.FCShdTotal,
+                    correctAmt = input_invoice.FCShdTotal,
+                    variance = input_invoice.FCShdTotal - input_invoice.FCShdTotal,
                 };
             }
 
@@ -1261,108 +1299,255 @@ namespace EtaxInvoice
 
             CallApi_share(apiUrl, serviceName, base64String);
         }
+        public bool Callapi_Ref_Invoice(InvoiceAPIData data)
+        {
+            string apiUrl = ETAX_Invoice_EndPoint;
+            string serviceName = "std-genft-document";
+
+            string jsonString = JsonConvert.SerializeObject(data);
+
+            string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(jsonString));
+
+            return CallApi_CreateRef(apiUrl, serviceName, base64String);
+        }
         public void CallApi_share(string apiUrl, string serviceName, string base64String)
         {
-            using (var client = new HttpClient())
+            string Bearer_api_key = CallApi_Auth();
+            if (Bearer_api_key == null)
             {
-                client.Timeout = TimeSpan.FromSeconds(5);
-
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                //client.DefaultRequestHeaders.Add("Authorization", "Bearer your-api-key");
-                client.DefaultRequestHeaders.Add("b2cauthorize", b2cauthorize);
-                client.DefaultRequestHeaders.Add("api-key", API_Key);
-
-                //var payload = new StringContent(base64String);
-
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
-                request.Content = new StringContent(base64String, Encoding.UTF8, "text/plain");
-
-                HttpResponseMessage response = client.SendAsync(request).Result;
-                string responseContent = response.Content.ReadAsStringAsync().Result;
-                var obj_result = JsonConvert.DeserializeObject<resultAPIData>(responseContent);
-
-                SaveLog(serviceName, base64String, responseContent, response.StatusCode.ToString(), obj_result.statusMessage);
-
-                if (response.IsSuccessStatusCode)
+                return;
+            }
+            try
+            {
+                using (var client = new HttpClient())
                 {
-
-                    string pdflink = "";
-                    if (obj_result.statusCode == "SUC023")
+                    if (!string.IsNullOrWhiteSpace(Web_Service_Timeout))
                     {
-                        //duplicate
-                        var obj_result_full = JsonConvert.DeserializeObject<resultSuccessDuplicateAPIData>(responseContent);
-                        pdflink = obj_result_full.data.pdfURL.FirstOrDefault();
-
-                        string text = obj_result.statusMessage;
-                        string textheader = "";
-                        var result = MessageHelper.ShowInfo(text, textheader);
-                        if (result == DialogResult.OK)
+                        int output;
+                        if (int.TryParse(Web_Service_Timeout, out output))
                         {
-                            string text_p = "คลิก OK เพื่อแสดงเอกสาร";
-                            string textheader_p = "";
-                            var result_p = MessageHelper.ShowInfo(text_p, textheader_p);
-                            if (result_p == DialogResult.OK)
-                            {
-                                System.Diagnostics.Process.Start(pdflink);
-                            }
-                        }
-                    }
-                    else if (obj_result.statusCode == "SUC004")
-                    {
-                        //new
-                        var obj_result_full = JsonConvert.DeserializeObject<resultSuccessNewAPIData>(responseContent);
-                        pdflink = obj_result_full.data.pdfURL;
-
-                        string text = "ระบบได้ดำเนินการส่งรายละเอียด\nเพื่อสร้างเอกสารอิเล็กทรอนิกส์เรียบร้อยแล้ว\nโดยนำส่งตาม E-mail ที่มีการระบุไว้";
-                        string textheader = "";
-                        var result = MessageHelper.ShowInfo(text, textheader);
-                        if (result == DialogResult.OK)
-                        {
-                            string text_p = "คลิก OK เพื่อแสดงเอกสาร";
-                            string textheader_p = "";
-                            var result_p = MessageHelper.ShowInfo(text_p, textheader_p);
-                            if (result_p == DialogResult.OK)
-                            {
-                                System.Diagnostics.Process.Start(pdflink);
-                            }
+                            client.Timeout = TimeSpan.FromSeconds(int.Parse(Web_Service_Timeout));
                         }
                     }
 
-                    else if (obj_result.statusCode == "SUC006")
-                    {
-                        //CN
-                        var obj_result_full = JsonConvert.DeserializeObject<resultSuccessNewAPIData>(responseContent);
-                        pdflink = obj_result_full.data.pdfURL;
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Bearer_api_key);
+                    client.DefaultRequestHeaders.Add("b2cauthorize", b2cauthorize);
+                    client.DefaultRequestHeaders.Add("api-key", API_Key);
 
-                        string text = "ระบบได้ดำเนินการส่งรายละเอียด\nเพื่อสร้างเอกสารอิเล็กทรอนิกส์เรียบร้อยแล้ว\nโดยนำส่งตาม E-mail ที่มีการระบุไว้";
-                        string textheader = "";
-                        var result = MessageHelper.ShowInfo(text, textheader);
-                        if (result == DialogResult.OK)
+                    //var payload = new StringContent(base64String);
+
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
+                    request.Content = new StringContent(base64String, Encoding.UTF8, "text/plain");
+
+                    HttpResponseMessage response = client.SendAsync(request).Result;
+                    string responseContent = response.Content.ReadAsStringAsync().Result;
+                    var obj_result = JsonConvert.DeserializeObject<resultAPIData>(responseContent);
+
+                    SaveLog(serviceName, base64String, responseContent, response.StatusCode.ToString(), obj_result.statusMessage);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        string pdflink = "";
+                        if (obj_result.statusCode == "SUC023")
                         {
-                            string text_p = "คลิก OK เพื่อแสดงเอกสาร";
-                            string textheader_p = "";
-                            var result_p = MessageHelper.ShowInfo(text_p, textheader_p);
-                            if (result_p == DialogResult.OK)
+                            //duplicate
+                            var obj_result_full = JsonConvert.DeserializeObject<resultSuccessDuplicateAPIData>(responseContent);
+                            pdflink = obj_result_full.data.pdfURL.FirstOrDefault();
+
+                            string text = obj_result.statusMessage;
+                            string textheader = "";
+                            var result = MessageHelper.ShowInfo(text, textheader);
+                            if (result == DialogResult.OK)
                             {
-                                System.Diagnostics.Process.Start(pdflink);
+                                string text_p = "คลิก OK เพื่อแสดงเอกสาร";
+                                string textheader_p = "";
+                                var result_p = MessageHelper.ShowInfo(text_p, textheader_p);
+                                if (result_p == DialogResult.OK)
+                                {
+                                    System.Diagnostics.Process.Start(pdflink);
+                                }
                             }
+                        }
+                        else if (obj_result.statusCode == "SUC004")
+                        {
+                            //new
+                            var obj_result_full = JsonConvert.DeserializeObject<resultSuccessNewAPIData>(responseContent);
+                            pdflink = obj_result_full.data.pdfURL;
+
+                            string text = "ระบบได้ดำเนินการส่งรายละเอียด\nเพื่อสร้างเอกสารอิเล็กทรอนิกส์เรียบร้อยแล้ว\nโดยนำส่งตาม E-mail ที่มีการระบุไว้";
+                            string textheader = "";
+                            var result = MessageHelper.ShowInfo(text, textheader);
+                            if (result == DialogResult.OK)
+                            {
+                                string text_p = "คลิก OK เพื่อแสดงเอกสาร";
+                                string textheader_p = "";
+                                var result_p = MessageHelper.ShowInfo(text_p, textheader_p);
+                                if (result_p == DialogResult.OK)
+                                {
+                                    System.Diagnostics.Process.Start(pdflink);
+                                }
+                            }
+                        }
+
+                        else if (obj_result.statusCode == "SUC006")
+                        {
+                            //CN
+                            var obj_result_full = JsonConvert.DeserializeObject<resultSuccessNewAPIData>(responseContent);
+                            pdflink = obj_result_full.data.pdfURL;
+
+                            string text = "ระบบได้ดำเนินการส่งรายละเอียด\nเพื่อสร้างเอกสารอิเล็กทรอนิกส์เรียบร้อยแล้ว\nโดยนำส่งตาม E-mail ที่มีการระบุไว้";
+                            string textheader = "";
+                            var result = MessageHelper.ShowInfo(text, textheader);
+                            if (result == DialogResult.OK)
+                            {
+                                string text_p = "คลิก OK เพื่อแสดงเอกสาร";
+                                string textheader_p = "";
+                                var result_p = MessageHelper.ShowInfo(text_p, textheader_p);
+                                if (result_p == DialogResult.OK)
+                                {
+                                    System.Diagnostics.Process.Start(pdflink);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            string text = obj_result.statusMessage;
+                            var result = MessageHelper.ShowError(text);
                         }
                     }
                     else
                     {
-                        string text = obj_result.statusMessage;
+                        string text = responseContent;// + "\n" + base64String;
                         var result = MessageHelper.ShowError(text);
                     }
                 }
-                else
-                {
-                    string text = responseContent;// + "\n" + base64String;
-                    var result = MessageHelper.ShowError(text);
-                }
+            }
+            catch(Exception ex)
+            {
+                MessageHelper.ShowError("CallApi_share:" + ex.Message);
             }
         }
-        public void SaveLog(string serviceName, string base64String, string responseContent, string responseStatusCodeToString, string obj_resultstatusMessage)
+
+        public bool CallApi_CreateRef(string apiUrl, string serviceName, string base64String)
+        {
+            string Bearer_api_key = CallApi_Auth();
+            if (Bearer_api_key == null)
+            {
+                return false;
+            }
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    if (!string.IsNullOrWhiteSpace(Web_Service_Timeout))
+                    {
+                        int output;
+                        if (int.TryParse(Web_Service_Timeout, out output))
+                        {
+                            client.Timeout = TimeSpan.FromSeconds(int.Parse(Web_Service_Timeout));
+                        }
+                    }
+
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Bearer_api_key);
+                    client.DefaultRequestHeaders.Add("b2cauthorize", b2cauthorize);
+                    client.DefaultRequestHeaders.Add("api-key", API_Key);
+
+                    //var payload = new StringContent(base64String);
+
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
+                    request.Content = new StringContent(base64String, Encoding.UTF8, "text/plain");
+
+                    HttpResponseMessage response = client.SendAsync(request).Result;
+                    string responseContent = response.Content.ReadAsStringAsync().Result;
+                    var obj_result = JsonConvert.DeserializeObject<resultAPIData>(responseContent);
+
+                    SaveLog(serviceName, base64String, responseContent, response.StatusCode.ToString(), obj_result.statusMessage, isRef_Create: true);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        if (obj_result.statusCode == "SUC023")
+                        {
+                            //duplicate
+                            return true;
+                        }
+                        else if (obj_result.statusCode == "SUC004")
+                        {
+                            //new
+                            return true;
+                        }
+                        else
+                        {
+                            string text = obj_result.statusMessage;
+                            var result = MessageHelper.ShowError(text);
+                        }
+                    }
+                    else
+                    {
+                        string text = responseContent;// + "\n" + base64String;
+                        var result = MessageHelper.ShowError(text);
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ShowError("CallApi_CreateRef :" + ex.Message);
+                return false;
+            }
+        }
+
+        public string CallApi_Auth()
+        {
+            try
+            {
+                string oauthUrl = OAuth_URL;
+                string clientId = Client_ID;
+                string clientSecret = Client_Secret;
+                string grantType = auth_grant_type;
+                string scope = auth_scope;
+
+                string postData = "grant_type=" + grantType + "&client_id=" + clientId + "&client_secret=" + clientSecret + "&scope=" + scope;
+                byte[] postDataBytes = Encoding.UTF8.GetBytes(postData);
+
+                var request = (HttpWebRequest)WebRequest.Create(oauthUrl);
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = postDataBytes.Length;
+
+                using (var requestStream = request.GetRequestStream())
+                {
+                    requestStream.Write(postDataBytes, 0, postDataBytes.Length);
+                }
+
+                using (var response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (var responseStream = response.GetResponseStream())
+                    {
+                        using (var streamReader = new StreamReader(responseStream))
+                        {
+                            var responseString = streamReader.ReadToEnd();
+                            // handle response
+
+                            var obj_result = JsonConvert.DeserializeObject<resultAuthAPIData>(responseString);
+
+                            return obj_result.access_token;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var result = MessageHelper.ShowError("CallApi_Auth :" + ex.Message);
+                return null;
+            }
+        }
+
+        public void SaveLog(string serviceName, string base64String, string responseContent, string responseStatusCodeToString, string obj_resultstatusMessage, bool isRef_Create = false)
         {
             LogETAX logdata = new LogETAX();
             logdata.FDDateIns = DateTime.Now;
@@ -1375,6 +1560,10 @@ namespace EtaxInvoice
             logdata.FDShdDocDate = CurrentInvoice.FDShdDocDate;
             logdata.FTShdDocType = Program.globalProgramMode == 1 ? "1" : "9";
             logdata.FTReqType = Program.globalProgramMode == 1 ? "สร้างใบกำกับภาษี" : "สร้างใบลดหนี้";
+            if (isRef_Create)
+            {
+                logdata.FTReqType = "สร้างใบกำกับภาษี";
+            }
             logdata.FNStep = 0;
             logdata.FTServiceName = serviceName;
             logdata.FTReqPara = base64String;
@@ -1585,6 +1774,11 @@ namespace EtaxInvoice
                 CurrentReasonCN = current;
                 textBox_CNReason_Other.ReadOnly = (current.FTRsnCNCode != otherCNreasoncode);
             }
+        }
+
+        private void tabCustomerDetail_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
