@@ -146,6 +146,9 @@
     <Compile Include="HelperClasses\LogInserter.cs" />
     <Compile Include="HelperClasses\MessageHelper.cs" />
     <Compile Include="HelperClasses\SQLHelper.cs" />
+    <Compile Include="OverideClass\MyNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgramData\AddCustomer.cs" />
     <Compile Include="ProgramData\LogAccessETAX.cs" />

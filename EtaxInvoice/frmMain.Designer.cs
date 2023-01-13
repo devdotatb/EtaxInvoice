@@ -39,23 +39,22 @@
             this.table_bottom_3_1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel_bottom_3_2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.numericUpDown_sumNet = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_sumNet = new EtaxInvoice.MyNumericUpDown();
             this.tableLayoutPanel42 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
-            this.numericUpDown_VAT = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_VAT = new EtaxInvoice.MyNumericUpDown();
             this.label20 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel41 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_sumDiscount = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_sumVat = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_Total = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_NetAfter = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_discount = new EtaxInvoice.MyNumericUpDown();
+            this.numericUpDown_sumDiscount = new EtaxInvoice.MyNumericUpDown();
+            this.numericUpDown_sumVat = new EtaxInvoice.MyNumericUpDown();
+            this.numericUpDown_Total = new EtaxInvoice.MyNumericUpDown();
+            this.numericUpDown_NetAfter = new EtaxInvoice.MyNumericUpDown();
             this.tableLayoutPanel43 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel27 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel44 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel48 = new System.Windows.Forms.TableLayoutPanel();
             this.label44 = new System.Windows.Forms.Label();
@@ -244,6 +243,7 @@
             this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
             this.button_print = new System.Windows.Forms.Button();
             this.button_close = new System.Windows.Forms.Button();
+            this.panel27 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabInvoice.SuspendLayout();
@@ -258,7 +258,7 @@
             this.tableLayoutPanel42.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_VAT)).BeginInit();
             this.tableLayoutPanel41.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_discount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sumDiscount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sumVat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Total)).BeginInit();
@@ -606,7 +606,7 @@
             this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel41.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel41.Controls.Add(this.numericUpDown5, 1, 0);
+            this.tableLayoutPanel41.Controls.Add(this.numericUpDown_discount, 1, 0);
             this.tableLayoutPanel41.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel41.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel41.Margin = new System.Windows.Forms.Padding(0);
@@ -628,15 +628,16 @@
             this.label1.TabIndex = 99;
             this.label1.Text = "ส่วนลด";
             // 
-            // numericUpDown5
+            // numericUpDown_discount
             // 
-            this.numericUpDown5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown5.Enabled = false;
-            this.numericUpDown5.Location = new System.Drawing.Point(120, 3);
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.ReadOnly = true;
-            this.numericUpDown5.Size = new System.Drawing.Size(111, 20);
-            this.numericUpDown5.TabIndex = 100;
+            this.numericUpDown_discount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDown_discount.Enabled = false;
+            this.numericUpDown_discount.Location = new System.Drawing.Point(120, 3);
+            this.numericUpDown_discount.Name = "numericUpDown_discount";
+            this.numericUpDown_discount.ReadOnly = true;
+            this.numericUpDown_discount.Size = new System.Drawing.Size(111, 20);
+            this.numericUpDown_discount.TabIndex = 100;
+            this.numericUpDown_discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // numericUpDown_sumDiscount
             // 
@@ -739,14 +740,6 @@
             this.tableLayoutPanel43.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 118F));
             this.tableLayoutPanel43.Size = new System.Drawing.Size(462, 118);
             this.tableLayoutPanel43.TabIndex = 1;
-            // 
-            // panel27
-            // 
-            this.panel27.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel27.Location = new System.Drawing.Point(3, 3);
-            this.panel27.Name = "panel27";
-            this.panel27.Size = new System.Drawing.Size(456, 112);
-            this.panel27.TabIndex = 1;
             // 
             // tableLayoutPanel44
             // 
@@ -3066,6 +3059,14 @@
             this.button_close.UseVisualStyleBackColor = true;
             this.button_close.Click += new System.EventHandler(this.button_close_Click);
             // 
+            // panel27
+            // 
+            this.panel27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel27.Location = new System.Drawing.Point(3, 3);
+            this.panel27.Name = "panel27";
+            this.panel27.Size = new System.Drawing.Size(456, 112);
+            this.panel27.TabIndex = 1;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3093,7 +3094,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_VAT)).EndInit();
             this.tableLayoutPanel41.ResumeLayout(false);
             this.tableLayoutPanel41.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_discount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sumDiscount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sumVat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Total)).EndInit();
@@ -3407,15 +3408,7 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel41;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.NumericUpDown numericUpDown_sumNet;
-        private System.Windows.Forms.NumericUpDown numericUpDown_VAT;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown_sumDiscount;
-        private System.Windows.Forms.NumericUpDown numericUpDown_NetAfter;
-        private System.Windows.Forms.NumericUpDown numericUpDown_sumVat;
-        private System.Windows.Forms.NumericUpDown numericUpDown_Total;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel43;
-        private System.Windows.Forms.Panel panel27;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel44;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel48;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel45;
@@ -3438,6 +3431,14 @@
         private System.Windows.Forms.TextBox textBox_CNReason_Other;
         private System.Windows.Forms.Label label_ReasonCN;
         private System.Windows.Forms.ComboBox comboBox_CNReason;
+        private MyNumericUpDown numericUpDown_sumNet;
+        private MyNumericUpDown numericUpDown_VAT;
+        private MyNumericUpDown numericUpDown_discount;
+        private MyNumericUpDown numericUpDown_sumDiscount;
+        private MyNumericUpDown numericUpDown_NetAfter;
+        private MyNumericUpDown numericUpDown_sumVat;
+        private MyNumericUpDown numericUpDown_Total;
+        private System.Windows.Forms.Panel panel27;
     }
 }
 

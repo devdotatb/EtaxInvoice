@@ -1069,8 +1069,8 @@ namespace EtaxInvoice
             sendingdata.remark = "";
             sendingdata.isShowBranchNo = true;
             sendingdata.userid = Program.globalStartUserName;
-            sendingdata.userBu = "CFR";//userBu;//
-            sendingdata.userLoc = "6001";//userLoc;//
+            sendingdata.userBu = userBu;
+            sendingdata.userLoc = userLoc;
             sendingdata.userRole = "admin";
 
             sendingdata.customer = Build_CustomerData(isCN: false);
