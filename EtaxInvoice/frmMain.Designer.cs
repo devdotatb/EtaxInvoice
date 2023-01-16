@@ -31,10 +31,12 @@ namespace EtaxInvoice
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabInvoice = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage_invoice = new System.Windows.Forms.TabPage();
             this.tablebottom_1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel_bottom_3 = new System.Windows.Forms.Panel();
@@ -73,10 +75,10 @@ namespace EtaxInvoice
             this.textBox_CNReason_Other = new System.Windows.Forms.TextBox();
             this.label_ReasonCN = new System.Windows.Forms.Label();
             this.comboBox_CNReason = new System.Windows.Forms.ComboBox();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabCustomerDetail = new System.Windows.Forms.TabControl();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage_NIDN = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel_Customer_1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button_testCN = new System.Windows.Forms.Button();
             this.panel_c_1_1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_customerCode = new System.Windows.Forms.TextBox();
@@ -132,7 +134,7 @@ namespace EtaxInvoice
             this.label16 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox_customerCountry = new System.Windows.Forms.TextBox();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage_TXID = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
@@ -193,7 +195,7 @@ namespace EtaxInvoice
             this.textBox_customerCountry_1 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.textBox21 = new System.Windows.Forms.TextBox();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tabPage_CCPT = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
             this.panel15 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
@@ -249,7 +251,7 @@ namespace EtaxInvoice
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabInvoice.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabPage_invoice.SuspendLayout();
             this.tablebottom_1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel_bottom_3.SuspendLayout();
@@ -272,7 +274,7 @@ namespace EtaxInvoice
             this.tableLayoutPanel46.SuspendLayout();
             this.tableLayoutPanel50.SuspendLayout();
             this.tabCustomerDetail.SuspendLayout();
-            this.tabPage5.SuspendLayout();
+            this.tabPage_NIDN.SuspendLayout();
             this.tableLayoutPanel_Customer_1.SuspendLayout();
             this.panel_c_1_1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -297,7 +299,7 @@ namespace EtaxInvoice
             this.tableLayoutPanel10.SuspendLayout();
             this.panel_c_1_12.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
-            this.tabPage6.SuspendLayout();
+            this.tabPage_TXID.SuspendLayout();
             this.tableLayoutPanel15.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel16.SuspendLayout();
@@ -323,7 +325,7 @@ namespace EtaxInvoice
             this.tableLayoutPanel26.SuspendLayout();
             this.panel14.SuspendLayout();
             this.tableLayoutPanel27.SuspendLayout();
-            this.tabPage7.SuspendLayout();
+            this.tabPage_CCPT.SuspendLayout();
             this.tableLayoutPanel28.SuspendLayout();
             this.panel15.SuspendLayout();
             this.tableLayoutPanel29.SuspendLayout();
@@ -379,26 +381,28 @@ namespace EtaxInvoice
             // 
             // tabInvoice
             // 
-            this.tabInvoice.Controls.Add(this.tabPage4);
+            this.tabInvoice.Controls.Add(this.tabPage_invoice);
             this.tabInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabInvoice.ImageList = this.imageList1;
             this.tabInvoice.Location = new System.Drawing.Point(0, 0);
             this.tabInvoice.Name = "tabInvoice";
             this.tabInvoice.SelectedIndex = 0;
             this.tabInvoice.Size = new System.Drawing.Size(953, 385);
             this.tabInvoice.TabIndex = 0;
             // 
-            // tabPage4
+            // tabPage_invoice
             // 
-            this.tabPage4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage4.Controls.Add(this.tablebottom_1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(945, 359);
-            this.tabPage4.TabIndex = 0;
-            this.tabPage4.Text = "page4 InitializeType error";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPage_invoice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage_invoice.Controls.Add(this.tablebottom_1);
+            this.tabPage_invoice.ImageIndex = 0;
+            this.tabPage_invoice.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_invoice.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPage_invoice.Name = "tabPage_invoice";
+            this.tabPage_invoice.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_invoice.Size = new System.Drawing.Size(945, 359);
+            this.tabPage_invoice.TabIndex = 0;
+            this.tabPage_invoice.Text = "page4 InitializeType error";
+            this.tabPage_invoice.UseVisualStyleBackColor = true;
             // 
             // tablebottom_1
             // 
@@ -423,6 +427,7 @@ namespace EtaxInvoice
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 90);
@@ -430,6 +435,7 @@ namespace EtaxInvoice
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(931, 134);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
             // 
             // panel_bottom_3
             // 
@@ -799,13 +805,13 @@ namespace EtaxInvoice
             // textBox_invoiceBranchCode
             // 
             this.textBox_invoiceBranchCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_invoiceBranchCode.Location = new System.Drawing.Point(127, 7);
+            this.textBox_invoiceBranchCode.Location = new System.Drawing.Point(127, 6);
             this.textBox_invoiceBranchCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_invoiceBranchCode.MaxLength = 50;
-            this.textBox_invoiceBranchCode.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_invoiceBranchCode.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_invoiceBranchCode.Name = "textBox_invoiceBranchCode";
             this.textBox_invoiceBranchCode.ReadOnly = true;
-            this.textBox_invoiceBranchCode.Size = new System.Drawing.Size(281, 20);
+            this.textBox_invoiceBranchCode.Size = new System.Drawing.Size(281, 23);
             this.textBox_invoiceBranchCode.TabIndex = 109;
             // 
             // tableLayoutPanel45
@@ -828,11 +834,13 @@ namespace EtaxInvoice
             // button_InvoiceSearch
             // 
             this.button_InvoiceSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_InvoiceSearch.Location = new System.Drawing.Point(373, 7);
+            this.button_InvoiceSearch.BackgroundImage = global::EtaxInvoice.Properties.Resources.icons8_browse_folder_96;
+            this.button_InvoiceSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_InvoiceSearch.Location = new System.Drawing.Point(370, 3);
+            this.button_InvoiceSearch.Margin = new System.Windows.Forms.Padding(0);
             this.button_InvoiceSearch.Name = "button_InvoiceSearch";
-            this.button_InvoiceSearch.Size = new System.Drawing.Size(25, 20);
+            this.button_InvoiceSearch.Size = new System.Drawing.Size(28, 28);
             this.button_InvoiceSearch.TabIndex = 113;
-            this.button_InvoiceSearch.Text = "...";
             this.button_InvoiceSearch.UseVisualStyleBackColor = true;
             this.button_InvoiceSearch.Click += new System.EventHandler(this.button_InvoiceSearch_Click);
             // 
@@ -850,13 +858,13 @@ namespace EtaxInvoice
             // textBox_invoiceDocNo
             // 
             this.textBox_invoiceDocNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_invoiceDocNo.Location = new System.Drawing.Point(127, 7);
+            this.textBox_invoiceDocNo.Location = new System.Drawing.Point(127, 5);
             this.textBox_invoiceDocNo.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_invoiceDocNo.MaxLength = 50;
-            this.textBox_invoiceDocNo.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_invoiceDocNo.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_invoiceDocNo.Name = "textBox_invoiceDocNo";
             this.textBox_invoiceDocNo.ReadOnly = true;
-            this.textBox_invoiceDocNo.Size = new System.Drawing.Size(239, 20);
+            this.textBox_invoiceDocNo.Size = new System.Drawing.Size(239, 23);
             this.textBox_invoiceDocNo.TabIndex = 107;
             // 
             // tableLayoutPanel46
@@ -877,13 +885,13 @@ namespace EtaxInvoice
             // textBox_invoiceDate
             // 
             this.textBox_invoiceDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_invoiceDate.Location = new System.Drawing.Point(127, 7);
+            this.textBox_invoiceDate.Location = new System.Drawing.Point(127, 6);
             this.textBox_invoiceDate.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_invoiceDate.MaxLength = 50;
-            this.textBox_invoiceDate.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_invoiceDate.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_invoiceDate.Name = "textBox_invoiceDate";
             this.textBox_invoiceDate.ReadOnly = true;
-            this.textBox_invoiceDate.Size = new System.Drawing.Size(281, 20);
+            this.textBox_invoiceDate.Size = new System.Drawing.Size(281, 23);
             this.textBox_invoiceDate.TabIndex = 111;
             // 
             // label45
@@ -917,13 +925,13 @@ namespace EtaxInvoice
             // textBox_CNReason_Other
             // 
             this.textBox_CNReason_Other.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_CNReason_Other.Location = new System.Drawing.Point(312, 7);
+            this.textBox_CNReason_Other.Location = new System.Drawing.Point(312, 5);
             this.textBox_CNReason_Other.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_CNReason_Other.MaxLength = 50;
-            this.textBox_CNReason_Other.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_CNReason_Other.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_CNReason_Other.Name = "textBox_CNReason_Other";
             this.textBox_CNReason_Other.ReadOnly = true;
-            this.textBox_CNReason_Other.Size = new System.Drawing.Size(96, 20);
+            this.textBox_CNReason_Other.Size = new System.Drawing.Size(96, 23);
             this.textBox_CNReason_Other.TabIndex = 115;
             // 
             // label_ReasonCN
@@ -942,18 +950,26 @@ namespace EtaxInvoice
             this.comboBox_CNReason.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_CNReason.DisplayMember = "FTRsnCNDescTh";
             this.comboBox_CNReason.FormattingEnabled = true;
-            this.comboBox_CNReason.Location = new System.Drawing.Point(147, 6);
+            this.comboBox_CNReason.Location = new System.Drawing.Point(148, 6);
+            this.comboBox_CNReason.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_CNReason.Name = "comboBox_CNReason";
-            this.comboBox_CNReason.Size = new System.Drawing.Size(158, 21);
+            this.comboBox_CNReason.Size = new System.Drawing.Size(156, 21);
             this.comboBox_CNReason.TabIndex = 114;
             this.comboBox_CNReason.SelectedValueChanged += new System.EventHandler(this.comboBox_CNReason_SelectedValueChanged);
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "icons8-green-circle-96.png");
+            // 
             // tabCustomerDetail
             // 
-            this.tabCustomerDetail.Controls.Add(this.tabPage5);
-            this.tabCustomerDetail.Controls.Add(this.tabPage6);
-            this.tabCustomerDetail.Controls.Add(this.tabPage7);
+            this.tabCustomerDetail.Controls.Add(this.tabPage_NIDN);
+            this.tabCustomerDetail.Controls.Add(this.tabPage_TXID);
+            this.tabCustomerDetail.Controls.Add(this.tabPage_CCPT);
             this.tabCustomerDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabCustomerDetail.ImageList = this.imageList1;
             this.tabCustomerDetail.Location = new System.Drawing.Point(3, 3);
             this.tabCustomerDetail.Name = "tabCustomerDetail";
             this.tabCustomerDetail.SelectedIndex = 0;
@@ -961,17 +977,18 @@ namespace EtaxInvoice
             this.tabCustomerDetail.TabIndex = 2;
             this.tabCustomerDetail.SelectedIndexChanged += new System.EventHandler(this.tabCustomerDetail_SelectedIndexChanged);
             // 
-            // tabPage5
+            // tabPage_NIDN
             // 
-            this.tabPage5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage5.Controls.Add(this.tableLayoutPanel_Customer_1);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(945, 217);
-            this.tabPage5.TabIndex = 1;
-            this.tabPage5.Text = "บุคคลธรรมดา";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.tabPage_NIDN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage_NIDN.Controls.Add(this.tableLayoutPanel_Customer_1);
+            this.tabPage_NIDN.ImageIndex = 0;
+            this.tabPage_NIDN.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_NIDN.Name = "tabPage_NIDN";
+            this.tabPage_NIDN.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_NIDN.Size = new System.Drawing.Size(945, 217);
+            this.tabPage_NIDN.TabIndex = 1;
+            this.tabPage_NIDN.Text = "บุคคลธรรมดา";
+            this.tabPage_NIDN.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel_Customer_1
             // 
@@ -979,7 +996,6 @@ namespace EtaxInvoice
             this.tableLayoutPanel_Customer_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel_Customer_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel_Customer_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel_Customer_1.Controls.Add(this.button_testCN, 2, 0);
             this.tableLayoutPanel_Customer_1.Controls.Add(this.panel_c_1_1, 0, 0);
             this.tableLayoutPanel_Customer_1.Controls.Add(this.panel_c_1_2, 1, 0);
             this.tableLayoutPanel_Customer_1.Controls.Add(this.panel_c_1_3, 0, 1);
@@ -1005,17 +1021,6 @@ namespace EtaxInvoice
             this.tableLayoutPanel_Customer_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel_Customer_1.Size = new System.Drawing.Size(937, 209);
             this.tableLayoutPanel_Customer_1.TabIndex = 0;
-            // 
-            // button_testCN
-            // 
-            this.button_testCN.Location = new System.Drawing.Point(845, 3);
-            this.button_testCN.Name = "button_testCN";
-            this.button_testCN.Size = new System.Drawing.Size(75, 23);
-            this.button_testCN.TabIndex = 12;
-            this.button_testCN.Text = "Inv/CN";
-            this.button_testCN.UseVisualStyleBackColor = true;
-            this.button_testCN.Visible = false;
-            this.button_testCN.Click += new System.EventHandler(this.button_testCN_Click);
             // 
             // panel_c_1_1
             // 
@@ -1048,7 +1053,7 @@ namespace EtaxInvoice
             this.textBox_customerCode.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerCode.MaxLength = 50;
-            this.textBox_customerCode.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerCode.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerCode.Name = "textBox_customerCode";
             this.textBox_customerCode.ReadOnly = true;
             this.textBox_customerCode.Size = new System.Drawing.Size(283, 20);
@@ -1096,7 +1101,7 @@ namespace EtaxInvoice
             this.textBox_customerAddress.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerAddress.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerAddress.MaxLength = 50;
-            this.textBox_customerAddress.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerAddress.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerAddress.Name = "textBox_customerAddress";
             this.textBox_customerAddress.ReadOnly = true;
             this.textBox_customerAddress.Size = new System.Drawing.Size(283, 20);
@@ -1144,7 +1149,7 @@ namespace EtaxInvoice
             this.textBox_customerName.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerName.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerName.MaxLength = 50;
-            this.textBox_customerName.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerName.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerName.Name = "textBox_customerName";
             this.textBox_customerName.ReadOnly = true;
             this.textBox_customerName.Size = new System.Drawing.Size(283, 20);
@@ -1192,7 +1197,7 @@ namespace EtaxInvoice
             this.textBox_customerRoad.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerRoad.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerRoad.MaxLength = 50;
-            this.textBox_customerRoad.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerRoad.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerRoad.Name = "textBox_customerRoad";
             this.textBox_customerRoad.ReadOnly = true;
             this.textBox_customerRoad.Size = new System.Drawing.Size(283, 20);
@@ -1240,7 +1245,7 @@ namespace EtaxInvoice
             this.textBox_customerTaxId.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTaxId.MaxLength = 13;
-            this.textBox_customerTaxId.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerTaxId.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerTaxId.Name = "textBox_customerTaxId";
             this.textBox_customerTaxId.ReadOnly = true;
             this.textBox_customerTaxId.Size = new System.Drawing.Size(283, 20);
@@ -1291,7 +1296,7 @@ namespace EtaxInvoice
             this.textBox_customerSubDistrict.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerSubDistrict.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerSubDistrict.MaxLength = 50;
-            this.textBox_customerSubDistrict.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerSubDistrict.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerSubDistrict.Name = "textBox_customerSubDistrict";
             this.textBox_customerSubDistrict.ReadOnly = true;
             this.textBox_customerSubDistrict.Size = new System.Drawing.Size(283, 20);
@@ -1363,11 +1368,12 @@ namespace EtaxInvoice
             // button_DistrictSearch
             // 
             this.button_DistrictSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_DistrictSearch.BackgroundImage = global::EtaxInvoice.Properties.Resources.icons8_folder_98;
+            this.button_DistrictSearch.BackgroundImage = global::EtaxInvoice.Properties.Resources.icons8_browse_folder_96;
             this.button_DistrictSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button_DistrictSearch.Location = new System.Drawing.Point(223, 3);
+            this.button_DistrictSearch.Location = new System.Drawing.Point(220, 0);
+            this.button_DistrictSearch.Margin = new System.Windows.Forms.Padding(0);
             this.button_DistrictSearch.Name = "button_DistrictSearch";
-            this.button_DistrictSearch.Size = new System.Drawing.Size(36, 22);
+            this.button_DistrictSearch.Size = new System.Drawing.Size(28, 28);
             this.button_DistrictSearch.TabIndex = 151;
             this.button_DistrictSearch.UseVisualStyleBackColor = true;
             this.button_DistrictSearch.Click += new System.EventHandler(this.button_DistrictSearch_Click);
@@ -1378,7 +1384,7 @@ namespace EtaxInvoice
             this.textBox_customerDistrictName.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerDistrictName.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerDistrictName.MaxLength = 50;
-            this.textBox_customerDistrictName.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerDistrictName.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerDistrictName.Name = "textBox_customerDistrictName";
             this.textBox_customerDistrictName.ReadOnly = true;
             this.textBox_customerDistrictName.Size = new System.Drawing.Size(132, 20);
@@ -1401,7 +1407,7 @@ namespace EtaxInvoice
             this.textBox_customerDistrictCode.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerDistrictCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerDistrictCode.MaxLength = 50;
-            this.textBox_customerDistrictCode.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerDistrictCode.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerDistrictCode.Name = "textBox_customerDistrictCode";
             this.textBox_customerDistrictCode.ReadOnly = true;
             this.textBox_customerDistrictCode.Size = new System.Drawing.Size(88, 20);
@@ -1438,7 +1444,7 @@ namespace EtaxInvoice
             this.textBox_customerEmail.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerEmail.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerEmail.MaxLength = 50;
-            this.textBox_customerEmail.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerEmail.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerEmail.Name = "textBox_customerEmail";
             this.textBox_customerEmail.ReadOnly = true;
             this.textBox_customerEmail.Size = new System.Drawing.Size(283, 20);
@@ -1488,11 +1494,13 @@ namespace EtaxInvoice
             // button_provinceSearch
             // 
             this.button_provinceSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_provinceSearch.Location = new System.Drawing.Point(223, 3);
+            this.button_provinceSearch.BackgroundImage = global::EtaxInvoice.Properties.Resources.icons8_browse_folder_96;
+            this.button_provinceSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_provinceSearch.Location = new System.Drawing.Point(220, 0);
+            this.button_provinceSearch.Margin = new System.Windows.Forms.Padding(0);
             this.button_provinceSearch.Name = "button_provinceSearch";
-            this.button_provinceSearch.Size = new System.Drawing.Size(26, 21);
+            this.button_provinceSearch.Size = new System.Drawing.Size(28, 28);
             this.button_provinceSearch.TabIndex = 150;
-            this.button_provinceSearch.Text = "...";
             this.button_provinceSearch.UseVisualStyleBackColor = true;
             this.button_provinceSearch.Click += new System.EventHandler(this.button_provinceSearch_Click);
             // 
@@ -1513,7 +1521,7 @@ namespace EtaxInvoice
             this.textBox_customerProvinceCode.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerProvinceCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceCode.MaxLength = 50;
-            this.textBox_customerProvinceCode.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerProvinceCode.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerProvinceCode.Name = "textBox_customerProvinceCode";
             this.textBox_customerProvinceCode.ReadOnly = true;
             this.textBox_customerProvinceCode.Size = new System.Drawing.Size(88, 20);
@@ -1525,7 +1533,7 @@ namespace EtaxInvoice
             this.textBox_customerProvinceName.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerProvinceName.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceName.MaxLength = 50;
-            this.textBox_customerProvinceName.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerProvinceName.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerProvinceName.Name = "textBox_customerProvinceName";
             this.textBox_customerProvinceName.ReadOnly = true;
             this.textBox_customerProvinceName.Size = new System.Drawing.Size(132, 20);
@@ -1563,13 +1571,13 @@ namespace EtaxInvoice
             // textBox_customerTel
             // 
             this.textBox_customerTel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerTel.Location = new System.Drawing.Point(128, 6);
+            this.textBox_customerTel.Location = new System.Drawing.Point(128, 5);
             this.textBox_customerTel.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTel.MaxLength = 50;
-            this.textBox_customerTel.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerTel.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerTel.Name = "textBox_customerTel";
             this.textBox_customerTel.ReadOnly = true;
-            this.textBox_customerTel.Size = new System.Drawing.Size(88, 20);
+            this.textBox_customerTel.Size = new System.Drawing.Size(88, 23);
             this.textBox_customerTel.TabIndex = 138;
             this.textBox_customerTel.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerTel_ContextMenuStripChanged);
             this.textBox_customerTel.TextChanged += new System.EventHandler(this.textBox_customerTel_TextChanged);
@@ -1578,13 +1586,13 @@ namespace EtaxInvoice
             // textBox_customerFax
             // 
             this.textBox_customerFax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerFax.Location = new System.Drawing.Point(320, 6);
+            this.textBox_customerFax.Location = new System.Drawing.Point(320, 5);
             this.textBox_customerFax.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerFax.MaxLength = 50;
-            this.textBox_customerFax.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerFax.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerFax.Name = "textBox_customerFax";
             this.textBox_customerFax.ReadOnly = true;
-            this.textBox_customerFax.Size = new System.Drawing.Size(91, 20);
+            this.textBox_customerFax.Size = new System.Drawing.Size(91, 23);
             this.textBox_customerFax.TabIndex = 140;
             // 
             // label11
@@ -1643,24 +1651,26 @@ namespace EtaxInvoice
             // button_countrySearch
             // 
             this.button_countrySearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_countrySearch.Location = new System.Drawing.Point(374, 6);
+            this.button_countrySearch.BackgroundImage = global::EtaxInvoice.Properties.Resources.icons8_browse_folder_96;
+            this.button_countrySearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_countrySearch.Location = new System.Drawing.Point(371, 2);
+            this.button_countrySearch.Margin = new System.Windows.Forms.Padding(0);
             this.button_countrySearch.Name = "button_countrySearch";
-            this.button_countrySearch.Size = new System.Drawing.Size(26, 21);
+            this.button_countrySearch.Size = new System.Drawing.Size(28, 28);
             this.button_countrySearch.TabIndex = 151;
-            this.button_countrySearch.Text = "...";
             this.button_countrySearch.UseVisualStyleBackColor = true;
             this.button_countrySearch.Click += new System.EventHandler(this.button_countrySearch_Click);
             // 
             // textBox_customerPostCode
             // 
             this.textBox_customerPostCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerPostCode.Location = new System.Drawing.Point(128, 6);
+            this.textBox_customerPostCode.Location = new System.Drawing.Point(128, 5);
             this.textBox_customerPostCode.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerPostCode.MaxLength = 5;
-            this.textBox_customerPostCode.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerPostCode.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerPostCode.Name = "textBox_customerPostCode";
             this.textBox_customerPostCode.ReadOnly = true;
-            this.textBox_customerPostCode.Size = new System.Drawing.Size(88, 20);
+            this.textBox_customerPostCode.Size = new System.Drawing.Size(88, 23);
             this.textBox_customerPostCode.TabIndex = 143;
             this.textBox_customerPostCode.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerPostCode_ContextMenuStripChanged);
             this.textBox_customerPostCode.TextChanged += new System.EventHandler(this.textBox_customerPostCode_TextChanged);
@@ -1691,26 +1701,27 @@ namespace EtaxInvoice
             // textBox_customerCountry
             // 
             this.textBox_customerCountry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerCountry.Location = new System.Drawing.Point(278, 6);
-            this.textBox_customerCountry.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerCountry.Location = new System.Drawing.Point(278, 5);
+            this.textBox_customerCountry.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerCountry.Name = "textBox_customerCountry";
             this.textBox_customerCountry.ReadOnly = true;
-            this.textBox_customerCountry.Size = new System.Drawing.Size(90, 20);
+            this.textBox_customerCountry.Size = new System.Drawing.Size(90, 23);
             this.textBox_customerCountry.TabIndex = 145;
             // 
-            // tabPage6
+            // tabPage_TXID
             // 
-            this.tabPage6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage6.Controls.Add(this.tableLayoutPanel15);
-            this.tabPage6.Controls.Add(this.label21);
-            this.tabPage6.Controls.Add(this.textBox21);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(945, 217);
-            this.tabPage6.TabIndex = 2;
-            this.tabPage6.Text = "นิติบุคคล";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.tabPage_TXID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage_TXID.Controls.Add(this.tableLayoutPanel15);
+            this.tabPage_TXID.Controls.Add(this.label21);
+            this.tabPage_TXID.Controls.Add(this.textBox21);
+            this.tabPage_TXID.ImageIndex = 0;
+            this.tabPage_TXID.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_TXID.Name = "tabPage_TXID";
+            this.tabPage_TXID.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_TXID.Size = new System.Drawing.Size(945, 217);
+            this.tabPage_TXID.TabIndex = 2;
+            this.tabPage_TXID.Text = "นิติบุคคล";
+            this.tabPage_TXID.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel15
             // 
@@ -1774,7 +1785,7 @@ namespace EtaxInvoice
             this.textBox_customerCode_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerCode_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerCode_1.MaxLength = 50;
-            this.textBox_customerCode_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerCode_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerCode_1.Name = "textBox_customerCode_1";
             this.textBox_customerCode_1.ReadOnly = true;
             this.textBox_customerCode_1.Size = new System.Drawing.Size(283, 20);
@@ -1821,7 +1832,7 @@ namespace EtaxInvoice
             this.textBox_customerAddress_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerAddress_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerAddress_1.MaxLength = 50;
-            this.textBox_customerAddress_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerAddress_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerAddress_1.Name = "textBox_customerAddress_1";
             this.textBox_customerAddress_1.ReadOnly = true;
             this.textBox_customerAddress_1.Size = new System.Drawing.Size(283, 20);
@@ -1868,7 +1879,7 @@ namespace EtaxInvoice
             this.textBox_customerName_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerName_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerName_1.MaxLength = 50;
-            this.textBox_customerName_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerName_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerName_1.Name = "textBox_customerName_1";
             this.textBox_customerName_1.ReadOnly = true;
             this.textBox_customerName_1.Size = new System.Drawing.Size(283, 20);
@@ -1915,7 +1926,7 @@ namespace EtaxInvoice
             this.textBox_customerRoad_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerRoad_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerRoad_1.MaxLength = 50;
-            this.textBox_customerRoad_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerRoad_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerRoad_1.Name = "textBox_customerRoad_1";
             this.textBox_customerRoad_1.ReadOnly = true;
             this.textBox_customerRoad_1.Size = new System.Drawing.Size(283, 20);
@@ -1962,7 +1973,7 @@ namespace EtaxInvoice
             this.textBox_customerTaxId_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTaxId_1.MaxLength = 13;
-            this.textBox_customerTaxId_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerTaxId_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerTaxId_1.Name = "textBox_customerTaxId_1";
             this.textBox_customerTaxId_1.ReadOnly = true;
             this.textBox_customerTaxId_1.Size = new System.Drawing.Size(283, 20);
@@ -2012,7 +2023,7 @@ namespace EtaxInvoice
             this.textBox_customerSubDistrict_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerSubDistrict_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerSubDistrict_1.MaxLength = 50;
-            this.textBox_customerSubDistrict_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerSubDistrict_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerSubDistrict_1.Name = "textBox_customerSubDistrict_1";
             this.textBox_customerSubDistrict_1.ReadOnly = true;
             this.textBox_customerSubDistrict_1.Size = new System.Drawing.Size(283, 20);
@@ -2059,7 +2070,7 @@ namespace EtaxInvoice
             this.textBox_customerWeb_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerWeb_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerWeb_1.MaxLength = 50;
-            this.textBox_customerWeb_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerWeb_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerWeb_1.Name = "textBox_customerWeb_1";
             this.textBox_customerWeb_1.ReadOnly = true;
             this.textBox_customerWeb_1.Size = new System.Drawing.Size(283, 20);
@@ -2110,11 +2121,13 @@ namespace EtaxInvoice
             // button_DistrictSearch_1
             // 
             this.button_DistrictSearch_1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_DistrictSearch_1.Location = new System.Drawing.Point(223, 3);
+            this.button_DistrictSearch_1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button_DistrictSearch_1.BackgroundImage")));
+            this.button_DistrictSearch_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_DistrictSearch_1.Location = new System.Drawing.Point(220, 0);
+            this.button_DistrictSearch_1.Margin = new System.Windows.Forms.Padding(0);
             this.button_DistrictSearch_1.Name = "button_DistrictSearch_1";
-            this.button_DistrictSearch_1.Size = new System.Drawing.Size(26, 21);
+            this.button_DistrictSearch_1.Size = new System.Drawing.Size(28, 28);
             this.button_DistrictSearch_1.TabIndex = 151;
-            this.button_DistrictSearch_1.Text = "...";
             this.button_DistrictSearch_1.UseVisualStyleBackColor = true;
             this.button_DistrictSearch_1.Click += new System.EventHandler(this.button_DistrictSearch_1_Click);
             // 
@@ -2124,7 +2137,7 @@ namespace EtaxInvoice
             this.textBox_customerDistrictName_1.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerDistrictName_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerDistrictName_1.MaxLength = 50;
-            this.textBox_customerDistrictName_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerDistrictName_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerDistrictName_1.Name = "textBox_customerDistrictName_1";
             this.textBox_customerDistrictName_1.ReadOnly = true;
             this.textBox_customerDistrictName_1.Size = new System.Drawing.Size(132, 20);
@@ -2147,7 +2160,7 @@ namespace EtaxInvoice
             this.textBox_customerDistrictCode_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerDistrictCode_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerDistrictCode_1.MaxLength = 50;
-            this.textBox_customerDistrictCode_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerDistrictCode_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerDistrictCode_1.Name = "textBox_customerDistrictCode_1";
             this.textBox_customerDistrictCode_1.ReadOnly = true;
             this.textBox_customerDistrictCode_1.Size = new System.Drawing.Size(88, 20);
@@ -2183,7 +2196,7 @@ namespace EtaxInvoice
             this.textBox_customerEmail_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerEmail_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerEmail_1.MaxLength = 50;
-            this.textBox_customerEmail_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerEmail_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerEmail_1.Name = "textBox_customerEmail_1";
             this.textBox_customerEmail_1.ReadOnly = true;
             this.textBox_customerEmail_1.Size = new System.Drawing.Size(283, 20);
@@ -2232,11 +2245,13 @@ namespace EtaxInvoice
             // button_provinceSearch_1
             // 
             this.button_provinceSearch_1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_provinceSearch_1.Location = new System.Drawing.Point(223, 3);
+            this.button_provinceSearch_1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button_provinceSearch_1.BackgroundImage")));
+            this.button_provinceSearch_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_provinceSearch_1.Location = new System.Drawing.Point(220, 0);
+            this.button_provinceSearch_1.Margin = new System.Windows.Forms.Padding(0);
             this.button_provinceSearch_1.Name = "button_provinceSearch_1";
-            this.button_provinceSearch_1.Size = new System.Drawing.Size(26, 21);
+            this.button_provinceSearch_1.Size = new System.Drawing.Size(28, 28);
             this.button_provinceSearch_1.TabIndex = 150;
-            this.button_provinceSearch_1.Text = "...";
             this.button_provinceSearch_1.UseVisualStyleBackColor = true;
             this.button_provinceSearch_1.Click += new System.EventHandler(this.button_provinceSearch_1_Click);
             // 
@@ -2257,7 +2272,7 @@ namespace EtaxInvoice
             this.textBox_customerProvinceCode_1.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerProvinceCode_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceCode_1.MaxLength = 50;
-            this.textBox_customerProvinceCode_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerProvinceCode_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerProvinceCode_1.Name = "textBox_customerProvinceCode_1";
             this.textBox_customerProvinceCode_1.ReadOnly = true;
             this.textBox_customerProvinceCode_1.Size = new System.Drawing.Size(88, 20);
@@ -2269,7 +2284,7 @@ namespace EtaxInvoice
             this.textBox_customerProvinceName_1.Location = new System.Drawing.Point(279, 4);
             this.textBox_customerProvinceName_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceName_1.MaxLength = 50;
-            this.textBox_customerProvinceName_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerProvinceName_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerProvinceName_1.Name = "textBox_customerProvinceName_1";
             this.textBox_customerProvinceName_1.ReadOnly = true;
             this.textBox_customerProvinceName_1.Size = new System.Drawing.Size(132, 20);
@@ -2306,13 +2321,13 @@ namespace EtaxInvoice
             // textBox_customerTel_1
             // 
             this.textBox_customerTel_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerTel_1.Location = new System.Drawing.Point(128, 6);
+            this.textBox_customerTel_1.Location = new System.Drawing.Point(128, 5);
             this.textBox_customerTel_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTel_1.MaxLength = 50;
-            this.textBox_customerTel_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerTel_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerTel_1.Name = "textBox_customerTel_1";
             this.textBox_customerTel_1.ReadOnly = true;
-            this.textBox_customerTel_1.Size = new System.Drawing.Size(88, 20);
+            this.textBox_customerTel_1.Size = new System.Drawing.Size(88, 23);
             this.textBox_customerTel_1.TabIndex = 138;
             this.textBox_customerTel_1.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerTel_1_ContextMenuStripChanged);
             this.textBox_customerTel_1.TextChanged += new System.EventHandler(this.textBox_customerTel_1_TextChanged);
@@ -2321,13 +2336,13 @@ namespace EtaxInvoice
             // textBox_customerFax_1
             // 
             this.textBox_customerFax_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerFax_1.Location = new System.Drawing.Point(320, 6);
+            this.textBox_customerFax_1.Location = new System.Drawing.Point(320, 5);
             this.textBox_customerFax_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerFax_1.MaxLength = 50;
-            this.textBox_customerFax_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerFax_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerFax_1.Name = "textBox_customerFax_1";
             this.textBox_customerFax_1.ReadOnly = true;
-            this.textBox_customerFax_1.Size = new System.Drawing.Size(91, 20);
+            this.textBox_customerFax_1.Size = new System.Drawing.Size(91, 23);
             this.textBox_customerFax_1.TabIndex = 140;
             // 
             // label31
@@ -2385,24 +2400,26 @@ namespace EtaxInvoice
             // button_countrySearch_1
             // 
             this.button_countrySearch_1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_countrySearch_1.Location = new System.Drawing.Point(374, 6);
+            this.button_countrySearch_1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button_countrySearch_1.BackgroundImage")));
+            this.button_countrySearch_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_countrySearch_1.Location = new System.Drawing.Point(371, 2);
+            this.button_countrySearch_1.Margin = new System.Windows.Forms.Padding(0);
             this.button_countrySearch_1.Name = "button_countrySearch_1";
-            this.button_countrySearch_1.Size = new System.Drawing.Size(26, 21);
+            this.button_countrySearch_1.Size = new System.Drawing.Size(28, 28);
             this.button_countrySearch_1.TabIndex = 152;
-            this.button_countrySearch_1.Text = "...";
             this.button_countrySearch_1.UseVisualStyleBackColor = true;
             this.button_countrySearch_1.Click += new System.EventHandler(this.button_countrySearch_1_Click);
             // 
             // textBox_customerPostCode_1
             // 
             this.textBox_customerPostCode_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerPostCode_1.Location = new System.Drawing.Point(128, 6);
+            this.textBox_customerPostCode_1.Location = new System.Drawing.Point(128, 5);
             this.textBox_customerPostCode_1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerPostCode_1.MaxLength = 5;
-            this.textBox_customerPostCode_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerPostCode_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerPostCode_1.Name = "textBox_customerPostCode_1";
             this.textBox_customerPostCode_1.ReadOnly = true;
-            this.textBox_customerPostCode_1.Size = new System.Drawing.Size(88, 20);
+            this.textBox_customerPostCode_1.Size = new System.Drawing.Size(88, 23);
             this.textBox_customerPostCode_1.TabIndex = 143;
             this.textBox_customerPostCode_1.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerPostCode_1_ContextMenuStripChanged);
             this.textBox_customerPostCode_1.TextChanged += new System.EventHandler(this.textBox_customerPostCode_1_TextChanged);
@@ -2433,11 +2450,11 @@ namespace EtaxInvoice
             // textBox_customerCountry_1
             // 
             this.textBox_customerCountry_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerCountry_1.Location = new System.Drawing.Point(278, 6);
-            this.textBox_customerCountry_1.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerCountry_1.Location = new System.Drawing.Point(278, 5);
+            this.textBox_customerCountry_1.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerCountry_1.Name = "textBox_customerCountry_1";
             this.textBox_customerCountry_1.ReadOnly = true;
-            this.textBox_customerCountry_1.Size = new System.Drawing.Size(90, 20);
+            this.textBox_customerCountry_1.Size = new System.Drawing.Size(90, 23);
             this.textBox_customerCountry_1.TabIndex = 145;
             // 
             // label21
@@ -2459,18 +2476,19 @@ namespace EtaxInvoice
             this.textBox21.Size = new System.Drawing.Size(232, 20);
             this.textBox21.TabIndex = 65;
             // 
-            // tabPage7
+            // tabPage_CCPT
             // 
-            this.tabPage7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage7.Controls.Add(this.tableLayoutPanel28);
-            this.tabPage7.Controls.Add(this.textBox27);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(945, 217);
-            this.tabPage7.TabIndex = 3;
-            this.tabPage7.Text = "ชาวต่างชาติ";
-            this.tabPage7.UseVisualStyleBackColor = true;
+            this.tabPage_CCPT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage_CCPT.Controls.Add(this.tableLayoutPanel28);
+            this.tabPage_CCPT.Controls.Add(this.textBox27);
+            this.tabPage_CCPT.ImageIndex = 0;
+            this.tabPage_CCPT.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_CCPT.Name = "tabPage_CCPT";
+            this.tabPage_CCPT.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_CCPT.Size = new System.Drawing.Size(945, 217);
+            this.tabPage_CCPT.TabIndex = 3;
+            this.tabPage_CCPT.Text = "ชาวต่างชาติ";
+            this.tabPage_CCPT.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel28
             // 
@@ -2534,7 +2552,7 @@ namespace EtaxInvoice
             this.textBox_customerCode_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerCode_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerCode_2.MaxLength = 50;
-            this.textBox_customerCode_2.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerCode_2.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerCode_2.Name = "textBox_customerCode_2";
             this.textBox_customerCode_2.ReadOnly = true;
             this.textBox_customerCode_2.Size = new System.Drawing.Size(283, 20);
@@ -2581,7 +2599,7 @@ namespace EtaxInvoice
             this.textBox_customerAddress_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerAddress_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerAddress_2.MaxLength = 50;
-            this.textBox_customerAddress_2.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerAddress_2.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerAddress_2.Name = "textBox_customerAddress_2";
             this.textBox_customerAddress_2.ReadOnly = true;
             this.textBox_customerAddress_2.Size = new System.Drawing.Size(283, 20);
@@ -2628,7 +2646,7 @@ namespace EtaxInvoice
             this.textBox_customerName_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerName_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerName_2.MaxLength = 50;
-            this.textBox_customerName_2.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerName_2.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerName_2.Name = "textBox_customerName_2";
             this.textBox_customerName_2.ReadOnly = true;
             this.textBox_customerName_2.Size = new System.Drawing.Size(283, 20);
@@ -2697,7 +2715,7 @@ namespace EtaxInvoice
             this.textBox_customerTaxId_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerTaxId_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTaxId_2.MaxLength = 9;
-            this.textBox_customerTaxId_2.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerTaxId_2.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerTaxId_2.Name = "textBox_customerTaxId_2";
             this.textBox_customerTaxId_2.ReadOnly = true;
             this.textBox_customerTaxId_2.Size = new System.Drawing.Size(283, 20);
@@ -2812,7 +2830,7 @@ namespace EtaxInvoice
             this.textBox_customerEmail_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerEmail_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerEmail_2.MaxLength = 50;
-            this.textBox_customerEmail_2.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerEmail_2.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerEmail_2.Name = "textBox_customerEmail_2";
             this.textBox_customerEmail_2.ReadOnly = true;
             this.textBox_customerEmail_2.Size = new System.Drawing.Size(283, 20);
@@ -2873,7 +2891,7 @@ namespace EtaxInvoice
             this.textBox_customerProvinceName_2.Location = new System.Drawing.Point(128, 4);
             this.textBox_customerProvinceName_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerProvinceName_2.MaxLength = 50;
-            this.textBox_customerProvinceName_2.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerProvinceName_2.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerProvinceName_2.Name = "textBox_customerProvinceName_2";
             this.textBox_customerProvinceName_2.ReadOnly = true;
             this.textBox_customerProvinceName_2.Size = new System.Drawing.Size(283, 20);
@@ -2908,13 +2926,13 @@ namespace EtaxInvoice
             // textBox_customerTel_2
             // 
             this.textBox_customerTel_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerTel_2.Location = new System.Drawing.Point(128, 6);
+            this.textBox_customerTel_2.Location = new System.Drawing.Point(128, 5);
             this.textBox_customerTel_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerTel_2.MaxLength = 50;
-            this.textBox_customerTel_2.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerTel_2.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerTel_2.Name = "textBox_customerTel_2";
             this.textBox_customerTel_2.ReadOnly = true;
-            this.textBox_customerTel_2.Size = new System.Drawing.Size(88, 20);
+            this.textBox_customerTel_2.Size = new System.Drawing.Size(88, 23);
             this.textBox_customerTel_2.TabIndex = 138;
             this.textBox_customerTel_2.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerTel_2_ContextMenuStripChanged);
             this.textBox_customerTel_2.TextChanged += new System.EventHandler(this.textBox_customerTel_2_TextChanged);
@@ -2964,24 +2982,26 @@ namespace EtaxInvoice
             // button_countrySearch_2
             // 
             this.button_countrySearch_2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_countrySearch_2.Location = new System.Drawing.Point(374, 6);
+            this.button_countrySearch_2.BackgroundImage = global::EtaxInvoice.Properties.Resources.icons8_browse_folder_96;
+            this.button_countrySearch_2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_countrySearch_2.Location = new System.Drawing.Point(371, 2);
+            this.button_countrySearch_2.Margin = new System.Windows.Forms.Padding(0);
             this.button_countrySearch_2.Name = "button_countrySearch_2";
-            this.button_countrySearch_2.Size = new System.Drawing.Size(26, 21);
+            this.button_countrySearch_2.Size = new System.Drawing.Size(28, 28);
             this.button_countrySearch_2.TabIndex = 151;
-            this.button_countrySearch_2.Text = "...";
             this.button_countrySearch_2.UseVisualStyleBackColor = true;
             this.button_countrySearch_2.Click += new System.EventHandler(this.button_countrySearch_2_Click);
             // 
             // textBox_customerPostCode_2
             // 
             this.textBox_customerPostCode_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerPostCode_2.Location = new System.Drawing.Point(128, 6);
+            this.textBox_customerPostCode_2.Location = new System.Drawing.Point(128, 5);
             this.textBox_customerPostCode_2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_customerPostCode_2.MaxLength = 5;
-            this.textBox_customerPostCode_2.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerPostCode_2.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerPostCode_2.Name = "textBox_customerPostCode_2";
             this.textBox_customerPostCode_2.ReadOnly = true;
-            this.textBox_customerPostCode_2.Size = new System.Drawing.Size(88, 20);
+            this.textBox_customerPostCode_2.Size = new System.Drawing.Size(88, 23);
             this.textBox_customerPostCode_2.TabIndex = 143;
             this.textBox_customerPostCode_2.ContextMenuStripChanged += new System.EventHandler(this.textBox_customerPostCode_2_ContextMenuStripChanged);
             this.textBox_customerPostCode_2.TextChanged += new System.EventHandler(this.textBox_customerPostCode_2_TextChanged);
@@ -3012,11 +3032,11 @@ namespace EtaxInvoice
             // textBox_customerCountry_2
             // 
             this.textBox_customerCountry_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customerCountry_2.Location = new System.Drawing.Point(278, 6);
-            this.textBox_customerCountry_2.MinimumSize = new System.Drawing.Size(0, 23);
+            this.textBox_customerCountry_2.Location = new System.Drawing.Point(278, 5);
+            this.textBox_customerCountry_2.MinimumSize = new System.Drawing.Size(4, 23);
             this.textBox_customerCountry_2.Name = "textBox_customerCountry_2";
             this.textBox_customerCountry_2.ReadOnly = true;
-            this.textBox_customerCountry_2.Size = new System.Drawing.Size(90, 20);
+            this.textBox_customerCountry_2.Size = new System.Drawing.Size(90, 23);
             this.textBox_customerCountry_2.TabIndex = 145;
             // 
             // textBox27
@@ -3051,11 +3071,15 @@ namespace EtaxInvoice
             this.button_add.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_add.Location = new System.Drawing.Point(479, 3);
+            this.button_add.Image = ((System.Drawing.Image)(resources.GetObject("button_add.Image")));
+            this.button_add.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_add.Location = new System.Drawing.Point(479, 0);
+            this.button_add.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.button_add.Name = "button_add";
-            this.button_add.Size = new System.Drawing.Size(152, 23);
+            this.button_add.Size = new System.Drawing.Size(152, 29);
             this.button_add.TabIndex = 0;
             this.button_add.Text = "เพิ่ม";
+            this.button_add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button_add.UseVisualStyleBackColor = true;
             this.button_add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
             // 
@@ -3064,11 +3088,15 @@ namespace EtaxInvoice
             this.button_save.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_save.Location = new System.Drawing.Point(637, 3);
+            this.button_save.Image = ((System.Drawing.Image)(resources.GetObject("button_save.Image")));
+            this.button_save.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_save.Location = new System.Drawing.Point(637, 0);
+            this.button_save.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(152, 23);
+            this.button_save.Size = new System.Drawing.Size(152, 29);
             this.button_save.TabIndex = 1;
             this.button_save.Text = "บันทึก";
+            this.button_save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button_save.UseVisualStyleBackColor = true;
             this.button_save.Click += new System.EventHandler(this.toolStripButton_Save_Click);
             // 
@@ -3077,11 +3105,15 @@ namespace EtaxInvoice
             this.button_customersearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_customersearch.Location = new System.Drawing.Point(795, 3);
+            this.button_customersearch.Image = ((System.Drawing.Image)(resources.GetObject("button_customersearch.Image")));
+            this.button_customersearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_customersearch.Location = new System.Drawing.Point(795, 0);
+            this.button_customersearch.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.button_customersearch.Name = "button_customersearch";
-            this.button_customersearch.Size = new System.Drawing.Size(155, 23);
+            this.button_customersearch.Size = new System.Drawing.Size(155, 29);
             this.button_customersearch.TabIndex = 2;
             this.button_customersearch.Text = "ค้นหา";
+            this.button_customersearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button_customersearch.UseVisualStyleBackColor = true;
             this.button_customersearch.Click += new System.EventHandler(this.button_SearchCustomer_Click);
             // 
@@ -3106,11 +3138,15 @@ namespace EtaxInvoice
             this.button_print.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_print.Location = new System.Drawing.Point(638, 3);
+            this.button_print.Image = ((System.Drawing.Image)(resources.GetObject("button_print.Image")));
+            this.button_print.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_print.Location = new System.Drawing.Point(638, 0);
+            this.button_print.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.button_print.Name = "button_print";
-            this.button_print.Size = new System.Drawing.Size(152, 25);
+            this.button_print.Size = new System.Drawing.Size(152, 31);
             this.button_print.TabIndex = 0;
             this.button_print.Text = "ออกใบกำกับภาษี";
+            this.button_print.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button_print.UseVisualStyleBackColor = true;
             this.button_print.Click += new System.EventHandler(this.button_print_Click);
             // 
@@ -3119,11 +3155,16 @@ namespace EtaxInvoice
             this.button_close.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_close.Location = new System.Drawing.Point(796, 3);
+            this.button_close.Image = ((System.Drawing.Image)(resources.GetObject("button_close.Image")));
+            this.button_close.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_close.Location = new System.Drawing.Point(796, 0);
+            this.button_close.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.button_close.Name = "button_close";
-            this.button_close.Size = new System.Drawing.Size(154, 25);
+            this.button_close.Size = new System.Drawing.Size(154, 31);
             this.button_close.TabIndex = 1;
             this.button_close.Text = "ปิด";
+            this.button_close.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_close.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.button_close.UseVisualStyleBackColor = true;
             this.button_close.Click += new System.EventHandler(this.button_close_Click);
             // 
@@ -3131,7 +3172,7 @@ namespace EtaxInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(181)))), ((int)(((byte)(226)))));
             this.ClientSize = new System.Drawing.Size(959, 712);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmMain";
@@ -3140,7 +3181,7 @@ namespace EtaxInvoice
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tabInvoice.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
+            this.tabPage_invoice.ResumeLayout(false);
             this.tablebottom_1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel_bottom_3.ResumeLayout(false);
@@ -3170,7 +3211,7 @@ namespace EtaxInvoice
             this.tableLayoutPanel50.ResumeLayout(false);
             this.tableLayoutPanel50.PerformLayout();
             this.tabCustomerDetail.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
+            this.tabPage_NIDN.ResumeLayout(false);
             this.tableLayoutPanel_Customer_1.ResumeLayout(false);
             this.panel_c_1_1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -3206,8 +3247,8 @@ namespace EtaxInvoice
             this.panel_c_1_12.ResumeLayout(false);
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel12.PerformLayout();
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
+            this.tabPage_TXID.ResumeLayout(false);
+            this.tabPage_TXID.PerformLayout();
             this.tableLayoutPanel15.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.tableLayoutPanel16.ResumeLayout(false);
@@ -3245,8 +3286,8 @@ namespace EtaxInvoice
             this.panel14.ResumeLayout(false);
             this.tableLayoutPanel27.ResumeLayout(false);
             this.tableLayoutPanel27.PerformLayout();
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
+            this.tabPage_CCPT.ResumeLayout(false);
+            this.tabPage_CCPT.PerformLayout();
             this.tableLayoutPanel28.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
             this.tableLayoutPanel29.ResumeLayout(false);
@@ -3287,11 +3328,11 @@ namespace EtaxInvoice
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl tabCustomerDetail;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage_NIDN;
+        private System.Windows.Forms.TabPage tabPage_TXID;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textBox21;
-        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabPage_CCPT;
         private System.Windows.Forms.TextBox textBox27;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Customer_1;
         private System.Windows.Forms.Panel panel_c_1_1;
@@ -3445,7 +3486,7 @@ namespace EtaxInvoice
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.TabControl tabInvoice;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage_invoice;
         private System.Windows.Forms.TableLayoutPanel tablebottom_1;
         private System.Windows.Forms.Button button_InvoiceSearch;
         private System.Windows.Forms.Label label45;
@@ -3486,7 +3527,6 @@ namespace EtaxInvoice
         private System.Windows.Forms.Button button_countrySearch_1;
         private System.Windows.Forms.Button button_countrySearch_2;
         private System.Windows.Forms.TextBox textBox_customerCountry_2;
-        private System.Windows.Forms.Button button_testCN;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel50;
         private System.Windows.Forms.TextBox textBox_CNReason_Other;
         private System.Windows.Forms.Label label_ReasonCN;
@@ -3499,6 +3539,7 @@ namespace EtaxInvoice
         private MyNumericUpDown numericUpDown_sumVat;
         private MyNumericUpDown numericUpDown_Total;
         private System.Windows.Forms.Panel panel27;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 

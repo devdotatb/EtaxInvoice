@@ -60,6 +60,7 @@ namespace EtaxInvoice
             CountryList = SQLHelper.LoadCountry();
             comboBox_CNReason.DataSource = SQLHelper.LoadReasonCN();
             LoadConfig();
+            tabChanged();
             DefaultData_Fortest_removing_required();
         }
         private void DefaultData_Fortest_removing_required()
@@ -81,7 +82,7 @@ namespace EtaxInvoice
             if (Program.globalProgramMode == 1)
             {
                 //Invoice
-                this.tabPage4.Text = "ใบกำกับภาษีอย่างย่อ";
+                this.tabPage_invoice.Text = "ใบกำกับภาษีอย่างย่อ";
                 this.Text = "E-TAX Invoice";
                 PrintConfirmText = "กรุณายืนยันการออก E-TAX Invoice?";
                 label_ReasonCN.Visible = false;
@@ -92,7 +93,7 @@ namespace EtaxInvoice
             else if (Program.globalProgramMode == 2)
             {
                 //CN
-                this.tabPage4.Text = "ใบกำกับภาษีอย่างย่อใบใหม่จากการReturn Receipt";
+                this.tabPage_invoice.Text = "ใบกำกับภาษีอย่างย่อใบใหม่จากการReturn Receipt";
                 this.Text = "E-TAX CN";
                 PrintConfirmText = "กรุณายืนยันการออก E-TAX CN?";
                 label_ReasonCN.Visible = true;
@@ -1671,7 +1672,7 @@ namespace EtaxInvoice
             logdata.FTReqPara = base64String;
             logdata.FTResPara = responseContent;
             logdata.FTResCode = responseStatusCodeToString;
-            logdata.FTResMsg = obj_resultstatusMessage;
+            logdata.FTResMsg = obj_resultstatusMessage?? "";
             logdata.FTResShwMsg = "";
             LogInserter.InterfaceInsertLog(logdata);
         }
@@ -1880,7 +1881,46 @@ namespace EtaxInvoice
 
         private void tabCustomerDetail_SelectedIndexChanged(object sender, EventArgs e)
         {
+            tabChanged();
+        }
 
+        private void tabChanged()
+        {
+
+            this.tabPage_NIDN.ImageIndex = 1;
+            this.tabPage_TXID.ImageIndex = 1;
+            this.tabPage_CCPT.ImageIndex = 1;
+            switch (tabCustomerDetail.SelectedIndex)
+            {
+
+                case 0://บุคคลธรรมดา
+                    {
+                        this.tabPage_NIDN.ImageIndex = 0;
+                        break;
+                    }
+                case 1://นิติบุคคล
+                    {
+                        this.tabPage_TXID.ImageIndex = 0;
+                        break;
+                    }
+
+                case 2://ต่างชาติ
+                    {
+                        this.tabPage_CCPT.ImageIndex = 0;
+                        break;
+                    }
+            }
+        }
+        private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex % 2 == 0)
+            {
+                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Program.RowPrePaintColor;
+            }
+            else
+            {
+                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+            }
         }
     }
 }

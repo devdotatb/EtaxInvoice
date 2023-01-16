@@ -255,5 +255,26 @@
   <ItemGroup>
     <None Include="Resources\icons8-folder-98.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-browse-folder-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-save-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-search-document-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-add-user-male-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-send-to-printer-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-green-circle-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-red-circle-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

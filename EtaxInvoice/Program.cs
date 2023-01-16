@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -63,7 +64,11 @@ namespace EtaxInvoice
         public static string globalPOSServerPassword = "12345";
         public static string globalStartUserPassword = "12345";
         public static string globalStartUserName = "x10-tester";//"ผู้จัดการสาขา";
-        public static int globalProgramMode = 2;
+        public static int globalProgramMode = 1;
+
+
+        public static Color BackgroundColor = Color.FromArgb(143, 181, 226);
+        public static Color RowPrePaintColor = Color.FromArgb(221, 230, 228);
 
         /// <summary>
         /// The main entry point for the application.
